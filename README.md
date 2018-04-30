@@ -17,8 +17,8 @@
 Maven
 
     <dependency>
-        <groupId>com.github.yuebo.dyna</groupId>
-        <artifactId>boot-starter</artifactId>
+        <groupId>com.github.yuebo</groupId>
+        <artifactId>boot-dyna-starter</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     

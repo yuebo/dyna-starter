@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.yuebo.dynaAutoConfiguration
+  com.github.yuebo.DynaAutoConfiguration
