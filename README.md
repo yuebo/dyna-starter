@@ -16,12 +16,12 @@
 
 Maven 增加快照地址
 
-    <distributionManagement>
+    <repositories>
        <repository>
            <id>oss-snapshot</id>
            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
        </repository>
-    </distributionManagement>
+    </repositories>
     
 Maven 依赖
 
