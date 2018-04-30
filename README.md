@@ -14,7 +14,16 @@
 ## 运行方式
 新建一个Spring Boot的应用
 
-Maven
+Maven 增加快照地址
+
+    <distributionManagement>
+       <repository>
+           <id>oss-snapshot</id>
+           <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+       </repository>
+    </distributionManagement>
+    
+Maven 依赖
 
     <dependency>
         <groupId>com.github.yuebo</groupId>
