@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.ifreelight.DynaAutoConfiguration
+  com.github.yuebo.dynaAutoConfiguration

@@ -17,7 +17,7 @@
 Maven
 
     <dependency>
-        <groupId>com.ifreelight.dyna</groupId>
+        <groupId>com.github.yuebo.dyna</groupId>
         <artifactId>boot-starter</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
@@ -38,7 +38,7 @@ Maven
 
     package com.ifreelight.demo;
     
-    import com.ifreelight.DynaFormApplication;
+    import com.github.yuebo.dynaFormApplication;
     import org.springframework.boot.SpringApplication;
     
     @DynaFormApplication
