@@ -1,0 +1,160 @@
+{
+  "name": "formResultCreateView",
+  "data": "tbl_dyna_form_result",
+  "inputParameter": [
+    "formId"
+  ],
+  "title": "添加结果",
+  "type": "create",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "字段名称",
+      "attributes": {
+        "placeholder": "请输入字段名称"
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "label": "字段标签",
+      "attributes": {
+        "placeholder": "请输入字段标签"
+      }
+    },
+    {
+      "name": "id",
+      "type": "select",
+      "label": "是否是id字段",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false,
+      "tip": "表示此结果中的id字段，用于picker，如果有多个id字段，返回第一个，如果全部是false，则返回_id"
+    },
+    {
+      "name": "usePermission",
+      "label": "是否启用权限",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "$permission",
+      "label": "权限",
+      "type": "muti-select",
+      "attributes": {
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_dyna_result_permission",
+        "column": "resultId",
+        "field": "permissionId",
+        "action": "delete"
+      }
+    },
+    {
+      "name": "attributes",
+      "label": "属性",
+      "type": "textarea",
+      "attributes": {
+        "rows": 10,
+        "placeholder": "控件属性，json类型，可以设置data-sortable等属性"
+      },
+      "tip": "data-sortable,data-radio,data-checkbox等选项可用"
+    },
+    {
+      "name": "converter",
+      "label": "转换器",
+      "type": "select",
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_dyna_converter"
+          }
+        }
+      }
+    },
+    {
+      "name": "$trigger2",
+      "type": "hidden"
+    },
+    {
+      "name": "formId",
+      "type": "hidden"
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "label",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "formId",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "change": [
+    {
+      "name": "usePermission",
+      "target": "$permission",
+      "type": "toggle",
+      "value": "true"
+    },
+    {
+      "name": "$trigger2",
+      "target": "converter"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true,
+      "view": "formCreateView",
+      "type": "create",
+      "id": "formId"
+    },
+    {
+      "label": "添加转换器",
+      "view": "converterProviderCreateView",
+      "type": "create",
+      "popup": true,
+      "title": "添加转换器",
+      "change": "$trigger2"
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

@@ -1,0 +1,62 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#set($colSpan=0)
+#set($colSpanTemp=0)
+<form role="form" novalidate="true" #if($view.enctype)enctype="$esc.html($view.enctype)"#end accept-charset="utf-8" action="$request.contextPath/spring/data/create/$view.name" method="post" class="form-horizontal">
+    #if($request.getAttribute("_session.token"))
+        <input type="hidden" name="_session.token" value="$esc.html($request.getAttribute('_session.token'))">
+    #end
+    #if($view.get('_id'))
+        <input type="hidden" id="_id" name="_id" value="$esc.html($view.get('_id'))">
+        #if($view.get('_taskId'))
+            <input type="hidden" id="_taskId" name="_taskId" value="$esc.html($view.get('_taskId'))">
+        #end
+    #else
+        #foreach($attr in $refIdMap.entrySet())
+            <input type="hidden" name="$esc.html($attr.key)" value="$esc.html($attr.value)">
+        #end
+    #end
+    #if($request.getParameter('_popup'))
+        <input type="hidden" id="_popup" name="_popup" value="true">
+    #end
+
+    ## process the section part
+    #if($view.section)
+        <div class="row">
+        #foreach($section in $view.section)
+            #if($section.span)
+                #set($colSpanTemp=$section.span)
+            #end
+            #set($colSpan=$colSpan+$colSpanTemp)
+            #if($colSpan>12)
+                </div>
+                <div class="row">
+                #set($colSpan=$colSpanTemp)
+            #end
+            #formsection($view,$section.name,$section.title,"template-empty.vm",$colSpanTemp)
+        #end
+        </div>
+        <div class="row">
+            #formsection($view, "", $view.title,"template-create.vm",12)
+        </div>
+    #else
+        <div class="row">
+            #formsection($view, "", $view.title,"template-create.vm",12)
+        </div>
+
+    #end
+</form>
+
+    #if($view.get("_id"))
+        #if($view.subview)
+          #foreach($subviewConf in $view.subview)
+          <form id="searchform" role="form" accept-charset="utf-8">
+              #set($subview=$util.getFormView($subviewConf.name))
+              #if($subview.type=="search")
+                  <div id="$esc.html($msg.escapeName($subview.name))" class="subview">
+                  #formsection($subview,"", $subview.title,"template-subview.vm",12)
+                  </div>
+              #end
+          </form>
+          #end
+        #end
+    #end

@@ -1,0 +1,27 @@
+{
+  "name": "errorView",
+  "type": "create",
+  "fields": [
+    {
+      "name": "message",
+      "label": "提示信息",
+      "type": "textarea",
+      "update": "false",
+      "attributes": {
+        "class": "form-control",
+        "value": "您的会话已过期，或者是您没有权限访问",
+        "disabled": "true"
+      }
+    }
+  ],
+  "readOnly": "true",
+  "path": "show",
+  "title": "错误信息",
+  "actions": [
+    {
+      "type": "create",
+      "label": "登录",
+      "view": "loginView"
+    }
+  ]
+}

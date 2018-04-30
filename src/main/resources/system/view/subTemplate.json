@@ -1,0 +1,54 @@
+{
+  "name": "approveHistorySubview",
+  "type": "search",
+  "data": "tbl_task_log",
+  "inputParameter": [
+    "businessId"
+  ],
+  "result": [
+    {
+      "name": "createdBy",
+      "label": "用户名",
+      "attributes": {
+        "data-sortable": true
+      }
+    },
+    {
+      "name": "approve",
+      "label": "意见"
+    },
+    {
+      "name": "remarks",
+      "label": "备注"
+    }
+  ],
+  "title": "审核历史",
+  "operate": [
+    {
+      "view": "taskLogCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create",
+      "popup": true,
+      "title": "test",
+      "refresh": "approveHistorySubview"
+    }
+  ],
+  "actions": [
+    {
+      "javascript": true,
+      "href": "refreshData('approveHistorySubview')",
+      "label": "刷新数据"
+    },
+    {
+      "popup": true,
+      "type": "create",
+      "view": "taskLogCreateView",
+      "title": "test",
+      "refresh": "approveHistorySubview",
+      "label": "创建历史",
+      "parameter": {
+        "businessId": "businessId"
+      }
+    }
+  ]
+}

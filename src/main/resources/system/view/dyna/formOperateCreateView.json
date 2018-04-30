@@ -1,0 +1,245 @@
+{
+  "name": "formOperateCreateView",
+  "data": "tbl_dyna_form_operate",
+  "inputParameter": [
+    "formId"
+  ],
+  "title": "添加操作",
+  "type": "create",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "操作名称",
+      "attributes": {
+        "placeholder": "请输入操作名称"
+      }
+    },
+    {
+      "name": "icon",
+      "type": "autocomplete",
+      "label": "动作图标",
+      "attributes": {
+        "placeholder": "请输入动作图标"
+      },
+      "option": {
+        "provider": "iconOptionProvider",
+        "parameter": {
+          "key": "icon",
+          "value": "label",
+          "query": {
+            "_data": "none"
+          }
+        }
+      }
+    },
+    {
+      "name": "operate",
+      "type": "select",
+      "label": "类型",
+      "option": {
+        "values": {
+          "view": "view",
+          "popup": "popup",
+          "operate": "operate"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "view",
+      "type": "text",
+      "label": "视图",
+      "attributes": {
+        "placeholder": "请输入要跳转的视图"
+      }
+    },
+    {
+      "name": "type",
+      "type": "autocomplete",
+      "label": "视图类型",
+      "attributes": {
+        "placeholder": "请输入要跳转的视图类型"
+      },
+      "option": {
+        "values": {
+          "search": "search",
+          "create": "create"
+        }
+      }
+    },
+    {
+      "name": "provider",
+      "type": "autocomplete",
+      "label": "Provider",
+      "attributes": {
+        "placeholder": "请输入字段标签"
+      },
+      "option": {
+        "provider": "springBeanOptionProvider",
+        "parameter": {
+          "key": "provider",
+          "value": "providerName",
+          "query": {
+            "_data": "none",
+            "class": "operate"
+          }
+        }
+      }
+    },
+    {
+      "name": "refresh",
+      "type": "text",
+      "label": "刷新",
+      "attributes": {
+        "placeholder": "请输入要刷新的子视图名称"
+      }
+    },
+    {
+      "name": "change",
+      "type": "text",
+      "label": "触发onchange",
+      "attributes": {
+        "placeholder": "请输入要触发onchange的控件id"
+      }
+    },
+    {
+      "name": "confirm",
+      "type": "text",
+      "label": "确认消息",
+      "attributes": {
+        "placeholder": "请输入操作前的确认消息"
+      }
+    },
+    {
+      "name": "usePermission",
+      "label": "是否启用权限",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "$permission",
+      "label": "权限",
+      "type": "muti-select",
+      "attributes": {
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_dyna_operate_permission",
+        "column": "operateId",
+        "field": "permissionId",
+        "action": "delete"
+      }
+    },
+    {
+      "name": "depend",
+      "type": "text",
+      "label": "显示依赖字段",
+      "attributes": {
+        "placeholder": "请输入依赖字段名称"
+      }
+    },
+    {
+      "name": "value",
+      "type": "text",
+      "label": "显示依赖字段值",
+      "attributes": {
+        "placeholder": "请输入显示依赖值"
+      }
+    },
+    {
+      "name": "formId",
+      "type": "hidden"
+    }
+  ],
+  "change": [
+    {
+      "name": "operate",
+      "target": "view",
+      "value": "view,popup",
+      "type": "toggle"
+    },
+    {
+      "name": "operate",
+      "target": "type",
+      "value": "view,popup",
+      "type": "toggle"
+    },
+    {
+      "name": "operate",
+      "target": "provider",
+      "value": "operate",
+      "type": "toggle"
+    },
+    {
+      "name": "operate",
+      "target": "refresh",
+      "value": "popup,operate",
+      "type": "toggle"
+    },
+    {
+      "name": "operate",
+      "target": "change",
+      "value": "popup,operate",
+      "type": "toggle"
+    },
+    {
+      "name": "usePermission",
+      "target": "$permission",
+      "type": "toggle",
+      "value": "true"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true,
+      "view": "formCreateView",
+      "type": "create",
+      "id": "formId"
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "icon",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "operate",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "formId",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

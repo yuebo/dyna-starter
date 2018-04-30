@@ -1,0 +1,68 @@
+{
+  "name": "departmentCreateView",
+  "searchview": "departmentSearchView",
+  "type": "create",
+  "title": "创建部门",
+  "data": "tbl_department",
+  "fields": [
+    {
+      "name": "name",
+      "label": "部门名称",
+      "type": "text",
+      "attributes": {
+        "maxlength": "100"
+      }
+    },
+    {
+      "name": "departmentNO",
+      "label": "部门编号",
+      "type": "text",
+      "attributes": {
+        "maxlength": "100"
+      },
+      "permission": []
+    },
+    {
+      "name": "managerId",
+      "label": "部门经理",
+      "type": "select",
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_user"
+          }
+        }
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "departmentNO",
+      "provider": "unique",
+      "msg": "unique"
+    }
+  ],
+  "subview": [
+    {
+      "name": "departmentSubSearchView",
+      "parameter": {
+        "parentId": "_id"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    }
+  ],
+  "permission": []
+}

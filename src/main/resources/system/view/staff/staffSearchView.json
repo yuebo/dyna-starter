@@ -1,0 +1,48 @@
+{
+  "name": "staffSearchView",
+  "type": "search",
+  "data": "tbl_staff",
+  "title": "查询员工",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "员工姓名",
+      "operator": "$like"
+    }
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "员工姓名",
+      "attributes": {
+        "data-sortable": true
+      }
+    },
+    {
+      "name": "department",
+      "label": "员工部门",
+      "attributes": {
+        "data-sortable": true
+      }
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style": "btn-primary"
+    },
+    {
+      "label": "新建员工",
+      "type": "create",
+      "view": "staffCreateView"
+    }
+  ],
+  "operate": [
+    {
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create",
+      "view": "staffCreateView"
+    }
+  ]
+}

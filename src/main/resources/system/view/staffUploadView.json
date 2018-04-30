@@ -1,0 +1,28 @@
+{
+  "name": "staffUploadView",
+  "type": "create",
+  "title": "员工上传",
+  "fields": [
+    {
+      "name": "file",
+      "type": "file",
+      "label": "文件",
+      "processor": "staffUpload"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style": "btn-primary"
+    }
+  ],
+  "validators": [
+    {
+      "field": "file",
+      "msg": "required",
+      "provider": "required"
+    }
+  ],
+  "processor": "uploadFileFormProcessor",
+  "permission": []
+}

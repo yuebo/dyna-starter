@@ -1,0 +1,53 @@
+{
+  "name": "formResultSubView",
+  "type": "search",
+  "data": "tbl_dyna_form_result",
+  "title": "表单结果",
+  "inputParameter": [
+    "formId"
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "字段名称"
+    },
+    {
+      "name": "label",
+      "label": "字段标签"
+    }
+  ],
+  "clear": false,
+  "actions": [
+    {
+      "type": "create",
+      "view": "formResultCreateView",
+      "title": "添加结果字段",
+      "refresh": "formResultSearchView",
+      "label": "添加结果字段",
+      "parameter": {
+        "formId": "formId"
+      }
+    }
+  ],
+  "operate": [
+    {
+      "view": "formResultCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create",
+      "title": "修改结果字段",
+      "refresh": "formResultSubView"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "formResultSubView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "defaultSort": {
+    "name": "createdDate",
+    "order": "asc"
+  },
+  "permission": []
+}

@@ -1,0 +1,99 @@
+{
+  "name": "computerApprover",
+  "type": "create",
+  "title": "审核电脑",
+  "data": "tbl_compute_application",
+  "fields": [
+    {
+      "name": "reason",
+      "label": "申请原因",
+      "type": "textarea",
+      "update": false
+    },
+    {
+      "name": "applyUserId",
+      "label": "申请人",
+      "type": "select",
+      "attributes": {
+        "disabled": "disabled"
+      },
+      "option": {
+        "provider": "currentUserOptionProvider"
+      },
+      "default": false,
+      "update": false
+    },
+    {
+      "name": "approvalName",
+      "label": "审核人",
+      "type": "select",
+      "attributes": {
+        "disabled": "disabled"
+      },
+      "option": {
+        "provider": "currentDepartmentManagerOptionProvider"
+      },
+      "default": false,
+      "update": false
+    },
+    {
+      "name": "$approve",
+      "type": "select",
+      "label": "审批意见",
+      "attributes": {
+        "class": "form-control"
+      },
+      "option": {
+        "values": {
+          "同意": "同意",
+          "不同意": "不同意"
+        }
+      },
+      "join": {
+        "table": "tbl_task_log",
+        "column": "businessId",
+        "field": "approve",
+        "bindTask": true
+      }
+    },
+    {
+      "name": "$remarks",
+      "type": "textarea",
+      "label": "评论",
+      "attributes": {
+        "class": "form-control"
+      },
+      "join": {
+        "table": "tbl_task_log",
+        "column": "businessId",
+        "field": "remarks",
+        "bindTask": true
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "$approve",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "process": {
+    "name": "申请电脑流程",
+    "output": {
+      "pass": {
+        "value": "#form['$approve']=='同意'?1:0"
+      },
+      "ts": "TS"
+    },
+    "complete": {
+      "value": "#form['$approve']!=null"
+    }
+  },
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    }
+  ]
+}

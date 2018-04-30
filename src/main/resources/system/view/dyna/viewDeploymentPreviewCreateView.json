@@ -1,0 +1,7 @@
+{
+  "name": "viewDeploymentPreviewCreateView",
+  "type": "create",
+  "processor": "previewFormProcessor",
+  "data": "",
+  "permission": []
+}

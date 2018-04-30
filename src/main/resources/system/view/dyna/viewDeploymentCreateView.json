@@ -1,0 +1,56 @@
+{
+  "name": "viewDeploymentCreateView",
+  "title": "编辑视图",
+  "type": "create",
+  "data": "tbl_view_deployment",
+  "fields": [
+    {
+      "name": "name",
+      "label": "视图名称",
+      "type": "text",
+      "update": false
+    },
+    {
+      "name": "type",
+      "label": "视图类型",
+      "type": "text",
+      "update": false
+    },
+    {
+      "name": "data",
+      "label": "视图内容",
+      "type": "code",
+      "attributes": {
+        "rows": 20
+      }
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "data",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "data",
+      "provider": "json",
+      "msg": "json"
+    }
+  ],
+  "searchview": "viewDeploymentSearchView",
+  "permission": []
+}

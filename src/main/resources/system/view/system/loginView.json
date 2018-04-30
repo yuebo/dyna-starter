@@ -1,0 +1,43 @@
+{
+  "name": "loginView",
+  "type": "create",
+  "title": "登录",
+  "data": "tbl_user",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "用户名",
+      "attributes": {
+        "class": "form-control",
+        "placeholder": "请输入用户名"
+      }
+    },
+    {
+      "name": "password",
+      "type": "password",
+      "label": "密码",
+      "attributes": {
+        "class": "form-control",
+        "placeholder": "请输入密码"
+      }
+    }
+  ],
+  "messages": {
+    "info": {
+      "success": "登录成功"
+    },
+    "error": {
+      "fail": "登录失败"
+    }
+  },
+  "menu": "public",
+  "processor": "loginProcessor",
+  "actions": [
+    {
+      "submit": true,
+      "label": "登录",
+      "style": "btn-primary"
+    }
+  ]
+}

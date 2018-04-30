@@ -1,0 +1,72 @@
+{
+  "name": "formFieldSubView",
+  "type": "search",
+  "data": "tbl_dyna_form_field",
+  "title": "表单字段",
+  "inputParameter": [
+    "formId"
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "字段名称"
+    },
+    {
+      "name": "type",
+      "label": "字段类型"
+    },
+    {
+      "name": "label",
+      "label": "字段标签"
+    }
+  ],
+  "clear": false,
+  "actions": [
+    {
+      "type": "create",
+      "view": "formFieldCreateView",
+      "title": "添加表单字段",
+      "refresh": "formFieldSearchView",
+      "label": "添加字段",
+      "parameter": {
+        "formId": "formId"
+      }
+    }
+  ],
+  "operate": [
+    {
+      "view": "formFieldCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create",
+      "title": "添加字段",
+      "refresh": "formFieldSubView"
+    },
+
+    {
+      "icon": "glyphicon-chevron-up",
+      "name": "moveUp",
+      "refresh": "formFieldSubView",
+      "operate": true,
+      "provider": "moveUpFieldProvider"
+    },
+    {
+      "icon": "glyphicon-chevron-down",
+      "name": "moveDown",
+      "refresh": "formFieldSubView",
+      "operate": true,
+      "provider": "moveDownFieldProvider"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "formFieldSubView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "defaultSort": {
+    "name": "seq",
+    "order": "asc"
+  },
+  "permission": []
+}

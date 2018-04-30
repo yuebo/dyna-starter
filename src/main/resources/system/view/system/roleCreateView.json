@@ -1,0 +1,64 @@
+{
+  "name": "roleCreateView",
+  "data": "tbl_role",
+  "type": "create",
+  "title": "角色创建",
+  "fields": [
+    {
+      "name": "roleName",
+      "type": "text",
+      "label": "角色名称",
+      "attributes": {
+        "class": "form-control",
+        "placeholder": "请输入角色名称"
+      }
+    },
+    {
+      "name": "$permission",
+      "label": "权限",
+      "type": "muti-select",
+      "attributes": {
+        "class": "form-control",
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_role_permission",
+        "column": "roleId",
+        "field": "permission",
+        "action": "delete"
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "roleName",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "$permission",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "searchview": "roleSearchView",
+  "actions": [
+    {
+      "submit": true,
+      "style": "btn-primary"
+    },
+    {
+      "back": true
+    }
+  ]
+}

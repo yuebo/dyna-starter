@@ -1,0 +1,55 @@
+{
+  "name": "msgCreateView",
+  "data": "tbl_message",
+  "title": "消息设置",
+  "type": "create",
+  "fields": [
+    {
+      "name": "key",
+      "label": "Key",
+      "type": "text",
+      "attributes": {
+        "class": "form-control"
+      }
+    },
+    {
+      "name": "value",
+      "label": "Value",
+      "type": "text",
+      "attributes": {
+        "class": "form-control"
+      }
+    }
+  ],
+  "messages": {
+    "info": {
+      "success": "保存成功"
+    },
+    "error": {
+      "required": "必填项:{0}"
+    }
+  },
+  "validators": [
+    {
+      "field": "key",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "value",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "searchview": "msgSearchView",
+  "permission": [],
+  "actions": [
+    {
+      "submit": true,
+      "style": "btn-primary"
+    },
+    {
+      "back": true
+    }
+  ]
+}

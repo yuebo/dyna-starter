@@ -1,0 +1,43 @@
+{
+  "name": "departmentSubSearchView",
+  "type": "search",
+  "data": "tbl_department",
+  "inputParameter": [
+    "parentId"
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "部门名称"
+    },
+    {
+      "name": "departmentNO",
+      "label": "部门编号"
+    }
+  ],
+  "title": "添加子部门",
+  "operate": [
+    {
+      "view": "departmentSubCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create",
+      "popup": true,
+      "title": "添加子部门",
+      "refresh": "departmentSubSearchView"
+    }
+  ],
+  "actions": [
+    {
+      "popup": true,
+      "type": "create",
+      "view": "departmentSubCreateView",
+      "title": "test",
+      "refresh": "departmentSubSearchView",
+      "label": "添加子部门",
+      "parameter": {
+        "parentId": "parentId"
+      }
+    }
+  ],
+  "clear": false
+}

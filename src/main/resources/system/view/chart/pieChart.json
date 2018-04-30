@@ -1,0 +1,127 @@
+{
+  "name": "pieChartView",
+  "type": "chart",
+  "charts": [
+    {
+      "name": "taskStatistic",
+      "label": "用户任务统计",
+      "attributes": {},
+      "container": {
+        "span": 6
+      },
+      "datasource": {
+        "provider": "userTaskChartDatasourceProvider",
+        "parameter": {
+          "legendGroup": "status",
+          "seriesGroup": "user",
+          "valueField": "cnt",
+          "seriesType": "pie"
+        }
+      },
+      "option": {
+        "title": {
+          "text": "任务统计",
+          "subtext": "纯属虚构",
+          "x": "center"
+        },
+        "tooltip": {
+          "trigger": "item",
+          "formatter": "{a} <br/>{b} : {c} ({d}%)"
+        },
+        "legend": {
+          "orient": "vertical",
+          "left": "left"
+        },
+        "series": []
+      }
+    },
+    {
+      "name": "userSexStatistic",
+      "label": "用户性别统计",
+      "datasource": {
+        "provider": "defaultChartDatasourceProvider",
+        "parameter": {
+          "sql": "select d.name,sex, count(1) as cnt from tbl_user u left join tbl_user_department ud on u._id=ud.userid left join tbl_department d on ud.departmentid =d._id group by d.name,sex",
+          "legendGroup": "sex",
+          "seriesGroup": "name",
+          "valueField": "cnt"
+        }
+      },
+      "option": {
+        "title": {
+          "text": "部门性别比统计",
+          "subtext": "数据来自网络"
+        },
+        "tooltip": {
+          "trigger": "axis",
+          "axisPointer": {
+            "type": "shadow"
+          }
+        },
+        "legend": {
+          "orient": "vertical",
+          "left": "right"
+        },
+        "grid": {
+          "left": "3%",
+          "right": "4%",
+          "bottom": "3%",
+          "containLabel": true
+        },
+        "xAxis": {
+          "type": "category"
+        },
+        "yAxis": {
+          "type": "value",
+          "boundaryGap": [
+            0,
+            0.01
+          ]
+        }
+      }
+    },
+    {
+      "name": "taskStatistic2",
+      "label": "用户任务统计",
+      "attributes": {},
+      "datasource": {
+        "provider": "userTaskChartDatasourceProvider",
+        "parameter": {
+          "legendGroup": "user",
+          "seriesGroup": "status",
+          "valueField": "cnt",
+          "seriesType": "bar"
+        }
+      },
+      "option": {
+        "title": {
+          "text": "任务统计",
+          "subtext": "纯属虚构",
+          "x": "center"
+        },
+        "tooltip": {
+          "trigger": "axis",
+          "axisPointer": {
+            "type": "shadow"
+          }
+        },
+        "legend": {
+          "orient": "vertical",
+          "left": "left"
+        },
+        "series": [],
+        "xAxis": {
+          "type": "category"
+        },
+        "yAxis": {
+          "type": "value",
+          "boundaryGap": [
+            0,
+            0.01
+          ]
+        }
+      }
+    }
+  ],
+  "permission": []
+}

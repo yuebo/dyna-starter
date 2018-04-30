@@ -1,0 +1,22 @@
+{
+  "name": "loginSuccessView",
+  "type": "create",
+  "data": "user",
+  "fields": [
+    {
+      "name": "message",
+      "label": "提示信息",
+      "type": "textarea",
+      "update": "false",
+      "attributes": {
+        "class": "form-control",
+        "value": "你已经成功登入系统",
+        "disabled": "true"
+      }
+    }
+  ],
+  "readOnly": "true",
+  "title": "登录信息",
+  "permission": [],
+  "path":"redirect:/spring/data/chart/pieChartView"
+}

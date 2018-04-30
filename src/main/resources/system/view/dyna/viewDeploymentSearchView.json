@@ -1,0 +1,76 @@
+{
+  "name": "viewDeploymentSearchView",
+  "title": "视图查询",
+  "type": "search",
+  "data": "tbl_view_deployment",
+  "fields": [
+    {
+      "name": "name",
+      "label": "视图名称",
+      "type": "text",
+      "operator": "$like"
+    },
+    {
+      "name": "type",
+      "label": "视图类型",
+      "type": "select",
+      "option": {
+        "values": {
+          "create": "create",
+          "search": "search",
+          "menu": "menu",
+          "hidden": "hidden",
+          "chart": "chart",
+          "upload": "upload"
+        }
+      }
+    }
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "option配置名称",
+      "attributes": {
+        "data-sortable": true
+      }
+    },
+    {
+      "name": "type",
+      "label": "视图类型",
+      "attributes": {
+        "data-sortable": true
+      }
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style":"btn-primary"
+    }
+  ],
+  "operate": [
+    {
+      "icon": "glyphicon-edit",
+      "type": "create",
+      "view": "viewDeploymentCreateView"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "viewDeploymentSearchView",
+      "operate": true,
+      "provider": "deleteOperateProvider",
+      "confirm": "确认删除?"
+    },
+    {
+      "icon": "glyphicon-eye-open",
+      "type": "create",
+      "view": "viewDeploymentPreviewCreateView"
+    }
+  ],
+  "permission": [],
+  "defaultSort": {
+    "name": "name",
+    "order": "asc"
+  }
+}

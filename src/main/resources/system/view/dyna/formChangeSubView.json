@@ -1,0 +1,61 @@
+{
+  "name": "formChangeSubView",
+  "type": "search",
+  "data": "tbl_dyna_form_change",
+  "title": "级联配置",
+  "inputParameter": [
+    "formId"
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "字段名称"
+    },
+    {
+      "name": "target",
+      "label": "目标元素"
+    },
+    {
+      "name": "type",
+      "label": "类型"
+    },
+    {
+      "name": "value",
+      "label": "条件值"
+    }
+  ],
+  "actions": [
+    {
+      "type": "create",
+      "view": "formChangeCreateView",
+      "title": "添加级联配置",
+      "refresh": "formChangeSubView",
+      "label": "添加级联配置",
+      "parameter": {
+        "formId": "formId"
+      }
+    }
+  ],
+  "operate": [
+    {
+      "view": "formChangeCreateView",
+      "icon": "glyphicon-edit",
+      "type": "create",
+      "title": "修改级联配置",
+      "refresh": "formChangeSubView"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "formChangeSubView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "defaultSort": {
+    "name": "createdDate",
+    "order": "asc"
+  },
+  "permission": [],
+  "clear": false
+}

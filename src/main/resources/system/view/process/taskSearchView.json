@@ -1,0 +1,60 @@
+{
+  "name": "taskSearchView",
+  "type": "search",
+  "title": "任务查询",
+  "result": [
+    {
+      "name": "processName",
+      "label": "流程名称"
+    },
+    {
+      "name": "processInstanceId",
+      "label": "流程实例编号"
+    },
+    {
+      "name": "name",
+      "label": "任务名称"
+    },
+    {
+      "name": "assignee",
+      "label": "指派人"
+    },
+    {
+      "name": "dueDate",
+      "label": "过期时间"
+    }
+  ],
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "名称",
+      "attributes": {
+        "class": "form-control"
+      }
+    }
+  ],
+  "processor": "taskSearchFormProcessor",
+  "operate": [
+    {
+      "view": "taskInitForm",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create"
+    },
+    {
+      "view": "chartView",
+      "icon": "glyphicon glyphicon-eye-open",
+      "type": "task",
+      "target": "_blank",
+      "popup": true,
+      "title": "流程图"
+    }
+  ],
+  "permission": [],
+  "actions": [
+    {
+      "search": true,
+      "style":"btn-primary"
+    }
+  ]
+}

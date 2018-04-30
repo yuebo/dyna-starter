@@ -1,0 +1,57 @@
+{
+  "name": "processSearchView",
+  "type": "search",
+  "title": "流程查询",
+  "result": [
+    {
+      "name": "name",
+      "label": "流程名字"
+    },
+    {
+      "name": "category",
+      "label": "类别"
+    },
+    {
+      "name": "version",
+      "label": "版本"
+    },
+    {
+      "name": "start",
+      "label": "起始表单"
+    }
+  ],
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "名称",
+      "attributes": {
+        "class": "form-control"
+      }
+    }
+  ],
+  "processor": "processSearchFormProcessor",
+  "operate": [
+    {
+      "view": "processInitForm",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create"
+    },
+    {
+      "view": "chartView",
+      "icon": "glyphicon glyphicon-eye-open",
+      "type": "process",
+      "target": "_blank",
+      "popup": true,
+      "title": "流程图"
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style":"btn-primary"
+    }
+  ],
+  "permission": [],
+  "description": "这是流程查询的view"
+}

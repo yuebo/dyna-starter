@@ -1,0 +1,81 @@
+{
+  "name": "userPicker",
+  "result": [
+    {
+      "name": "_id",
+      "label": "",
+      "attributes": {
+        "data-checkbox": true
+      }
+    },
+    {
+      "name": "name",
+      "label": "姓名",
+      "attributes": {
+        "data-sortable": true
+      },
+      "id": true
+    },
+    {
+      "name": "mail",
+      "label": "邮箱"
+    },
+    {
+      "name": "sex",
+      "label": "性别",
+      "converter": {
+        "provider": "valuesConvertProvider",
+        "parameter": {
+          "values": {
+            "M": "男",
+            "F": "女"
+          }
+        }
+      }
+    },
+    {
+      "name": "phone",
+      "label": "电话"
+    }
+  ],
+  "title": "用户管理",
+  "operate": [
+    {
+      "view": "userCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create"
+    }
+  ],
+  "data": "tbl_user",
+  "permission": [],
+  "type": "search",
+  "actions": [
+    {
+      "search": true
+    },
+    {
+      "close": true,
+      "label": "选择并关闭"
+    }
+  ],
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "用户名",
+      "attributes": {
+        "class": "form-control"
+      },
+      "operator": "$like"
+    },
+    {
+      "name": "realName",
+      "label": "姓名",
+      "type": "text",
+      "attributes": {
+        "class": "form-control"
+      },
+      "operator": "$like"
+    }
+  ]
+}

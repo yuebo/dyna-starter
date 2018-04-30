@@ -1,0 +1,50 @@
+{
+  "name": "converterProviderSearchView",
+  "title": "转换配置查询",
+  "type": "search",
+  "data": "tbl_dyna_converter",
+  "fields": [
+    {
+      "name": "name",
+      "label": "converter配置名称",
+      "type": "text",
+      "operator": "$like"
+    }
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "converter配置名称"
+    },
+    {
+      "name": "provider",
+      "label": "Provider"
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style":"btn-primary"
+    },
+    {
+      "type": "create",
+      "view": "converterProviderCreateView",
+      "label": "添加选项配置"
+    }
+  ],
+  "operate": [
+    {
+      "icon": "glyphicon-edit",
+      "view": "converterProviderCreateView",
+      "type": "create"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "converterProviderSearchView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "permission": []
+}

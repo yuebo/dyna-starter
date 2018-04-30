@@ -1,0 +1,89 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+<form id="listForm" role="form" accept-charset="utf-8" action="$request.contextPath/spring/data/list/$esc.html($view.name)" method="post" class="form-horizontal">
+    <input style="display: none" type="text" value="" disabled="disabled">
+    #formviewcreate($view)
+    #if($view.search&&$view.search=="false")
+    #else
+        <button type="button" class="btn btn-default" onclick="doSearch()">$esc.html($msg.get("btn_search"))</button>
+    #end
+    #doAction($view)
+</form>
+<form accept-charset="utf-8" id="listResultForm" action="$request.contextPath/spring/data/list/$esc.html($view.name)" method="post" class="form-horizontal" >
+    #formsearchresult($view)
+    <button type="button" onclick="doSubmit()" id="btn_submit" style="display:none" class="btn btn-default">$esc.html($msg.get("btn_submit"))</button>
+    <script>
+            #if($view.actions)
+            function doAction(url,checked){
+                if(checked=='true'&&jQuery("input[name=_id]:checked").length==0){
+                    alert("$esc.javascript($msg.get('select_one'))");
+                    return;
+                }
+                jQuery("#listSearchForm").attr("action","$request.contextPath/spring/"+url);
+                jQuery("#listSearchForm").submit();
+            }
+            #end
+
+            #if($view.search&&$view.search=="false")
+            #else
+
+            function doSearch(){
+                jQuery("#btn_submit").removeAttr("style");
+                var data=jQuery("#listForm").serialize();
+                jQuery.ajax({
+                    type: "GET",
+                    url: "$request.contextPath/spring/data/template/$esc.javascript($view.name)?"+data
+                }).done(function( vData ) {
+                    jQuery('#result').html(vData);
+                    jQuery('#result>table').bootstrapTable({
+                        url: "$request.contextPath/spring/data/list/data/$esc.javascript($view.name)?"+data,
+                        method: "get",
+                        sidePagination: "server",
+                        pagination: true,
+                        selectItemName:"_id",
+                        idField:"_id"
+                    });
+                });
+
+            }
+            #end
+
+        function doSubmit(){
+            var data=jQuery("#listForm,#listResultForm").serialize();
+            $.ajax({
+                type: "POST",
+                url: "$request.contextPath/spring/data/list/$esc.javascript($view.name)",
+                data: data,
+                success: function (res) {
+                    debugger;
+                    var data = res;
+                    if(res.validate){
+                        $("#msgDiv").html("");
+                        var msg="<div class=\"alert alert-info\">";
+                        $(res.info).each(function(i,v){
+                            msg=msg+"<p>" + v['success']+"</p>";
+                        })
+                        msg=msg+"</div>";
+
+                        $("#msgDiv").html(msg);
+                        return
+                    }else{
+                        $("#msgDiv").html("");
+                        var msg="<div class=\"alert alert-warning\">";
+                        $(res.error).each(function(i,v){
+                            msg=msg+"<p>" + v['msg']+"</p>";
+                        })
+                        msg=msg+"</div>";
+
+                        $("#msgDiv").html(msg);
+                        return
+
+                    }
+                },
+                error: function (res) {
+                    alert("error");
+                }
+
+            });
+        }
+    </script>
+</form>

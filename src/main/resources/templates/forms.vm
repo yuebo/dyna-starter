@@ -1,0 +1,118 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#set($colSpan=0)
+#set($colSpanTemp=12)
+#set($colLabel=2)
+#set($colWedget=10)
+<div class="row">
+#foreach($item in $view.fields)
+    #if(!$item.id)#set($id=$item.name)#else#set($id=$item.id)#end
+
+    #if($viewContext.hasId() && $item.update==false)
+        <input id="$esc.html($id)" name="$esc.html($item.name)" type="hidden" value="$esc.html($item.attributes['value'])">
+        #set($id=$id+"_disabled")
+    #end
+
+    #if($section==""&&$msg.isNull($item.section)||$item.section&&$item.section==$section)
+        #if($item.container&&$item.container.span)
+            #set($colSpanTemp=$item.container.span)
+        #end
+        #if($item.container&&$item.container.label)
+            #set($colLabel=$item.container.label)
+        #end
+        #if($item.container&&$item.container.widget)
+            #set($colWedget=$item.container.widget)
+        #end
+
+        #set($colSpan=$colSpan+$colSpanTemp)
+
+        #if($colSpan>12)
+            </div>
+            <div class="row">
+            #set($colSpan=$colSpanTemp)
+        #end
+
+        #if($item.type == 'checkbox' || $item.type == 'radio')
+            <div class="form-group #if($colSpan)col-sm-$colSpanTemp#end #if($msg.hasError($messages,$item.name))has-error#end">
+                #if($item.label)<label class="col-sm-$colLabel">$esc.html($item.label)#checkrequired($item,$view.validators)</label>#end
+                <div class="col-md-$colWedget">
+                    #if($item.type == 'radio')
+                        #parse("/templates/form-radio.vm")
+                    #end
+            #if($item.type == 'checkbox')
+                    #parse("/templates/form-checkbox.vm")
+                #end
+                </div>
+                #if($item.tip)
+                    <p class="help-block">$esc.html($item.tip)</p>
+                #end
+            </div>
+        #elseif($item.type == 'hidden')
+            #parse("/templates/form-hidden.vm")
+        #else
+            <div class="form-group #if($colSpan)col-sm-$colSpanTemp#end #if($msg.hasError($messages,$item.name))has-error#end">
+                #if($item.label)<label for="$esc.html($id)" class="col-sm-$colLabel">$esc.html($item.label) #checkrequired($item,$view.validators)
+                    #if($item.allowEmpty=='false')
+                        <input type="checkbox" class="toggleBox" #if($msg.isNull($item.attributes.value))checked="checked"#end>
+                        #if($msg.isNull($item.attributes.value))#set($x=$item.attributes.put("disabled","disabled")) #set($x=$item.attributes.put("value",""))#end
+                    #end
+                </label>#end
+
+                <div class="col-sm-$colWedget">
+                    #if($item.type == 'label')
+                        #parse("/templates/form-label.vm")
+                    #end
+                    #if($item.type == 'dyna-label')
+                        #parse("/templates/form-dyna-label.vm")
+                    #end
+                    #if($item.type == 'text')
+                        #parse("/templates/form-text.vm")
+                    #end
+                    #if($item.type == 'file')
+                        #parse("/templates/form-file.vm")
+                    #end
+                    #if($item.type == 'elfinder')
+                        #parse("/templates/form-elfinder.vm")
+                    #end
+                    #if($item.type == 'password')
+                        #parse("/templates/form-password.vm")
+                    #end
+                    #if($item.type == 'email')
+                        #parse("/templates/form-mail.vm")
+                    #end
+                    #if($item.type == 'textarea')
+                        #parse("/templates/form-textarea.vm")
+                    #end
+                    #if($item.type == 'richtext')
+                        #parse("/templates/form-richtext.vm")
+                    #end
+                    #if($item.type == 'date')
+                        #parse("/templates/form-date.vm")
+                    #end
+                    #if($item.type == 'autocomplete')
+                        #parse("/templates/form-autocomplete.vm")
+                    #end
+                    #if($item.type == 'number')
+                        #parse("/templates/form-number.vm")
+                    #end
+                    #if($item.type == 'code')
+                        #parse("/templates/form-code.vm")
+                    #end
+                    #if($item.type == 'picker')
+                        #parse("/templates/form-picker.vm")
+                    #end
+                    #if($item.type == 'select'||$item.type=='muti-select')
+                        #parse("/templates/form-select.vm")
+                    #end
+                    #if($item.tip)
+                        <p class="help-block">$esc.html($item.tip)</p>
+                    #end
+                </div>
+
+
+            </div>
+        #end
+    #end
+
+
+#end
+</div>

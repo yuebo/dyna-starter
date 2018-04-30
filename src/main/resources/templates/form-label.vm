@@ -1,0 +1,9 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#if($item.type == 'label')
+    #if($item.escape&&$item.escape=='false')
+    <div id="$esc.html($id)" #mapiterator($item,$attr.key)>$item.attributes.value</div>
+    #else
+    <div id="$esc.html($id)" #mapiterator($item,$attr.key)>$msg.label($esc.html($item.attributes.value))</div>
+    #end
+
+#end

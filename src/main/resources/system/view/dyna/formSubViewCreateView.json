@@ -1,0 +1,63 @@
+{
+  "name": "formSubViewCreateView",
+  "type": "create",
+  "title": "子视图配置",
+  "data": "tbl_dyna_form_subview",
+  "inputParameter": [
+    "formId"
+  ],
+  "fields": [
+    {
+      "name": "name",
+      "label": "子视图名称",
+      "type": "text",
+      "attributes": {
+        "placeholder": "请输入配置名称，唯一键"
+      }
+    },
+    {
+      "name": "parameter",
+      "label": "参数",
+      "type": "textarea",
+      "attributes": {
+        "placeholder": "请输入参数，json格式",
+        "rows": 10
+      }
+    },
+    {
+      "name": "formId",
+      "type": "hidden"
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "parameter",
+      "provider": "json",
+      "msg": "json"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true,
+      "view": "formCreateView",
+      "type": "create",
+      "id": "formId"
+    },
+    {
+      "field": "formId",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

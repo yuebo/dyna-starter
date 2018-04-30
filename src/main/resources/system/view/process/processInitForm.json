@@ -1,0 +1,7 @@
+{
+  "name": "processInitForm",
+  "title": "流程启动",
+  "processor": "processInitFormProcessor",
+  "type": "create",
+  "description": "这是流程启动跳转的View"
+}

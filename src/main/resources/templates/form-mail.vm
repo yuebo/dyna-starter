@@ -1,0 +1,2 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+<input id="$esc.html($id)" name="$esc.html($item.name)" type="email" #mapiterator($item,$attr.key)>

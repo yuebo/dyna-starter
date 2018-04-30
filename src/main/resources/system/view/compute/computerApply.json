@@ -1,0 +1,66 @@
+{
+  "name": "computerApply",
+  "type": "create",
+  "title": "申请电脑",
+  "data": "tbl_compute_application",
+  "fields": [
+    {
+      "name": "reason",
+      "label": "申请原因",
+      "type": "textarea"
+    },
+    {
+      "name": "applyUserId",
+      "label": "申请人",
+      "type": "select",
+      "option": {
+        "provider": "currentUserOptionProvider"
+      },
+      "default": false
+    },
+    {
+      "name": "approvalName",
+      "label": "审核人",
+      "type": "select",
+      "option": {
+        "provider": "currentDepartmentManagerOptionProvider"
+      },
+      "default": false
+    }
+  ],
+  "validators": [
+    {
+      "field": "reason",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "applyUserId",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "approvalName",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "process": {
+    "name": "申请电脑流程",
+    "output": {
+      "apply": {
+        "value": "#form['applyUserId']"
+      },
+      "manager": {
+        "value": "#form['approvalName']"
+      }
+    }
+  },
+  "redirect": "/spring/data/search/processSearchView",
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    }
+  ]
+}

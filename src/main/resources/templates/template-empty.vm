@@ -1,0 +1,2 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#formviewcreate($view)

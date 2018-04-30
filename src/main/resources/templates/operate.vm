@@ -1,0 +1,7 @@
+<script>
+    #if($subview.operate)
+    function operateFormatter_$esc.html($subview.name)(value, row, index) {
+        return '#foreach($item in $subview.operate)<a class="operate" #if($item.operate)data-operate="true"#end #if($item.confirm)data-confirm="$esc.html($item.confirm)"#end  #if($item.name)data-name="$esc.html($item.name)"#end data-root="$esc.html($subview.name)" #if($item.depend)'+(row['$esc.javascript($item.depend)']#if($item.value)=='$esc.javascript($item.value)'#end?'':'style="display: none"') +'#end  #if($item.popup)data-popup="true"#end #if($item.change)data-change="$esc.html($item.change)"#end #if($item.refresh)data-refresh="$esc.html($item.refresh)"#end #if($item.title) data-title="$esc.html($item.title)" #end  onclick="doOperate(event)" #if($item.type)data-type="$esc.html($item.type)" #end  href="javascript:void(0)"  #if($item.view)data-view="$esc.html($item.view)"#end data-id="'+row['_id']+'"><i class="glyphicon $esc.javascript($esc.html($item.icon))"></i></a>#end'
+    }
+    #end
+</script>

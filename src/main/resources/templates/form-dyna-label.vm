@@ -1,0 +1,4 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#set($list=($provider.provider($item.option.provider).option($viewContext,$item,$item.option.parameter)))
+<div id="$esc.html($id)" #mapiterator($item,$attr.key)>#if($list&&$list.size()>0)$list[0].keySet().iterator().next()#end
+</div>

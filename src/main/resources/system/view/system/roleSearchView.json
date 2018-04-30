@@ -1,0 +1,52 @@
+{
+  "name": "roleSearchView",
+  "type": "search",
+  "data": "tbl_role",
+  "title": "角色查询",
+  "fields": [
+    {
+      "name": "roleName",
+      "type": "text",
+      "label": "角色名称",
+      "attributes": {
+        "class": "form-control",
+        "placeholder": "请输入角色名称"
+      },
+      "operator": "$like"
+    }
+  ],
+  "result": [
+    {
+      "name": "roleName",
+      "label": "角色名称"
+    },
+    {
+      "name": "permission",
+      "label": "权限"
+    }
+  ],
+  "dataview": {
+    "name": "roleCreateView",
+    "type": "create"
+  },
+  "operate": [
+    {
+      "view": "roleCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create"
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style": "btn-primary"
+    },
+    {
+      "type": "create",
+      "view": "roleCreateView",
+      "label": "新建角色"
+    }
+  ],
+  "processor": "roleSearchSearchFormProcessor",
+  "permission": []
+}

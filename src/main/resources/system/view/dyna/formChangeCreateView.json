@@ -1,0 +1,122 @@
+{
+  "name": "formChangeCreateView",
+  "type": "create",
+  "title": "级联配置",
+  "data": "tbl_dyna_form_change",
+  "inputParameter": [
+    "formId"
+  ],
+  "fields": [
+    {
+      "name": "name",
+      "label": "字段名称",
+      "type": "autocomplete",
+      "attributes": {
+        "placeholder": "请输入级联字段名称"
+      },
+      "option": {
+        "provider": "multiDataOptionProvider",
+        "parameter": {
+          "key": "name",
+          "value": "name",
+          "depends": [
+            {
+              "depend": "formId",
+              "name": "formId"
+            }
+          ],
+          "query": {
+            "_data": "tbl_dyna_form_field"
+          }
+        }
+      }
+    },
+    {
+      "name": "target",
+      "label": "目标元素",
+      "type": "autocomplete",
+      "attributes": {
+        "placeholder": "请输入目标元素名称，可以是字段或者子视图"
+      },
+      "option": {
+        "provider": "multiDataOptionProvider",
+        "parameter": {
+          "key": "name",
+          "value": "name",
+          "depends": [
+            {
+              "depend": "formId",
+              "name": "formId"
+            }
+          ],
+          "query": {
+            "_data": "tbl_dyna_form_field,tbl_dyna_form_subview"
+          }
+        }
+      }
+    },
+    {
+      "name": "type",
+      "label": "类型",
+      "type": "select",
+      "option": {
+        "values": {
+          "cascade": "cascade",
+          "toggle": "toggle"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "value",
+      "label": "条件值",
+      "type": "text",
+      "attributes": {
+        "placeholder": "请输入级联条件值，可以用,分割多个值"
+      }
+    },
+    {
+      "name": "formId",
+      "type": "hidden"
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "target",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "formId",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "change": [
+    {
+      "name": "type",
+      "target": "value",
+      "type": "toggle",
+      "value": "toggle"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true,
+      "view": "formCreateView",
+      "type": "create",
+      "id": "formId"
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

@@ -1,0 +1,49 @@
+{
+  "name": "formSubviewSubView",
+  "type": "search",
+  "data": "tbl_dyna_form_subview",
+  "title": "子视图",
+  "inputParameter": [
+    "formId"
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "视图名称"
+    }
+  ],
+  "actions": [
+    {
+      "type": "create",
+      "view": "formSubViewCreateView",
+      "title": "添加子视图",
+      "refresh": "formSubviewSubView",
+      "label": "添加子视图",
+      "parameter": {
+        "formId": "formId"
+      }
+    }
+  ],
+  "operate": [
+    {
+      "view": "formSubViewCreateView",
+      "icon": "glyphicon-edit",
+      "type": "create",
+      "title": "修改子视图",
+      "refresh": "formSubviewSubView"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "formSubviewSubView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "defaultSort": {
+    "name": "createdDate",
+    "order": "asc"
+  },
+  "permission": [],
+  "clear": false
+}

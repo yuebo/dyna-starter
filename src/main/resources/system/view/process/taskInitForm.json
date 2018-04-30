@@ -1,0 +1,7 @@
+{
+  "name": "taskInitForm",
+  "title": "任务跳转",
+  "processor": "taskInitFormProcessor",
+  "type": "create",
+  "description": "这是任务跳转的view"
+}

@@ -1,0 +1,124 @@
+{
+  "TBL_MESSAGE#KEY": [
+    {
+      "KEY": "unique",
+      "VALUE": "{0}不是唯一的"
+    },
+    {
+      "VALUE": "提交",
+      "KEY": "btn_submit"
+    },
+    {
+      "VALUE": "查询",
+      "KEY": "btn_search"
+    },
+    {
+      "VALUE": "删除",
+      "KEY": "btn_delete"
+    },
+    {
+      "VALUE": "选择",
+      "KEY": "btn_picker"
+    },
+    {
+      "VALUE": "清除",
+      "KEY": "btn_picker_clear"
+    },
+    {
+      "KEY": "required",
+      "VALUE": "必填项:{0}"
+    },
+    {
+      "KEY": "regexp",
+      "VALUE": "无效的格式:{0}"
+    },
+    {
+      "KEY": "length",
+      "VALUE": "长度限制:{0}"
+    },
+    {
+      "KEY": "match",
+      "VALUE": "密码不匹配"
+    },
+    {
+      "VALUE": "请选择",
+      "KEY": "select_default"
+    },
+    {
+      "KEY": "success",
+      "VALUE": "数据保存成功"
+    },
+    {
+      "KEY": "delete",
+      "VALUE": "数据删除成功"
+    },
+    {
+      "VALUE": "导出",
+      "KEY": "btn_export"
+    },
+    {
+      "VALUE": "请选择至少一个选项",
+      "KEY": "select_one"
+    },
+    {
+      "VALUE": "返回",
+      "KEY": "btn_back"
+    },
+    {
+      "VALUE": "令牌已经失效,请重新提交表单",
+      "KEY": "token"
+    },
+    {
+      "VALUE": "无效的任务",
+      "KEY": "task"
+    },
+    {
+      "VALUE": "文件上传成功",
+      "KEY": "upload"
+    },
+    {
+      "VALUE": "不是合法的JSON",
+      "KEY": "json"
+    },
+    {
+      "VALUE": "关闭",
+      "KEY": "btn_close"
+    },
+    {
+      "VALUE": "操作成功",
+      "KEY": "operate_success"
+    },
+    {
+      "VALUE": "操作失败",
+      "KEY": "operate_fail"
+    },
+    {
+      "VALUE": "无效操作",
+      "KEY": "operate_invalid"
+    },
+    {
+      "VALUE": "无效的值:{0}",
+      "KEY": "option"
+    },
+    {
+      "VALUE": "主页",
+      "KEY": "btn_home"
+    },
+    {
+      "VALUE": "注销",
+      "KEY": "btn_logout"
+    },
+    {
+      "VALUE": "修改密码",
+      "KEY": "btn_password"
+    },
+    {
+      "VALUE": "修改皮肤",
+      "KEY": "btn_skin"
+    },
+    {
+      "VALUE": "操作",
+      "KEY": "operate"
+    }
+  ]
+}

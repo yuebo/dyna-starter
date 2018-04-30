@@ -1,0 +1,54 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+<form id="chartform" role="form" accept-charset="utf-8" action="$request.contextPath/spring/data/chart/$esc.html($view.name)" method="post" class="form-horizontal">
+    <input style="display: none" type="text" value="" disabled="disabled">
+    #if($view.fields||$view.actions)
+        #if($view.section)
+            #foreach($section in $view.section)
+            <div class="row">
+                #foreach($section in $view.section)
+                    #if($section.span)
+                        #set($colSpanTemp=$section.span)
+                    #end
+                    #set($colSpan=$colSpan+$colSpanTemp)
+                    #if($colSpan>12)
+                    </div>
+                    <div class="row">
+                        #set($colSpan=$colSpanTemp)
+                    #end
+                    #formsection($view,$section.name,$section.title,"template-empty.vm",$colSpanTemp)
+                #end
+            </div>
+
+            #end
+            <div class="row">
+                #formsection($view, "", $section.title,"template-chart.vm",12)
+            </div>
+        #else
+            <div id="" class="row">
+                #formsection($view,"",$view.title,"template-chart.vm",12)
+            </div>
+        #end
+    #end
+
+
+    #set($colSpan=0)
+    #set($colSpanTemp=12)
+    <div class="row">
+        #foreach($chart in $view.charts)
+            #if($chart.container&&$chart.container.span)
+                #set($colSpanTemp=$chart.container.span)
+            #end
+            #set($colSpan=$colSpan+$colSpanTemp)
+
+            #if($colSpan>12)
+            </div>
+            <div class="row">
+                #set($colSpan=$colSpanTemp)
+            #end
+            #formsection($view,$chart.name,$chart.label,"chart.vm",$colSpanTemp)
+        #end
+    </div>
+
+
+
+</form>

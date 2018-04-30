@@ -1,0 +1,376 @@
+{
+  "name": "formFieldCreateView",
+  "data": "tbl_dyna_form_field",
+  "inputParameter": [
+    "formId"
+  ],
+  "title": "添加字段",
+  "type": "create",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "字段名称",
+      "attributes": {
+        "placeholder": "请输入字段名称"
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "label": "字段标签",
+      "attributes": {
+        "placeholder": "请输入字段标签"
+      }
+    },
+    {
+      "name": "seq",
+      "type": "number",
+      "label": "顺序",
+      "converter":{
+        "provider":"numberConverter",
+        "parameter":{
+          "format":"#"
+        }
+      },
+      "attributes": {
+        "placeholder": "请输入字段顺序",
+        "value":"0"
+      }
+    },
+    {
+      "name": "tip",
+      "type": "text",
+      "label": "提示",
+      "attributes": {
+        "placeholder": "请输入字段提示"
+      }
+    },
+    {
+      "name": "type",
+      "type": "select",
+      "label": "字段类型",
+      "option": {
+        "values": {
+          "text": "text",
+          "textarea": "textarea",
+          "password": "password",
+          "richtext": "richtext",
+          "number": "number",
+          "date": "date",
+          "email": "email",
+          "hidden": "hidden",
+          "elfinder": "elfinder",
+          "autocomplete": "autocomplete",
+          "select": "select",
+          "muti-select": "muti-select",
+          "radio": "radio",
+          "checkbox": "checkbox",
+          "file": "file",
+          "picker": "picker",
+          "code":"code"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "view",
+      "type": "text",
+      "label": "picker的查询视图",
+      "attributes": {
+        "placeholder": "请输入picker的查询视图"
+      },
+      "tip": "用于定义picker选择的查询视图"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "label": "picker的标题",
+      "attributes": {
+        "placeholder": "请输入picker的标题"
+      },
+      "tip": "用于定义picker的窗口名称"
+    },
+    {
+      "name": "operator",
+      "label": "查询操作符",
+      "type": "select",
+      "option": {
+        "values": {
+          "": "无",
+          "$like": "$like",
+          "$lt": "$lt",
+          "$gt": "$gt",
+          "$lte": "$lte",
+          "$gte": "$gte",
+          "$null": "$null"
+        }
+      },
+      "tip": "只有查询视图有效, 用于匹配条件",
+      "default": false
+    },
+    {
+      "name": "option",
+      "label": "选项",
+      "type": "select",
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_dyna_option"
+          }
+        }
+      }
+    },
+    {
+      "name": "default",
+      "label": "启用默认选项",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "update",
+      "label": "是否可更新",
+      "type": "select",
+      "option": {
+        "values": {
+          "true": "true",
+          "false": "false"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "usePermission",
+      "label": "是否启用权限",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "$permission",
+      "label": "权限",
+      "type": "muti-select",
+      "attributes": {
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_dyna_field_permission",
+        "column": "fieldId",
+        "field": "permissionId",
+        "action": "delete"
+      }
+    },
+    {
+      "name": "attributes",
+      "label": "属性",
+      "type": "textarea",
+      "attributes": {
+        "rows": 10,
+        "placeholder": "控件属性，json类型，可以设置disabled,readonly等属性"
+      }
+    },
+    {
+      "name": "join",
+      "label": "join属性",
+      "type": "textarea",
+      "attributes": {
+        "rows": 10,
+        "placeholder": "可以定义外部数据，通过{\"table\":\"数据表名\",\"column\":\"外键名称\",\"field\":\"字段名\"}"
+      }
+    },
+    {
+      "name": "converter",
+      "label": "转换器",
+      "type": "select",
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_dyna_converter"
+          }
+        }
+      }
+    },
+    {
+      "name": "processor",
+      "label": "文件处理器",
+      "type": "autocomplete",
+      "attributes": {
+        "placeholder": "file类型的文件处理器,用于自定义上传文件处理"
+      },
+      "option": {
+        "provider": "springBeanOptionProvider",
+        "parameter": {
+          "key": "provider",
+          "value": "providerName",
+          "depends": [
+            {
+              "depend": "type",
+              "name": "processor"
+            }
+          ],
+          "query": {
+            "_data": "none",
+            "class": "file"
+          }
+        }
+      }
+    },
+    {
+      "name": "container",
+      "label": "容器属性",
+      "type": "textarea",
+      "attributes": {
+        "rows": 10,
+        "placeholder": "容器属性，用于定义容器，例如{ \"span\": 6, \"label\": 4, \"widget\": 8}"
+      },
+      "tip": "span指定占用的列,label指定标签占用的比例，widget指定组件占用比例"
+    },
+    {
+      "name": "$trigger1",
+      "type": "hidden"
+    },
+    {
+      "name": "$trigger2",
+      "type": "hidden"
+    },
+    {
+      "name": "formId",
+      "type": "hidden"
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "label",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "type",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "formId",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "container",
+      "provider": "json",
+      "msg": "json"
+    },
+    {
+      "field": "join",
+      "provider": "json",
+      "msg": "json"
+    }
+  ],
+  "change": [
+    {
+      "name": "type",
+      "target": "option",
+      "type": "toggle",
+      "value": "radio,autocomplete,checkbox,select,muti-select"
+    },
+    {
+      "name": "type",
+      "target": "default",
+      "type": "toggle",
+      "value": "select"
+    },
+    {
+      "name": "usePermission",
+      "target": "$permission",
+      "type": "toggle",
+      "value": "true"
+    },
+    {
+      "name": "$trigger1",
+      "target": "option"
+    },
+    {
+      "name": "$trigger2",
+      "target": "converter"
+    },
+    {
+      "name": "type",
+      "target": "processor",
+      "value": "file",
+      "type": "toggle"
+    },
+    {
+      "name": "type",
+      "target": "view",
+      "value": "picker",
+      "type": "toggle"
+    },
+    {
+      "name": "type",
+      "target": "title",
+      "value": "picker",
+      "type": "toggle"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true,
+      "view": "formCreateView",
+      "type": "create",
+      "id": "formId"
+    },
+    {
+      "label": "添加选项",
+      "view": "optionProviderCreateView",
+      "type": "create",
+      "popup": true,
+      "title": "添加选项配置",
+      "change": "$trigger1"
+    },
+    {
+      "label": "添加转换器",
+      "view": "converterProviderCreateView",
+      "type": "create",
+      "popup": true,
+      "title": "添加转换器",
+      "change": "$trigger2"
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

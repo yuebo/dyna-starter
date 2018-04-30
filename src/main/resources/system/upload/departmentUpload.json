@@ -1,0 +1,52 @@
+{
+  "name": "departmentUpload",
+  "type": "upload",
+  "data": "tbl_department",
+  "file": "xlsx",
+  "keys": [
+    "name"
+  ],
+  "processor": "xlsxFileProcessor",
+  "fields": [
+    {
+      "name": "departmentNO",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "type": "text"
+    },
+    {
+      "name": "parentId",
+      "type": "text"
+    },
+    {
+      "name": "managerId",
+      "type": "text",
+      "converter": {
+        "provider": "dataConverter",
+        "parameter": {
+          "table": "tbl_user",
+          "column": "name"
+        }
+      }
+    },
+    {
+      "name": "joinDate",
+      "type": "date",
+      "update": false
+    }
+  ],
+  "validators": [
+    {
+      "field": "departmentNO",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    }
+  ]
+}

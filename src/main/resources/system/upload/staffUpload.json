@@ -1,0 +1,40 @@
+{
+  "name": "staffUpload",
+  "type": "upload",
+  "data": "tbl_staff",
+  "file": "xlsx",
+  "keys": [
+    "name"
+  ],
+  "processor": "xlsxFileProcessor",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text"
+    },
+    {
+      "name": "grade",
+      "type": "text"
+    },
+    {
+      "name": "department",
+      "type": "text"
+    },
+    {
+      "name": "employId",
+      "type": "text"
+    },
+    {
+      "name": "joinDate",
+      "type": "date",
+      "update": false
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    }
+  ]
+}

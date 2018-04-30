@@ -1,0 +1,53 @@
+{
+  "name": "formValidatorSubView",
+  "type": "search",
+  "data": "tbl_dyna_form_validator",
+  "title": "验证器",
+  "inputParameter": [
+    "formId"
+  ],
+  "result": [
+    {
+      "name": "field",
+      "label": "字段"
+    },
+    {
+      "name": "provider",
+      "label": "验证器"
+    }
+  ],
+  "clear": false,
+  "actions": [
+    {
+      "type": "create",
+      "view": "formValidatorCreateView",
+      "title": "添加验证",
+      "refresh": "formValidatorSearchView",
+      "label": "添加验证",
+      "parameter": {
+        "formId": "formId"
+      }
+    }
+  ],
+  "operate": [
+    {
+      "view": "formValidatorCreateView",
+      "icon": "glyphicon-edit",
+      "type": "create",
+      "title": "修改验证",
+      "refresh": "formValidatorSubView"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "formValidatorSubView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "defaultSort": {
+    "name": "createdDate",
+    "order": "asc"
+  },
+  "permission": []
+}

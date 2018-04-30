@@ -1,0 +1,12 @@
+{
+  "name": "public",
+  "type": "menu",
+  "items": [
+    {
+      "type": "create",
+      "view": "loginView",
+      "label": "登录",
+      "icon": "glyphicon-log-in"
+    }
+  ]
+}

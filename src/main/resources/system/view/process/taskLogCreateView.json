@@ -1,0 +1,46 @@
+{
+  "name": "taskLogCreateView",
+  "title": "审核历史",
+  "validators": [
+    {
+      "field": "businessId",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "inputParameter": [
+    "businessId"
+  ],
+  "data": "tbl_task_log",
+  "type": "create",
+  "fields": [
+    {
+      "name": "businessId",
+      "type": "hidden",
+      "label": "逻辑主键"
+    },
+    {
+      "name": "approve",
+      "type": "select",
+      "label": "审批意见",
+      "attributes": {
+        "class": "form-control"
+      },
+      "option": {
+        "values": {
+          "同意": "同意",
+          "不同意": "不同意"
+        }
+      }
+    },
+    {
+      "name": "remarks",
+      "type": "textarea",
+      "label": "审核备注",
+      "attributes": {
+        "class": "form-control"
+      }
+    }
+  ],
+  "permission": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "logoutView",
+  "title": "注销登录",
+  "readOnly": "true",
+  "menu": "public",
+  "data": "user",
+  "type": "create",
+  "fields": [
+    {
+      "name": "message",
+      "label": "提示信息",
+      "type": "label",
+      "update": "false",
+      "attributes": {
+        "class": "form-control-static",
+        "value": "你成功退出系统"
+      }
+    }
+  ]
+}

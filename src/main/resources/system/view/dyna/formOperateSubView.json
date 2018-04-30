@@ -1,0 +1,57 @@
+{
+  "name": "formOperateSubView",
+  "type": "search",
+  "data": "tbl_dyna_form_operate",
+  "title": "操作配置",
+  "inputParameter": [
+    "formId"
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "字段"
+    },
+    {
+      "name": "operate",
+      "label": "类型"
+    },
+    {
+      "name": "icon",
+      "label": "Icon"
+    }
+  ],
+  "actions": [
+    {
+      "type": "create",
+      "view": "formOperateCreateView",
+      "title": "添加操作",
+      "refresh": "formOperateSubView",
+      "label": "添加操作",
+      "parameter": {
+        "formId": "formId"
+      }
+    }
+  ],
+  "operate": [
+    {
+      "view": "formOperateCreateView",
+      "icon": "glyphicon-edit",
+      "type": "create",
+      "title": "修改操作",
+      "refresh": "formOperateSubView"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "formOperateSubView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "defaultSort": {
+    "name": "createdDate",
+    "order": "asc"
+  },
+  "permission": [],
+  "clear": false
+}

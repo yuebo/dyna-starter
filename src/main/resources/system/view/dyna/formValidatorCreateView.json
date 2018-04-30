@@ -1,0 +1,176 @@
+{
+  "name": "formValidatorCreateView",
+  "data": "tbl_dyna_form_validator",
+  "inputParameter": [
+    "formId"
+  ],
+  "title": "添加验证",
+  "type": "create",
+  "fields": [
+    {
+      "name": "field",
+      "type": "autocomplete",
+      "label": "验证字段",
+      "attributes": {
+        "placeholder": "请输入验证字段名称"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "name",
+          "value": "name",
+          "depends": [
+            {
+              "depend": "formId",
+              "name": "formId"
+            }
+          ],
+          "query": {
+            "_data": "tbl_dyna_form_field"
+          }
+        }
+      }
+    },
+    {
+      "name": "provider",
+      "type": "autocomplete",
+      "label": "验证器",
+      "attributes": {
+        "placeholder": "请输入字段标签"
+      },
+      "option": {
+        "provider": "springBeanOptionProvider",
+        "parameter": {
+          "key": "provider",
+          "value": "providerName",
+          "depends": [
+            {
+              "depend": "type",
+              "name": "provider"
+            }
+          ],
+          "query": {
+            "_data": "none",
+            "class": "validator"
+          }
+        }
+      }
+    },
+    {
+      "name": "msg",
+      "type": "autocomplete",
+      "label": "错误消息",
+      "attributes": {
+        "placeholder": "请输入错误消息的key"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "key",
+          "value": "value",
+          "query": {
+            "_data": "tbl_message"
+          }
+        }
+      }
+    },
+    {
+      "name": "external",
+      "type": "select",
+      "default": false,
+      "label": "全局验证",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      }
+    },
+    {
+      "name": "match",
+      "type": "autocomplete",
+      "label": "匹配字段",
+      "attributes": {
+        "placeholder": "请输入匹配的字段名称"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "name",
+          "value": "name",
+          "depends": [
+            {
+              "depend": "formId",
+              "name": "formId"
+            }
+          ],
+          "query": {
+            "_data": "tbl_dyna_form_field"
+          }
+        }
+      }
+    },
+    {
+      "name": "parameter",
+      "type": "textarea",
+      "label": "参数",
+      "attributes": {
+        "placeholder": "请输入验证器参数, json格式",
+        "rows": 10
+      }
+    },
+    {
+      "name": "formId",
+      "type": "hidden"
+    }
+  ],
+  "validators": [
+    {
+      "field": "field",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "provider",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "msg",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "parameter",
+      "provider": "json",
+      "msg": "json"
+    },
+    {
+      "field": "formId",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true,
+      "view": "formCreateView",
+      "type": "create",
+      "id": "formId"
+    }
+  ],
+  "change": [
+    {
+      "type": "toggle",
+      "name": "provider",
+      "target": "match",
+      "value": "match"
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

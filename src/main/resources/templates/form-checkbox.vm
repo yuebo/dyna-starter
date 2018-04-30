@@ -1,0 +1,14 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#if($item.option.provider)
+    #set($list=$provider.provider($item.option.provider).option($viewContext,$item,$item.option.parameter))
+    #foreach($map in $list)
+        #foreach($attr in $map.keySet())
+        <div class="checkbox"><label><input type="checkbox" name="$esc.html($item.name)" value="$esc.html($attr.key)" #mapiterator($item,$attr.key)>$esc.html($attr.value)</label></div>
+        #end
+    #end
+
+#elseif($item.option.values)
+    #foreach($attr in $item.option.values.entrySet())
+    <div class="checkbox"><label><input type="checkbox" name="$esc.html($item.name)" value="$esc.html($attr.key)" #mapiterator($item,$attr.key)>$esc.html($attr.value)</label></div>
+    #end
+#end

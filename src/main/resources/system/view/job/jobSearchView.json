@@ -1,0 +1,101 @@
+{
+  "name": "jobSearchView",
+  "type": "search",
+  "data": "tbl_job",
+  "title": "上传查询",
+  "fields": [
+    {
+      "name": "uploadTime.$gte",
+      "label": "上传时间",
+      "type": "date",
+      "converter": {
+        "provider": "dateConverter",
+        "parameter": {
+          "format": "yyyy-MM-dd HH:mm"
+        }
+      },
+      "attributes": {
+        "data-date-format": "yyyy-MM-dd hh:ii",
+        "data-min-view": "day"
+      }
+    },
+    {
+      "name": "uploadTime.$lte",
+      "type": "date",
+      "label": "",
+      "converter": {
+        "provider": "dateConverter",
+        "parameter": {
+          "format": "yyyy-MM-dd HH:mm"
+        }
+      },
+      "attributes": {
+        "data-date-format": "yyyy-MM-dd hh:ii",
+        "data-min-view": "day"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style": "btn-primary"
+    },
+    {
+      "label": "导出",
+      "submit": true
+    }
+  ],
+  "permission": [],
+  "result": [
+    {
+      "name": "upload",
+      "label": "上传类型"
+    },
+    {
+      "name": "uploadTime",
+      "converter": {
+        "provider": "dateConverter",
+        "parameter": {
+          "format": "yyyy-MM-dd HH:mm"
+        }
+      },
+      "label": "上传时间",
+      "attributes": {
+        "data-sortable": true
+      }
+    },
+    {
+      "name": "completeDate",
+      "converter": {
+        "provider": "dateConverter",
+        "parameter": {
+          "format": "yyyy-MM-dd HH:mm"
+        }
+      },
+      "label": "完成时间"
+    },
+    {
+      "name": "errorCnt",
+      "label": "错误数"
+    },
+    {
+      "name": "status",
+      "label": "状态"
+    }
+  ],
+  "defaultSort": {
+    "name": "uploadTime",
+    "order": "desc"
+  },
+  "operate": [
+    {
+      "view": "jobSearchView",
+      "icon": "glyphicon glyphicon-download-alt",
+      "type": "download",
+      "depend": "status"
+    }
+  ],
+  "export": {
+    "template": "export/default.xlsx"
+  }
+}

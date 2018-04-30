@@ -1,0 +1,9 @@
+{
+  "name": "chartView",
+  "type": "hidden",
+  "permission": [
+  ],
+  "process": {
+  },
+  "description": "这是process视图view,系统会检查此view的权限"
+}

@@ -1,0 +1,20 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+<select id="$esc.html($id)" name="$esc.html($item.name)" #mapiterator($item,$attr.key)>
+    #if($item.type=='select'&&$msg.isNull($item.default)||$item.type=='select'&&$item.default)
+        <option value="">$esc.html($msg.get("select_default"))</option>
+    #end
+
+    #if($item.option.provider)
+        #set($list=$provider.provider($item.option.provider).option($viewContext,$item,$item.option.parameter))
+        #foreach($map in $list)
+            #foreach($attr in $map.entrySet())
+                <option value="$esc.html($attr.key)" #if($attr.key==$item.attributes.value||$item.attributes.value.contains($attr.key))selected="selected"#end>$esc.html($attr.value)</option>
+            #end
+        #end
+
+    #elseif($item.option.values)
+        #foreach($attr in $item.option.values.entrySet())
+            <option value="$esc.html($attr.key)" #if($attr.key==$item.attributes.value||$item.attributes.value.contains($attr.key))selected="selected"#end>$esc.html($attr.value)</option>
+        #end
+    #end
+</select>

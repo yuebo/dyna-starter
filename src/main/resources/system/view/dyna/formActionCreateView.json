@@ -1,0 +1,292 @@
+{
+  "name": "formActionCreateView",
+  "data": "tbl_dyna_form_action",
+  "inputParameter": [
+    "formId"
+  ],
+  "title": "添加动作",
+  "type": "create",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "动作名称",
+      "attributes": {
+        "placeholder": "请输入动作名称"
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "label": "动作标签",
+      "attributes": {
+        "placeholder": "请输入动作标签"
+      }
+    },
+    {
+      "name": "action",
+      "type": "select",
+      "label": "类型",
+      "option": {
+        "values": {
+          "search": "search",
+          "submit": "submit",
+          "back": "back",
+          "export": "export",
+          "close": "close",
+          "view": "view",
+          "popup": "popup",
+          "javascript": "javascript",
+          "url": "url"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "url",
+      "type": "text",
+      "label": "跳转链接",
+      "attributes": {
+        "placeholder": "请输入跳转链接,需要spring MVC的url"
+      },
+      "tip": "用于search视图跳转到自定义视图，并且携带选择的参数，内置redirect?view={viewname}用于跳转"
+    },
+    {
+      "name": "href",
+      "type": "text",
+      "label": "javascript",
+      "attributes": {
+        "placeholder": "请输入执行的javascript"
+      }
+    },
+    {
+      "name": "view",
+      "type": "text",
+      "label": "视图",
+      "attributes": {
+        "placeholder": "请输入要跳转的视图"
+      }
+    },
+    {
+      "name": "type",
+      "type": "autocomplete",
+      "label": "视图类型",
+      "attributes": {
+        "placeholder": "请输入要跳转的视图类型"
+      },
+      "option": {
+        "values": {
+          "search": "search",
+          "create": "create"
+        }
+      }
+    },
+    {
+      "name": "id",
+      "type": "text",
+      "label": "id字段",
+      "attributes": {
+        "placeholder": "请输入返回的id来自的字段"
+      }
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "label": "窗口名称",
+      "attributes": {
+        "placeholder": "请输入弹出窗口的名称"
+      }
+    },
+    {
+      "name": "style",
+      "type": "autocomplete",
+      "label": "按钮样式",
+      "attributes": {
+        "placeholder": "请输入按钮样式"
+      },
+      "option": {
+        "values": {
+          "btn-default": "btn-default",
+          "btn-primary": "btn-primary",
+          "btn-secondary": "btn-secondary",
+          "btn-success": "btn-success",
+          "btn-warning": "btn-warning",
+          "btn-info": "btn-info",
+          "btn-danger": "btn-danger"
+        }
+      }
+    },
+    {
+      "name": "update",
+      "label": "是否在更新时显示",
+      "type": "select",
+      "option": {
+        "values": {
+          "true": "true",
+          "false": "false"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "usePermission",
+      "label": "是否启用权限",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "$permission",
+      "label": "权限",
+      "type": "muti-select",
+      "attributes": {
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_dyna_action_permission",
+        "column": "actionId",
+        "field": "permissionId",
+        "action": "delete"
+      }
+    },
+    {
+      "name": "refresh",
+      "type": "text",
+      "label": "刷新",
+      "attributes": {
+        "placeholder": "请输入要刷新的子视图名称"
+      }
+    },
+    {
+      "name":"parameter",
+      "type":"textarea",
+      "label":"跳转参数",
+      "attributes": {
+        "rows": 10,
+        "placeholder": "跳转参数，JSON属性"
+      }
+    },
+    {
+      "name": "formId",
+      "type": "hidden"
+    }
+  ],
+  "change": [
+    {
+      "name": "action",
+      "target": "url",
+      "value": "url",
+      "type": "toggle"
+    },
+    {
+      "name": "action",
+      "target": "view",
+      "value": "view,popup,back,export",
+      "type": "toggle"
+    },
+    {
+      "name": "action",
+      "target": "type",
+      "value": "view,popup,back",
+      "type": "toggle"
+    },
+    {
+      "name": "action",
+      "target": "href",
+      "value": "javascript",
+      "type": "toggle"
+    },
+    {
+      "name": "action",
+      "target": "id",
+      "value": "back",
+      "type": "toggle"
+    },
+    {
+      "name": "action",
+      "target": "title",
+      "value": "popup",
+      "type": "toggle"
+    },
+    {
+      "name": "usePermission",
+      "target": "$permission",
+      "type": "toggle",
+      "value": "true"
+    },
+    {
+      "name": "action",
+      "target": "update",
+      "value": "submit",
+      "type": "toggle"
+    },
+    {
+      "name": "action",
+      "target": "parameter",
+      "value": "view,popup",
+      "type": "toggle"
+    },
+    {
+      "name": "action",
+      "target": "refresh",
+      "value": "popup",
+      "type": "toggle"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true,
+      "view": "formCreateView",
+      "type": "create",
+      "id": "formId"
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "label",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "action",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "formId",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "parameter",
+      "provider": "json",
+      "msg": "json"
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

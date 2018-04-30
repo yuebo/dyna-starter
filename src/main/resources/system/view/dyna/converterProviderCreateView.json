@@ -1,0 +1,76 @@
+{
+  "name": "converterProviderCreateView",
+  "type": "create",
+  "title": "转换器配置",
+  "data": "tbl_dyna_converter",
+  "fields": [
+    {
+      "name": "name",
+      "label": "转换器名称",
+      "type": "text",
+      "attributes": {
+        "placeholder": "请输入配置名称，唯一键"
+      }
+    },
+    {
+      "name": "provider",
+      "label": "Provider",
+      "type": "autocomplete",
+      "attributes": {
+        "placeholder": "请输入provider"
+      },
+      "option": {
+        "provider": "springBeanOptionProvider",
+        "parameter": {
+          "key": "provider",
+          "value": "providerName",
+          "depends": [
+            {
+              "depend": "type",
+              "name": "provider"
+            }
+          ],
+          "query": {
+            "_data": "none",
+            "class": "converter"
+          }
+        }
+      }
+    },
+    {
+      "name": "parameter",
+      "label": "参数",
+      "type": "textarea",
+      "attributes": {
+        "placeholder": "请输入参数，json格式",
+        "rows": 10
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "parameter",
+      "provider": "json",
+      "msg": "json"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "close": true
+    },
+    {
+      "back": true
+    }
+  ],
+  "searchview": "converterProviderSearchView",
+  "permission": []
+}

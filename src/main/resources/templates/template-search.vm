@@ -1,0 +1,90 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#if($view.fields)
+    #formviewcreate($view)
+#end
+#if($view.actions)
+<div class="row">
+    <div class="form-group col-md-12">
+        #doAction($view)
+    </div>
+</div>
+#end
+#if($view.result)
+    #formsearchresult($view)
+    #set($subview=$view)
+    #parse("/templates/operate.vm")
+<script>
+
+        #if($view.actions)
+        function doSelectAction(url,checked){
+            if(checked=='true'&&jQuery("input[name=_id]:checked").length==0){
+                alert("$esc.javascript($msg.get('select_one'))");
+                return;
+            }
+            jQuery("#searchform").attr("action","$request.contextPath/spring/"+url);
+            jQuery("#searchform").submit();
+        }
+        #end
+
+        #if($view.search&&$view.search=="false")
+        #else
+
+        function doSearch(){
+            loadData_$esc.html($view.name)();
+        }
+        function loadData_$esc.html($view.name)(){
+            var data=jQuery("#searchform").serialize();
+
+            //jQuery('#result').html(jQuery('#template').html())
+
+            jQuery.ajax({
+                type: "GET",
+                url: "$request.contextPath/spring/data/template/$esc.javascript($view.name)?"+data
+            }).done(function( vData ) {
+                jQuery('#result_$esc.html($view.name)').html(vData);
+                jQuery('#result_$esc.html($view.name)>table').bootstrapTable({
+                    url: "$request.contextPath/spring/data/data/$esc.javascript($view.name)?_rnd="+Math.random()+"&"+data,
+                    method: "get",
+                    #if($view.defaultSort)
+                        sortName:'$esc.javascript($view.defaultSort.name)',
+                        sortOrder:'$esc.javascript($view.defaultSort.order)',
+                    #end
+                    sidePagination: "server",
+                    pagination: true,
+                    selectItemName:"_id",
+                    idField: "$esc.javascript($viewContext.idFieldName)"
+                });
+            });
+        }
+        #end
+        #if($view.dataview)
+
+        function linkFormatter(value,row,index,col){
+            var str= "$request.contextPath/spring/data/$esc.javascript($view.dataview.type)/$esc.javascript($view.dataview.name)?_id="+row['_id']+"&_col="+col;
+            return "<a href=\""+str+"\">"+value+"</a>"
+        }
+        #end
+        #if($params)
+        jQuery(document).ready(function(){
+            var data=jQuery("#searchform").serialize();
+            jQuery('#result_$esc.html($view.name)').html(jQuery('#template').html())
+            jQuery('#result_$esc.html($view.name)>table').bootstrapTable({
+                url: "$request.contextPath/spring/data/data/$esc.javascript($view.name)?_rnd="+Math.random()+"&"+data,
+                method: "get",
+                sidePagination: "server",
+                pagination: true,
+                selectItemName:"_id",
+                idField:"_id",
+                #if($params.sort[0])
+                    sortName: "$esc.javascript($params.sort[0])",
+                #end
+                #if($params.order[0])
+                    sortOrder: "$esc.javascript($params.order[0])",
+                #end
+                pageSize: $esc.javascript($params.limit[0]),
+                pageNumber: (($esc.javascript($params.offset[0])+$esc.javascript($params.limit[0])))/$esc.javascript($params.limit[0])
+            });
+        })
+        #end
+</script>
+#end

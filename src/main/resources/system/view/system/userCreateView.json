@@ -1,0 +1,218 @@
+{
+  "name": "userCreateView",
+  "title": "用户管理",
+  "validators": [
+    {
+      "field": "address",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "realName",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "data": "tbl_user",
+  "type": "create",
+  "searchview": "userSearchView",
+  "messages": {
+    "info": {
+      "success": "用户保存成功"
+    }
+  },
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "用户名",
+      "attributes": {
+        "class": "form-control"
+      },
+      "update": false,
+      "container": {
+        "class": "col-md-6"
+      }
+    },
+    {
+      "name": "realName",
+      "type": "text",
+      "label": "姓名",
+      "attributes": {
+        "class": "form-control"
+      }
+    },
+    {
+      "name": "logo",
+      "type": "elfinder",
+      "label": "头像",
+      "attributes": {
+        "class": "form-control",
+        "renderType": "img"
+      }
+    },
+    {
+      "name": "sex",
+      "type": "radio",
+      "label": "性别",
+      "attributes": {
+        "class": "radio",
+        "value": "F"
+      },
+      "option": {
+        "values": {
+          "M": "男",
+          "F": "女"
+        }
+      }
+    },
+    {
+      "name": "dob",
+      "type": "date",
+      "label": "生日",
+      "attributes": {
+        "class": "form-control"
+      },
+      "converter": {
+        "provider": "dateConverter"
+      }
+    },
+    {
+      "name": "authenticate",
+      "type": "radio",
+      "label": "验证方式",
+      "attributes": {
+        "class": "radio",
+        "value": "I"
+      },
+      "option": {
+        "values": {
+          "E": "外部验证",
+          "I": "内部验证"
+        }
+      }
+    },
+    {
+      "name": "mail",
+      "type": "text",
+      "label": "邮箱",
+      "attributes": {
+        "class": "form-control"
+      }
+    },
+    {
+      "name": "address",
+      "label": "地址",
+      "type": "richtext",
+      "attributes": {
+        "class": "form-control",
+        "rows": 20
+      }
+    },
+    {
+      "name": "phone",
+      "label": "电话",
+      "type": "picker",
+      "view": "userPicker",
+      "attributes": {
+        "class": "form-control"
+      }
+    },
+    {
+      "name": "mobile",
+      "label": "手机号",
+      "type": "text",
+      "attributes": {
+        "class": "form-control"
+      }
+    },
+    {
+      "name": "$department",
+      "label": "部门",
+      "type": "select",
+      "attributes": {
+        "class": "form-control"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_department"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_user_department",
+        "column": "userId",
+        "field": "departmentId"
+      }
+    },
+    {
+      "name": "$permission",
+      "label": "权限",
+      "type": "muti-select",
+      "attributes": {
+        "class": "form-control",
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_user_permission",
+        "column": "userId",
+        "field": "permission",
+        "action": "delete"
+      }
+    },
+    {
+      "name": "$roleId",
+      "label": "角色",
+      "type": "muti-select",
+      "attributes": {
+        "class": "form-control",
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "rolename",
+          "query": {
+            "_data": "tbl_role"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_user_role",
+        "column": "userId",
+        "field": "roleId",
+        "action": "delete"
+      }
+    }
+  ],
+  "permission": [],
+  "actions": [
+    {
+      "submit": true,
+      "style": "btn-primary"
+    },
+    {
+      "back": true
+    }
+  ]
+}

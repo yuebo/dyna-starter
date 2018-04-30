@@ -1,0 +1,16 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+<div class="uploadify_container">
+    <input type="file" id="$esc.html($id)_control" uploadify="true" target="$esc.html($id)" >
+    <input id="$esc.html($id)" name="$esc.html($item.name)" type="hidden" #mapiterator($item,$attr.key)>
+    <ul class="files">
+        #foreach($filename in $msg.split($item.attributes.value))
+            <li file="$esc.html($filename)">
+                #if($item.attributes.renderType=='img')
+                    <img src="$request.contextPath/spring/data/download/uploadify/$view.name/?file=$esc.html($filename)">
+                #else
+                    $msg.filename($filename)<i class="glyphicon glyphicon-download" onclick="uploadify_download()"></i>
+                #end
+                <i class="glyphicon glyphicon-remove" onclick="uploadify_delete()"></i></li>
+        #end
+    </ul>
+</div>

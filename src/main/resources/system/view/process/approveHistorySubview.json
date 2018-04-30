@@ -1,0 +1,37 @@
+{
+  "name": "approveHistorySubview",
+  "type": "search",
+  "data": "tbl_task_log",
+  "inputParameter": [
+    "businessId"
+  ],
+  "result": [
+    {
+      "name": "createdBy",
+      "label": "用户名",
+      "attributes": {
+        "data-sortable": true
+      },
+      "converter": {
+        "provider": "dataConverter",
+        "parameter": {
+          "table": "tbl_user",
+          "column": "name"
+        }
+      }
+    },
+    {
+      "name": "approve",
+      "label": "意见"
+    },
+    {
+      "name": "remarks",
+      "label": "备注"
+    }
+  ],
+  "title": "审核历史",
+  "defaultValue": {
+  },
+  "clear": false,
+  "description": "这是显示审核历史的Subview"
+}

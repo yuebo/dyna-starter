@@ -1,0 +1,37 @@
+{
+  "name": "permissionCreateView",
+  "data": "tbl_permission",
+  "type": "create",
+  "title": "权限设置",
+  "fields": [
+    {
+      "name": "name",
+      "label": "名称",
+      "type": "text",
+      "attributes": {
+        "class": "form-control",
+        "placeholder": "请输入权限名称"
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "name",
+      "provider": "unique",
+      "msg": "unique"
+    }
+  ],
+  "searchview":"permissionSearchView",
+  "delete": "false",
+  "actions": [
+    {
+      "submit": true,
+      "style": "btn-primary"
+    }
+  ]
+}

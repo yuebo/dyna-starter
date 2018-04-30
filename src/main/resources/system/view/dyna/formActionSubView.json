@@ -1,0 +1,61 @@
+{
+  "name": "formActionSubView",
+  "type": "search",
+  "data": "tbl_dyna_form_action",
+  "title": "动作配置",
+  "inputParameter": [
+    "formId"
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "字段"
+    },
+    {
+      "name": "action",
+      "label": "类型"
+    },
+    {
+      "name": "label",
+      "label": "标签"
+    }
+  ],
+  "actions": [
+    {
+      "type": "create",
+      "view": "formActionCreateView",
+      "title": "添加动作",
+      "refresh": "formActionSubView",
+      "label": "添加动作",
+      "parameter": {
+        "formId": "formId"
+      }
+    },
+    {
+      "export": true,
+      "view": "formActionSubView"
+    }
+  ],
+  "operate": [
+    {
+      "view": "formActionCreateView",
+      "icon": "glyphicon-edit",
+      "type": "create",
+      "title": "修改动作",
+      "refresh": "formActionSubView"
+    },
+    {
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "refresh": "formActionSubView",
+      "operate": true,
+      "provider": "deleteOperateProvider"
+    }
+  ],
+  "defaultSort": {
+    "name": "createdDate",
+    "order": "asc"
+  },
+  "permission": [],
+  "clear": false
+}

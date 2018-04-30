@@ -1,0 +1,7 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#if($msg.isNull($item.attributes.value))#set($x=$item.attributes.put("value",""))#end
+<div class="input-group date" #if(!$item.attributes.keySet().contains("data-min-view")) data-min-view="month" #end #if(!$item.attributes.keySet().contains("data-date-format")) data-date-format="yyyy-mm-dd" #end>
+    <input id="$esc.html($id)"  name="$esc.html($item.name)" type="text" readonly #mapiterator($item,$attr.key)>
+    <span class="input-group-addon"><i class="glyphicon glyphicon-remove"></i></span>
+    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div>

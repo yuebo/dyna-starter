@@ -1,0 +1,141 @@
+#macro(mapiterator $item $key)
+    #set($map=$item.attributes)
+    #if($msg.isNull($map))
+        #set($map=$util.map())
+    #end
+    #if($viewContext.hasId()&&$item.update==false)
+        #set($temp=$map.put("disabled","disabled"))
+    #end
+    #if($msg.isNull($map.get("class")))
+        #set($temp=$map.put("class","form-control"))
+    #end
+    #foreach($attribute in $map.entrySet())
+        #if($attribute.key=='value'&&$item.type!='text'&&$item.type!='hidden'&&$item.type!='date'&&$item.type!='number'&&$item.type!='email'&&$item.type!='elfinder'&&$item.type!='autocomplete'&&$item.type!='picker'&&$item.type!='code')
+            #if($key==$attribute.value||($attribute.value.class.name!='java.lang.String'&&$attribute.value.contains($key)))
+                #if($item.type=='select')
+
+                #elseif($item.type=='textarea')
+                #elseif($item.type=='muti-select')
+                #elseif($item.type=='checkbox'|| $item.type=='radio')
+                    checked="checked"
+                #else
+                    value="$esc.html($attribute.value)"
+                #end
+            #end
+        #else
+            $esc.html($attribute.key)="$esc.html($attribute.value)"
+        #end
+    #end
+    #if($view.get('_id')&&$item.update=='false')
+        readonly="true"
+    #end
+#end
+
+#macro(mapattribute $map)
+    #foreach($attribute in $map.entrySet())
+        $esc.html($attribute.key)="$esc.html($attribute.value)"
+    #end
+#end
+
+#macro(doAction $view)
+    #if($view.actions)
+        #foreach($action in $view.actions)
+           #parse("/templates/action.vm")
+        #end
+    #end
+#end
+#macro(formbody $request $view)
+    #if($view.type=='create')
+        #parse("/templates/view-create.vm")
+    #elseif($view.type=='search')
+        #parse("/templates/view-search.vm")
+    #elseif($view.type=='chart')
+        #parse("/templates/view-chart.vm")
+    #end
+    #parse("/templates/view-common.vm")
+#end
+
+#macro (formchartresult $view)
+    <div id="chart" style="height:500px"></div>
+#end
+#macro(formsearchresult $view)
+<div id="result_$esc.html($view.name)"></div>
+<div id="template" style="display: none">
+    <table>
+        <thead>
+        <tr>
+            #foreach($item in $view.result)
+                #if($item.excelOnly=='true')
+                #else
+                	<th data-field="$esc.html($item.name)" #if($item.attributes)#mapattribute($item.attributes)#end>$esc.html($item.label)</th>
+            	#end
+            #end
+            #if($view.operate)
+                <th data-field="operate" data-formatter="operateFormatter_$esc.html($view.name)">$msg.get("operate")</th>
+            #end
+        </tr>
+        </thead>
+    </table>
+</div>
+#end
+
+
+#macro(subviewresult $subview)
+<div id="result_$subview.name"></div>
+<div id="template_$subview.name" style="display: none">
+    <table>
+        <thead>
+        <tr>
+            #foreach($item in $subview.result)
+                <th data-field="$esc.html($item.name)" #if($item.attributes)#mapattribute($item.attributes)#end>$esc.html($item.label)</th>
+            #end
+            #if($subview.operate)
+                <th data-field="operate" data-formatter="operateFormatter_$esc.html($subview.name)">$msg.get("operate")</th>
+            #end
+        </tr>
+
+        </thead>
+    </table>
+</div>
+#end
+
+#macro(checkrequired $item $validators)
+    #if($item.attributes&&$item.attributes.required)
+        <span style="color: red">*</span>
+    #else
+        #if($validators)
+            #foreach($val in $validators)
+                #if($val.provider=="required"&&$item.name==$val.field)
+                <span style="color: red">*</span>
+                #end
+            #end
+        #end
+    #end
+#end
+
+#macro(formviewcreate $view)
+    #parse("/templates/forms.vm")
+#end
+
+
+#macro(formsection $tempview $section $title $template $colSpan)
+    <div class="col-md-$colSpan">
+    <div class="box">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>#if($title)$esc.html($title)#end</h2>
+
+                <div class="box-icon">
+                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                            class="glyphicon glyphicon-chevron-up"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                #parse("/templates/$template")
+            </div>
+        </div>
+    </div>
+    </div>
+#end
+
+

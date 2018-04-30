@@ -1,0 +1,33 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+<form id="searchform" novalidate="true" role="form" accept-charset="utf-8" action="$request.contextPath/spring/data/search/export/$esc.html($view.name)" method="post" class="form-horizontal">
+    <input style="display: none" type="text" value="" disabled="disabled">
+    #if($view.section)
+        #foreach($section in $view.section)
+            <div class="row">
+            #foreach($section in $view.section)
+                #if($section.span)
+                    #set($colSpanTemp=$section.span)
+                #end
+                #set($colSpan=$colSpan+$colSpanTemp)
+                #if($colSpan>12)
+                    </div>
+                    <div class="row">
+                    #set($colSpan=$colSpanTemp)
+                #end
+                #formsection($view,$section.name,$section.title,"template-empty.vm",$colSpanTemp)
+            #end
+            </div>
+
+        #end
+        <div class="row">
+        #formsection($view, "", $section.title,"template-search.vm",12)
+        </div>
+    #else
+        <div id="" class="row">
+        #formsection($view,"",$view.title,"template-search.vm",12)
+        </div>
+    #end
+
+
+
+</form>

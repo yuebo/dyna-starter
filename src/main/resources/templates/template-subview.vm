@@ -1,0 +1,30 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+$util.prepareParameter($view,$subview,$subviewConf.parameter)
+#foreach($item in $subview.input.keySet())
+    <input type="hidden" name="$esc.html($item)" value="$esc.html($subview.input.get($item))">
+#end
+#subviewresult($subview)
+#parse("/templates/operate.vm")
+<script>
+    function loadData_$esc.html($subview.name)(){
+        jQuery("#result_"+"$esc.javascript($subview.name)").html(jQuery("#template_"+"$esc.javascript($subview.name)").html())
+        var temp=jQuery("#result_"+"$esc.javascript($subview.name)>table").bootstrapTable({
+        url: "$request.contextPath/spring/data/data/$esc.javascript($subview.name)?_rnd="+Math.random()+#foreach($key in $subviewConf.parameter.keySet())"&$esc.javascript($key)="+jQuery("#"+"$esc.javascript($subviewConf.parameter.get($key))").val()#end,
+            method: "get",
+            #if($subview.defaultSort)
+                sortName:'$esc.javascript($subview.defaultSort.name)',
+                sortOrder:'$esc.javascript($subview.defaultSort.order)',
+            #end
+            sidePagination: "server",
+            pagination: true
+        });
+//        console.log(temp);
+//        temp.refresh()`
+    }
+    jQuery(document).ready(function(){
+        loadData_$esc.html($subview.name)();
+    })
+</script>
+
+
+#doAction($subview)

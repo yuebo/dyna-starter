@@ -1,0 +1,91 @@
+{
+  "name": "computerCancel",
+  "type": "create",
+  "title": "申请电脑",
+  "data": "tbl_compute_application",
+  "fields": [
+    {
+      "name": "reason",
+      "label": "申请原因",
+      "type": "textarea"
+    },
+    {
+      "name": "applyUserId",
+      "label": "申请人",
+      "type": "select",
+      "option": {
+        "provider": "currentUserOptionProvider"
+      },
+      "default": false
+    },
+    {
+      "name": "approvalName",
+      "label": "审核人",
+      "type": "select",
+      "option": {
+        "provider": "currentDepartmentManagerOptionProvider"
+      },
+      "default": false
+    },
+    {
+      "name": "$cancel",
+      "type": "select",
+      "label": "取消选项",
+      "attributes": {
+        "class": "form-control"
+      },
+      "option": {
+        "values": {
+          "撤销": "撤销",
+          "重新提交": "重新提交"
+        }
+      },
+      "join": {
+        "table": "tbl_task_log",
+        "column": "businessId",
+        "field": "approve",
+        "bindTask": true
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "reason",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "applyUserId",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "approvalName",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "$cancel",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "process": {
+    "name": "申请电脑流程",
+    "output": {
+      "pass": -1,
+      "cancel": {
+        "value": "#form['$cancel']=='撤销'?1:0"
+      }
+    },
+    "complete": {
+      "value": "#form['$cancel']!=null"
+    }
+  },
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    }
+  ]
+}

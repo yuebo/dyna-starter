@@ -1,0 +1,89 @@
+{
+  "name": "optionProviderCreateView",
+  "type": "create",
+  "title": "选项配置",
+  "data": "tbl_dyna_option",
+  "fields": [
+    {
+      "name": "name",
+      "label": "option配置名称",
+      "type": "text",
+      "attributes": {
+        "placeholder": "请输入配置名称，唯一键"
+      }
+    },
+    {
+      "name": "values",
+      "label": "Option的values",
+      "type": "textarea",
+      "attributes": {
+        "placeholder": "option的值，json格式"
+      }
+    },
+    {
+      "name": "provider",
+      "label": "Provider",
+      "type": "autocomplete",
+      "attributes": {
+        "placeholder": "请输入provider"
+      },
+      "option": {
+        "provider": "springBeanOptionProvider",
+        "parameter": {
+          "key": "provider",
+          "value": "providerName",
+          "depends": [
+            {
+              "depend": "type",
+              "name": "provider"
+            }
+          ],
+          "query": {
+            "_data": "none",
+            "class": "option"
+          }
+        }
+      }
+    },
+    {
+      "name": "parameter",
+      "label": "参数",
+      "type": "textarea",
+      "attributes": {
+        "placeholder": "请输入参数，json格式",
+        "rows": 10
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "values",
+      "provider": "json",
+      "msg": "json"
+    },
+    {
+      "field": "parameter",
+      "provider": "json",
+      "msg": "json"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "close": true
+    },
+    {
+      "back": true
+    }
+  ],
+  "searchview": "optionProviderSearchView",
+  "permission": []
+}

@@ -1,0 +1,86 @@
+{
+  "name": "computerTS",
+  "type": "create",
+  "title": "TS填写信息",
+  "data": "tbl_compute_application",
+  "fields": [
+    {
+      "name": "reason",
+      "label": "申请原因",
+      "type": "textarea",
+      "update": false
+    },
+    {
+      "name": "applyUserId",
+      "label": "申请人",
+      "type": "select",
+      "option": {
+        "provider": "currentUserOptionProvider"
+      },
+      "default": false,
+      "update": false
+    },
+    {
+      "name": "approvalName",
+      "label": "审核人",
+      "type": "select",
+      "option": {
+        "provider": "currentDepartmentManagerOptionProvider"
+      },
+      "default": false,
+      "update": false
+    },
+    {
+      "name": "computeType",
+      "label": "电脑型号",
+      "type": "text"
+    },
+    {
+      "name": "assertNO",
+      "label": "资产编号",
+      "type": "text"
+    },
+    {
+      "name": "assertCount",
+      "label": "资产数量",
+      "type": "number"
+    }
+  ],
+  "validators": [
+    {
+      "field": "computeType",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "assertNO",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "assertCount",
+      "provider": "required",
+      "msg": "required"
+    }
+  ],
+  "process": {
+    "name": "申请电脑流程",
+    "complete": {
+      "value": "#form['assertNO']!=null"
+    }
+  },
+  "subview": [
+    {
+      "name": "approveHistorySubview",
+      "parameter": {
+        "businessId": "_id"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    }
+  ]
+}

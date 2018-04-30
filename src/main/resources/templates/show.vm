@@ -1,0 +1,326 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#* set the request from RequestContext*#
+#set($request=$requestContext.request)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>动态表单系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="动态表单，通过简单配置就能生成一个系统">
+    <meta name="author" content="https://dyna.eappca.com">
+    <!-- let ie using the edge mode to render the view-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+    <!-- The styles -->
+    #set($currentTheme='cerulean')
+    #foreach($cookie in $request.getCookies())
+        #if($cookie.getName() =='currentTheme')
+            #set($currentTheme=$cookie.getValue())
+        #end
+    #end
+    #if($currentTheme=='classic')
+        <link id="bs-css" href="$request.contextPath/resources/charisma/css/bootstrap.min.css" rel="stylesheet">
+    #else
+        <link id="bs-css" href="$request.contextPath/resources/charisma/css/bootstrap-${esc.html($currentTheme)}.min.css" rel="stylesheet">
+    #end
+
+    <link href="$request.contextPath/resources/charisma/css/charisma-app.css" rel="stylesheet">
+    <link href='$request.contextPath/resources/charisma/css/animate.min.css' rel='stylesheet'>
+    #if($viewContext.hasFieldType('select')||$viewContext.hasFieldType('muti-select'))
+    <link rel="stylesheet" href="$request.contextPath/resources/css/select2.css">
+    <link rel="stylesheet" href="$request.contextPath/resources/css/select2-bootstrap.css">
+    #end
+    <link rel="stylesheet" href="$request.contextPath/resources/css/bootstrap-table.css">
+    #if($viewContext.hasFieldType('date'))
+    <link rel="stylesheet" href="$request.contextPath/resources/css/bootstrap-datetimepicker.min.css">
+    #end
+    <link rel="stylesheet" href="$request.contextPath/resources/css/jquery.noty.css">
+    <link rel="stylesheet" href="$request.contextPath/resources/css/noty_theme_default.css">
+    <!-- jQuery -->
+    <script src="$request.contextPath/resources/js/jquery.min.js"></script>
+
+    <!-- jQuery and jQuery UI (REQUIRED) -->
+    <link rel="stylesheet" type="text/css" href="$request.contextPath/resources/jquery-ui/jquery-ui-custom.css">
+
+
+    #if($viewContext.hasFieldType('elfinder')||$viewContext.hasFieldType('richtext'))
+    <!-- elFinder CSS (REQUIRED) -->
+    <link rel="stylesheet" type="text/css" href="$request.contextPath/resources/elfinder/css/elfinder.min.css">
+    #end
+    #if($viewContext.hasFieldType('code'))
+    <link rel="stylesheet" type="text/css" href="$request.contextPath/resources/codemirror/codemirror.css">
+    #end
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="$request.contextPath/resources/charisma/img/favicon.ico">
+    <script>
+        var contextPath='$request.contextPath/resources/charisma/';
+        var rootPath='$request.contextPath';
+        var viewname='$esc.javascript($view.name)';
+    </script>
+</head>
+
+<body>
+
+#if(!$request.getParameter("_popup"))
+
+<!-- topbar starts -->
+<div class="navbar navbar-default" role="navigation">
+
+    <div class="navbar-inner">
+        <button type="button" class="navbar-toggle pull-left">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"> <img alt="Charisma Logo" src="$request.contextPath/resources/charisma/img/logo20.png" class="hidden-xs"/>
+            <span>动态表单系统</span></a>
+
+        <!-- user dropdown starts -->
+
+        #if($request.getSession().getAttribute("user"))
+            <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">$esc.html($request.getSession().getAttribute("user").name)</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="$request.contextPath/spring/data/create/loginSuccessView" class="glyphicon glyphicon-home">$msg.get("btn_home")</a></li>
+                    <li><a href="$request.contextPath/spring/data/logout" class="glyphicon glyphicon-log-out">$msg.get("btn_logout")</a></li>
+                    #if($request.getSession().getAttribute("user").authenticate=="I")
+                        <li><a href="$request.contextPath/spring/data/create/changePasswordView" class="glyphicon glyphicon-lock">$msg.get("btn_password")</a></li>
+                    #end
+                </ul>
+            </div>
+        #end
+        <!-- user dropdown ends -->
+
+        <!-- theme selector starts -->
+        <div class="btn-group pull-right theme-container">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-tint"></i><span
+                    class="hidden-sm hidden-xs">$msg.get("btn_skin")</span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="themes">
+                <li><a data-value="classic" href="#"><i class="whitespace"></i> Classic</a></li>
+                <li><a data-value="cerulean" href="#"><i class="whitespace"></i> Cerulean</a></li>
+                <li><a data-value="cyborg" href="#"><i class="whitespace"></i> Cyborg</a></li>
+                <li><a data-value="simplex" href="#"><i class="whitespace"></i> Simplex</a></li>
+                <li><a data-value="darkly" href="#"><i class="whitespace"></i> Darkly</a></li>
+                <li><a data-value="lumen" href="#"><i class="whitespace"></i> Lumen</a></li>
+                <li><a data-value="slate" href="#"><i class="whitespace"></i> Slate</a></li>
+                <li><a data-value="spacelab" href="#"><i class="whitespace"></i> Spacelab</a></li>
+                <li><a data-value="united" href="#"><i class="whitespace"></i> United</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!-- topbar ends -->
+<div class="ch-container">
+    <div class="row">
+        <!-- left menu starts -->
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav" id="complementary">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+
+                    </div>
+                    <ul class="nav nav-pills nav-stacked main-menu">
+                        <li class="nav-header">Main</li>
+                        #if($view.menu)
+                            #set($rootMenu=$menu.get($view.menu))
+                        #else
+                            #set($rootMenu=$menu.get("default"))
+                        #end
+
+                        #foreach($item in $rootMenu.items)
+                            #if($item.show=='true')
+                                #if($item.submenu)
+                                    <li class="accordion">
+                                        <a href="#">#if($item.icon)<i class="glyphicon $esc.html($item.icon)"></i>#end <span>$esc.html($item.label)</span></a>
+                                        <ul class="nav nav-pills nav-stacked"  #foreach($submenu in $item.submenu)#if($view.searchview==$submenu.view||$view.name==$submenu.view) style="display: block" #end #end>
+                                            #foreach($submenu in $item.submenu)
+                                                #if($submenu.show=='true')
+                                                    <li #if($view.searchview==$submenu.view||$view.name==$submenu.view)class="active"#end><a class="ajax-link" href="$request.contextPath/spring/data/$esc.html($submenu.type)/$esc.html($submenu.view)">#if($submenu.icon)<i class="glyphicon $esc.html($submenu.icon)"></i>#end
+                                                        <span>$esc.html($submenu.label)</span></a>
+                                                    </li>
+                                                #end
+                                            #end
+                                        </ul>
+                                    </li>
+                                #else
+                                    <li #if($view.searchview==$item.view||$view.name==$submenu)class="active"#end><a class="ajax-link" href="$request.contextPath/spring/data/$esc.html($item.type)/$esc.html($item.view)">#if($item.icon)<i class="glyphicon $esc.html($item.icon)"></i>#end
+                                        <span>$esc.html($item.label)</span></a>
+                                    </li>
+                                #end
+
+
+                            #end
+                        #end
+
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <!-- left menu ends -->
+
+        <noscript>
+            <div class="alert alert-block col-md-12">
+                <h4 class="alert-heading">Warning!</h4>
+
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+                    enabled to use this site.</p>
+            </div>
+        </noscript>
+
+        <div id="content" class="col-lg-10 col-sm-10 nopadding">
+            <!-- content starts -->
+            <div id="msgDiv" class="col-sm-12">
+                #if($messages.info)
+                    <div class="alert alert-info">
+
+                        #foreach($item in $messages.info.entrySet())
+                            <p>$esc.html($item.value)</p>
+                        #end
+                    </div>
+                #end
+                #if($messages.error)
+                    <div class="alert alert-warning">
+                        #foreach($item in $messages.error)
+                            <p>$esc.html($item.msg)</p>
+                        #end
+                    </div>
+                #end
+            </div>
+
+            <div class="row">
+                <div class="box col-md-12">
+                    #formbody($request,$view)
+                </div>
+                <!--/span-->
+
+            </div><!--/row-->
+
+            <!-- content ends -->
+        </div><!--/#content.col-md-0-->
+    </div><!--/fluid-row-->
+    <a href="#top" id="toTop"></a>
+    <hr>
+
+    <footer class="row">
+        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; 动态表单(JDBC整合activiti) 2014 - 2017</p>
+        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: www.eappcat.com
+    </footer>
+
+</div>
+#else
+<div class="ch-container">
+
+    <div id="msgDiv" class="row">
+        #if($messages.info)
+           <div class="alert alert-info">
+
+                #foreach($item in $messages.info.entrySet())
+                    <p>$esc.html($item.value)</p>
+                #end
+            </div>
+        #end
+        #if($messages.error)
+            <div class="alert alert-warning">
+                #foreach($item in $messages.error)
+                    <p>$esc.html($item.msg)</p>
+                #end
+            </div>
+        #end
+    </div>
+
+    <div class="row">
+        #formbody($request,$view)
+    </div>
+    <a href="#top" id="toTop"></a>
+</div>
+#end
+
+
+
+
+<div id="loadingMask" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Please wait... </h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                <div class="progress-bar progress-bar-striped active" style="width: 100%">
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- external javascript -->
+<script src="$request.contextPath/resources/js/bootstrap.min.js"></script>
+<script src="$request.contextPath/resources/js/jquery.noty.js"></script>
+
+#if($viewContext.hasFieldType('richtext'))
+##<script src="$request.contextPath/resources/js/editor/ckeditor.js"></script>
+##<script src="$request.contextPath/resources/js/editor/adapters/jquery.js"></script>
+<script src="$request.contextPath/resources/tinymce/tinymce.min.js"></script>
+<script src="$request.contextPath/resources/tinymce/jquery.tinymce.min.js"></script>
+#end
+#if($viewContext.hasFieldType('select')||$viewContext.hasFieldType('muti-select'))
+<script src="$request.contextPath/resources/js/select2.min.js"></script>
+#end
+<!-- library for cookie management -->
+<script src="$request.contextPath/resources/charisma/js/jquery.cookie.js"></script>
+<script src="$request.contextPath/resources/charisma/js/jquery.history.js"></script>
+<!-- application script for Charisma demo -->
+<script src="$request.contextPath/resources/charisma/js/charisma.js"></script>
+
+
+
+#if($viewContext.hasFieldType('date'))
+<script src="$request.contextPath/resources/js/bootstrap-datetimepicker.js"></script>
+<script src="$request.contextPath/resources/js/bootstrap-datetimepicker.zh-CN.js"></script>
+#end
+
+<script src="$request.contextPath/resources/js/bootstrap-table.js"></script>
+<script src="$request.contextPath/resources/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="$request.contextPath/resources/js/jquery.scrollToTop.js"></script>
+<script src="$request.contextPath/resources/js/searchResult.js"></script>
+
+
+<script src="$request.contextPath/resources/jquery-ui/jquery-ui.min.js"></script>
+<script src="$request.contextPath/resources/jquery-ui/jquery-ui-autocomplete.js"></script>
+
+<!-- tinymce will use the elfinder upload so need to load the js when there is a richtext type-->
+#if($viewContext.hasFieldType('elfinder')||$viewContext.hasFieldType('richtext'))
+<!-- elFinder JS (REQUIRED) -->
+<script src="$request.contextPath/resources/elfinder/js/elfinder.min.js"></script>
+<!-- elFinder translation (OPTIONAL) -->
+<script src="$request.contextPath/resources/elfinder/js/i18n/elfinder.zh_CN.js"></script>
+#end
+
+#if($viewContext.hasFieldType('code'))
+<script src="$request.contextPath/resources/codemirror/codemirror.js"></script>
+<script src="$request.contextPath/resources/codemirror/mode/javascript/javascript.js"></script>
+#end
+#if($viewContext.getType()=='chart')
+<script src="$request.contextPath/resources/echarts/echarts.common.min.js"></script>
+#end
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "name": "msgSearchView",
+  "type": "search",
+  "title": "消息查询",
+  "data": "tbl_message",
+  "fields": [
+    {
+      "name": "key",
+      "label": "Key",
+      "type": "text",
+      "attributes": {
+        "class": "form-control"
+      }
+    }
+  ],
+  "result": [
+    {
+      "name": "key",
+      "label": "Key",
+      "attributes": {
+      }
+    },
+    {
+      "name": "value",
+      "label": "Value"
+    }
+  ],
+  "dataview": {
+    "name": "msgCreateView",
+    "type": "create"
+  },
+  "permission": [],
+  "operate": [
+    {
+      "view": "msgCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create"
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style": "btn-primary"
+    },
+    {
+      "type": "create",
+      "view": "msgCreateView",
+      "label": "消息设置"
+    }
+  ]
+}

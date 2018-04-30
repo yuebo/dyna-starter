@@ -1,0 +1,15 @@
+<table>
+    <thead>
+    <tr>
+        #foreach($item in $view.result)
+            #if($item.excelOnly=='true')
+            #else
+            	<th data-field="$esc.html($item.name)" #if($item.attributes)#mapattribute($item.attributes)#end>$esc.html($item.label)</th>
+        	#end
+        #end
+        #if($view.operate)
+            <th data-field="operate" data-formatter="operateFormatter_$esc.html($view.name)">$msg.get("operate")</th>
+        #end
+    </tr>
+    </thead>
+</table>

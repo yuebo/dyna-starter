@@ -1,0 +1,20 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+<div class="elfinder_container">
+    <input id="$esc.html($id)" name="$esc.html($item.name)" type="hidden" #mapiterator($item,$attr.key)>
+    <button class="elfinder_action btn btn-default" type="button" target="$esc.html($id)" #if($item.attributes.disabled) disabled="disabled" #end>#if($item.attributes.label) $esc.html($item.attributes.label) #else 选择文件#end</button>
+    <ul class="files">
+        #foreach($filename in $msg.split($item.attributes.value,"\|"))
+            #set($array=$msg.split($item.attributes.value,','))
+            <li file="$esc.html($filename)">
+                #if($item.attributes.renderType=='img')
+                    <img src="$request.contextPath/spring/connector?cmd=file&target=$esc.html($array[0])">
+                #else
+                    $esc.html($array[1])
+                #end
+                <i class="glyphicon glyphicon-remove" onclick="elfinder_delete()">
+
+                </i>
+            </li>
+        #end
+    </ul>
+</div>

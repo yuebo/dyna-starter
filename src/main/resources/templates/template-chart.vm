@@ -1,0 +1,12 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#if($view.fields)
+    #formviewcreate($view)
+#end
+#if($view.actions)
+<div class="row">
+    <div class="form-group col-md-12">
+        #doAction($view)
+    </div>
+</div>
+#end
+

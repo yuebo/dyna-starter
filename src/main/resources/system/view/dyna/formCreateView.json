@@ -1,0 +1,423 @@
+{
+  "name": "formCreateView",
+  "type": "create",
+  "title": "动态表单创建",
+  "data": "tbl_dyna_form",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "表单名称",
+      "attributes": {
+        "placeholder": "表单名称，不可重复"
+      },
+      "container": {
+        "span": 12,
+        "label": 3,
+        "widget": 9
+      }
+    },
+    {
+      "name": "type",
+      "label": "表单类型",
+      "type": "select",
+      "option": {
+        "values": {
+          "create": "create",
+          "search": "search"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "title",
+      "label": "标题",
+      "type": "text",
+      "attributes": {
+        "placeholder": "表单的默认标题"
+      }
+    },
+    {
+      "name": "data",
+      "label": "数据表",
+      "type": "text",
+      "attributes": {
+        "placeholder": "用于指定此表单需要用到的数据库表"
+      }
+    },
+    {
+      "name": "menu",
+      "label": "菜单文件",
+      "type": "text",
+      "attributes": {
+        "placeholder": "用于指定当前视图所在菜单，默认default菜单"
+      }
+    },
+    {
+      "name": "processor",
+      "label": "处理器",
+      "type": "autocomplete",
+      "option": {
+        "provider": "springBeanOptionProvider",
+        "parameter": {
+          "key": "processor",
+          "value": "processorName",
+          "depends": [
+            {
+              "depend": "type",
+              "name": "processor"
+            }
+          ],
+          "query": {
+            "_data": "none",
+            "class": "formProvider"
+          }
+        }
+      },
+      "attributes": {
+        "placeholder": "用于指定表单处理器"
+      },
+      "tip": "处理器是用来实现定制一些功能，比如提供数据加载，数据查询，数据保存回调等"
+    },
+    {
+      "name": "readOnly",
+      "label": "表单只读",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false,
+      "tip": "只读属性会禁用所有输入和提交按钮"
+    },
+    {
+      "name": "usePermission",
+      "label": "是否启用权限",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false
+    },
+    {
+      "name": "$permission",
+      "id": "permission",
+      "label": "权限",
+      "type": "muti-select",
+      "attributes": {
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_dyna_form_permission",
+        "column": "formId",
+        "field": "permissionId",
+        "action": "delete"
+      }
+    },
+    {
+      "name": "$dataPermission",
+      "id": "dataPermission",
+      "label": "数据权限",
+      "type": "muti-select",
+      "attributes": {
+        "multiple": "true"
+      },
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_permission"
+          }
+        }
+      },
+      "join": {
+        "table": "tbl_dyna_form_data_permission",
+        "column": "formId",
+        "field": "permissionId",
+        "action": "delete"
+      }
+    },
+    {
+      "name": "selfOnly",
+      "label": "selfOnly",
+      "type": "select",
+      "option": {
+        "values": {
+          "false": "false",
+          "true": "true"
+        }
+      },
+      "default": false,
+      "tip": "只能编辑自己的数据"
+    },
+    {
+      "name": "clear",
+      "label": "清除",
+      "type": "select",
+      "option": {
+        "values": {
+          "true": "true",
+          "false": "false"
+        }
+      },
+      "default": false,
+      "tip": "是否清除错误，用于查询验证。请在子视图中设置为false"
+    },
+    {
+      "name": "redirect",
+      "label": "跳转",
+      "type": "text",
+      "attributes": {
+        "placeholder": "提交成功后的跳转的链接"
+      }
+    },
+    {
+      "name": "searchview",
+      "type": "text",
+      "label": "查询视图",
+      "attributes": {
+        "placeholder": "back按钮返回的查询页面"
+      }
+    },
+    {
+      "name": "inputParameter",
+      "type": "textarea",
+      "label": "输入参数",
+      "attributes": {
+        "placeholder": "页面输入参数，用于子页面等, 例如[\"param1\",\"param2\"]",
+        "rows": 6
+      }
+    },
+    {
+      "name": "process",
+      "type": "textarea",
+      "label": "流程定义",
+      "attributes": {
+        "placeholder": "定义流程，json格式",
+        "rows": 6
+      }
+    },
+    {
+      "name": "defaultSort",
+      "type": "textarea",
+      "label": "默认参数",
+      "attributes": {
+        "placeholder": "定义默认排序，json格式, { \"name\": \"列名\", \"order\":\"asc|desc\"}",
+        "rows": 6
+      }
+    },
+    {
+      "name": "defaultValue",
+      "type": "textarea",
+      "label": "默认值",
+      "attributes": {
+        "placeholder": "定义默认查询条件或者保存，json格式, { \"name\": \"admin\", \"sex\":\"F\"}",
+        "rows": 6
+      },
+      "tip": "同名属性会被用户输入值覆盖"
+    },
+    {
+      "name": "export",
+      "type": "textarea",
+      "label": "导出选项",
+      "attributes": {
+        "placeholder": "定义导出设置",
+        "rows": 6
+      },
+      "tip": "指定导出的模板，默认值{template:\"export/default.xlsx\"}"
+    }
+  ],
+  "validators": [
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "type",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "title",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "data",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "inputParameter",
+      "provider": "json",
+      "msg": "json"
+    },
+    {
+      "field": "process",
+      "provider": "json",
+      "msg": "json"
+    },
+    {
+      "field": "defaultSort",
+      "provider": "json",
+      "msg": "json"
+    },
+    {
+      "field": "defaultValue",
+      "provider": "json",
+      "msg": "json"
+    },
+    {
+      "field": "export",
+      "provider": "json",
+      "msg": "json"
+    }
+  ],
+  "change": [
+    {
+      "name": "type",
+      "target": "clear",
+      "type": "toggle",
+      "value": "search"
+    },
+    {
+      "name": "type",
+      "target": "redirect",
+      "type": "toggle",
+      "value": "create"
+    },
+    {
+      "name": "type",
+      "target": "formResultSearchView",
+      "type": "toggle",
+      "value": "search"
+    },
+    {
+      "name": "type",
+      "target": "searchview",
+      "type": "toggle",
+      "value": "create"
+    },
+    {
+      "name": "usePermission",
+      "target": "permission",
+      "type": "toggle",
+      "value": "true"
+    },
+    {
+      "name": "usePermission",
+      "target": "dataPermission",
+      "type": "toggle",
+      "value": "true"
+    },
+    {
+      "name": "type",
+      "target": "formOperateSubView",
+      "type": "toggle",
+      "value": "search"
+    },
+    {
+      "name": "type",
+      "target": "formSubviewSubView",
+      "type": "toggle",
+      "value": "create"
+    },
+    {
+      "name": "type",
+      "target": "process",
+      "type": "toggle",
+      "value": "create"
+    },
+    {
+      "name": "type",
+      "target": "defaultSort",
+      "type": "toggle",
+      "value": "search"
+    },
+    {
+      "name": "type",
+      "target": "formResultSubView",
+      "type": "toggle",
+      "value": "search"
+    },
+    {
+      "name": "type",
+      "target": "export",
+      "type": "toggle",
+      "value": "search"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true,
+      "style":"btn-primary"
+    },
+    {
+      "back": true
+    }
+  ],
+  "subview": [
+    {
+      "name": "formFieldSubView",
+      "parameter": {
+        "formId": "_id"
+      }
+    },
+    {
+      "name": "formResultSubView",
+      "parameter": {
+        "formId": "_id"
+      }
+    },
+    {
+      "name": "formValidatorSubView",
+      "parameter": {
+        "formId": "_id"
+      }
+    },
+    {
+      "name": "formActionSubView",
+      "parameter": {
+        "formId": "_id"
+      }
+    },
+    {
+      "name": "formOperateSubView",
+      "parameter": {
+        "formId": "_id"
+      }
+    },
+    {
+      "name": "formSubviewSubView",
+      "parameter": {
+        "formId": "_id"
+      }
+    },
+    {
+      "name": "formChangeSubView",
+      "parameter": {
+        "formId": "_id"
+      }
+    }
+  ],
+  "searchview": "formSearchView",
+  "permission": []
+}

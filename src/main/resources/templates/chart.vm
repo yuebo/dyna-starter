@@ -1,0 +1,24 @@
+
+#if($chart.datasource&&$chart.datasource.provider)
+#set($datasourceProvider=$provider.chartProvider($chart.datasource.provider))
+#set($optionJson=$datasourceProvider.toJson($viewContext.toChartContext($chart.name)))
+<!-- $chart.datasource.provider  -->
+<!-- $datasourceProvider  -->
+<!-- $viewContext.toChartContext($chart.name)  -->
+<div data-type="echarts" id="$esc.html($chart.name)" data-option="$esc.html($optionJson)" style="width: 100%;min-height: 400px"></div>
+#else
+<div data-type="echarts" id="$esc.html($chart.name)" data-option="$esc.html($viewContext.toChartContext($chart.name).toJsonOption())" style="width: 100%;min-height: 400px"></div>
+#end
+
+<script>
+    jQuery(document).ready(function(){
+        jQuery("div[data-type=echarts]").each(function(i,v){
+
+            var myChart = echarts.init(v);
+            console.log(v);
+            var option=$(v).data("option")
+            myChart.setOption(option);
+        })
+
+    })
+</script>

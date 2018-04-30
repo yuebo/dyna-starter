@@ -1,0 +1,12 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+#set($item=$field)
+#if(!$item.id)#set($id=$item.name)#else#set($id=$item.id)#end
+#if($item.type == 'select'||$item.type=='muti-select')
+    #parse("/templates/form-select.vm")
+#end
+#if($item.type=='dyna-label')
+	#parse("/templates/form-dyna-label.vm")
+#end
+#if($item.tip)
+<p class="help-block">$esc.html($item.tip)</p>
+#end

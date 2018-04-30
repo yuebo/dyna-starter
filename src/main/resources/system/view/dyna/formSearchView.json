@@ -1,0 +1,91 @@
+{
+  "name": "formSearchView",
+  "type": "search",
+  "title": "表单查询",
+  "data": "tbl_dyna_form",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "表单名称",
+      "operator": "$like"
+    }
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "表单名称"
+    },
+    {
+      "name": "title",
+      "label": "表单标题"
+    },
+    {
+      "name": "type",
+      "label": "表单类型"
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style":"btn-primary"
+    },
+    {
+      "view": "formCreateView",
+      "label": "创建表单",
+      "type": "create"
+    }
+  ],
+  "operate": [
+    {
+      "view": "formCreateView",
+      "type": "create",
+      "icon": "glyphicon glyphicon-edit"
+    },
+    {
+      "operate": true,
+      "provider": "exportJsonOperateProvider",
+      "label": "导出json",
+      "icon": "glyphicon-export",
+      "name": "export"
+    },
+    {
+      "refresh": "formSearchView",
+      "operate": true,
+      "provider": "deleteOperateProvider",
+      "parameter":{
+        "sub":[
+          {
+            "table":"tbl_dyna_form_field",
+            "field":"formId"
+          },
+          {
+            "table":"tbl_dyna_form_action",
+            "field":"formId"
+          },
+          {
+            "table":"tbl_dyna_form_operate",
+            "field":"formId"
+          },
+          {
+            "table":"tbl_dyna_form_change",
+            "field":"formId"
+          },
+          {
+            "table":"tbl_dyna_form_result",
+            "field":"formId"
+          },
+          {
+            "table":"tbl_dyna_form_validator",
+            "field":"formId"
+          }
+        ]
+      },
+      "label": "删除",
+      "icon": "glyphicon-trash",
+      "name": "delete",
+      "confirm": "确认删除?"
+    }
+  ],
+  "permission": []
+}

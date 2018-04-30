@@ -1,0 +1,45 @@
+{
+  "name": "permissionSearchView",
+  "data": "tbl_permission",
+  "type": "search",
+  "title": "权限查询",
+  "fields": [
+    {
+      "name": "name",
+      "label": "名称",
+      "type": "text",
+      "attributes": {
+        "class": "form-control",
+        "placeholder": "请输入权限名称"
+      }
+    }
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "权限名称",
+      "attributes": {
+        "data-formatter": "linkFormatter"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "search": true,
+      "style": "btn-primary"
+    },
+    {
+      "type": "create",
+      "label": "新建权限",
+      "view": "permissionCreateView"
+    }
+  ],
+  "operate": [
+    {
+      "view": "permissionCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create"
+    }
+  ],
+  "permission": []
+}

@@ -1,0 +1,37 @@
+#if($action.close)
+    #if($request.getParameter("_popup"))
+        <a class="btn #if($action.style)$action.style#else btn-default#end" href="javascript:doPopupClose()">#if($action.label)$esc.html($action.label)#else $esc.html($msg.get("btn_close"))#end</a>
+    #end
+#elseif($action.export)
+        #if($action.view)
+            <a href="javascript:void(0)" class="btn #if($action.style)$action.style#else btn-default#end"  data-view="$esc.html($action.view)" onclick="doExport(event)">#if($action.label)$esc.html($action.label)#else $esc.html($msg.get("btn_export"))#end</a>
+        #end
+
+#elseif($action.back)
+    #if($request.getParameter("_popup"))
+    #else
+        #if($action.view)
+        <a href="javascript:void(0)" class="btn #if($action.style)$action.style#else btn-default#end" data-type="$esc.html($action.type)"  data-view="$esc.html($action.view)" data-id="$esc.html($action.id)" onclick="backToView(event)">#if($action.label)$esc.html($action.label)#else $esc.html($msg.get("btn_back"))#end</a>
+        #elseif($view.searchview)
+        <a class="btn #if($action.style)$action.style#else btn-default#end" href="$request.contextPath/spring/data/search/$esc.html($view.searchview)?_back=1">#if($action.label)$esc.html($action.label)#else $esc.html($msg.get("btn_back"))#end</a>
+        #end
+    #end
+
+#elseif($action.search)
+    #if($view.search&&$view.search=="false")
+    #else
+        <button type="submit" class="btn #if($action.style)$action.style#else btn-default#end" onclick="event.preventDefault();doSearch();">#if($action.label)$esc.html($action.label)#else $esc.html($msg.get("btn_search"))#end</button>
+    #end
+#elseif($action.submit)
+    #if($msg.isNull($view.readOnly)&&($msg.isNull($action.update)||$action.update==false&&(!$viewContext.hasId())))
+        <button type="submit" class="btn #if($action.style)$action.style#else btn-default#end">#if($action.label)$esc.html($action.label)#else $esc.html($msg.get("btn_submit"))#end</button>
+    #end
+#elseif($action.javascript)
+<a href="javascript:$esc.html($action.href)" class="btn #if($action.style) $action.style#else btn-default#end">$esc.html($action.label)</a>
+#elseif($action.action||$action.popup)
+<a href="javascript:void(0)" #if($item.action)data-name="$esc.html($action.name)"#end data-root="$esc.html($view.name)" #if($action.change)data-change="$esc.html($msg.escapeName($action.change))"#end class="btn #if($action.style)$action.style#else btn-default#end" #if($action.parameter)data-parameter="#foreach($key in $action.parameter.keySet())&$esc.html($key)=$esc.html($util.value($view,$action.parameter.get($key)))#end"#end #if($action.refresh)data-refresh="$esc.html($action.refresh)"#end #if($action.title)data-title="$esc.html($action.title)"#else data-title="$esc.html($action.label)" #end #if($action.popup)data-popup="true"#end onclick="doAction(event)" data-type="$esc.html($action.type)"data-view="$esc.html($action.view)">$esc.html($action.label)</a>
+#elseif($action.view)
+<a href="javascript:void(0)" #if($action.change)data-change="$esc.html($msg.escapeName($action.change))"#end class="btn #if($action.style)$action.style#else btn-default#end" #if($action.parameter)data-parameter="#foreach($key in $action.parameter.keySet())&$esc.html($key)=$esc.html($util.value($view,$action.parameter.get($key)))#end"#end #if($action.refresh)data-refresh="$esc.html($action.refresh)"#end data-title="$esc.html($action.title)" onclick="linkGoto(event)" data-type="$esc.html($action.type)"data-view="$esc.html($action.view)">$esc.html($action.label)</a>
+#elseif($action.url)
+<a href="javascript:doSelectAction('$esc.html($action.url)',#if($action.checked)'true'#else'false'#end)" class="btn #if($action.style)$action.style#else btn-default#end">$esc.html($action.label)</a>
+#end

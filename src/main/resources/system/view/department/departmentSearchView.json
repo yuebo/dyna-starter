@@ -1,0 +1,65 @@
+{
+  "name": "departmentSearchView",
+  "type": "search",
+  "title": "部门查询",
+  "fields": [
+    {
+      "name": "name",
+      "label": "部门",
+      "type": "text",
+      "attributes": {
+      },
+      "operator": "$like"
+    }
+  ],
+  "permission": [],
+  "data": "tbl_department",
+  "actions": [
+    {
+      "search": true,
+      "style":"btn-primary"
+    },
+    {
+      "type": "create",
+      "view": "departmentCreateView",
+      "label": "新建部门"
+    }
+  ],
+  "result": [
+    {
+      "name": "name",
+      "label": "部门名称",
+      "attributes": {
+        "data-sortable": true
+      }
+    },
+    {
+      "name": "departmentNO",
+      "label": "部门名称",
+      "attributes": {
+        "data-sortable": true
+      }
+    },
+    {
+      "name": "managerId",
+      "label": "部门经理",
+      "converter": {
+        "provider": "dataConverter",
+        "parameter": {
+          "table": "tbl_user",
+          "column": "name"
+        }
+      },
+      "permission": [
+        "test"
+      ]
+    }
+  ],
+  "operate": [
+    {
+      "view": "departmentCreateView",
+      "icon": "glyphicon glyphicon-edit",
+      "type": "create"
+    }
+  ]
+}

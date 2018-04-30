@@ -1,0 +1,68 @@
+{
+  "name": "departmentSubCreateView",
+  "type": "create",
+  "title": "创建子部门",
+  "data": "tbl_department",
+  "inputParameter": [
+    "parentId"
+  ],
+  "fields": [
+    {
+      "name": "parentId",
+      "type": "hidden"
+    },
+    {
+      "name": "name",
+      "label": "部门名称",
+      "type": "text",
+      "attributes": {
+        "maxlength": "100"
+      }
+    },
+    {
+      "name": "departmentNO",
+      "label": "部门编号",
+      "type": "text",
+      "attributes": {
+        "maxlength": "100"
+      }
+    },
+    {
+      "name": "managerId",
+      "label": "部门经理",
+      "type": "select",
+      "option": {
+        "provider": "defaultOptionProvider",
+        "parameter": {
+          "key": "_id",
+          "value": "name",
+          "query": {
+            "_data": "tbl_user"
+          }
+        }
+      }
+    }
+  ],
+  "validators": [
+    {
+      "field": "parentId",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "name",
+      "provider": "required",
+      "msg": "required"
+    },
+    {
+      "field": "departmentNO",
+      "provider": "unique",
+      "msg": "unique"
+    }
+  ],
+  "actions": [
+    {
+      "submit": true
+    }
+  ]
+}
