@@ -27,6 +27,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -39,6 +40,8 @@ public class DynaAutoConfiguration {
     boolean initData;
     @Value("${dyna.init.view:true}")
     boolean initView;
+    @Value("${dyna.data.files:user.json;message.json}")
+    String dataFiles;
     @ConfigurationProperties
     @Bean
     JDBCService jdbcService(@Autowired NamedParameterJdbcTemplate jdbcTemplate,@Autowired TableGenerator tableGenerator){
@@ -132,6 +135,7 @@ public class DynaAutoConfiguration {
         SystemInit systemInit=new SystemInit();
         systemInit.setInitData(initData);
         systemInit.setInitView(initView);
+        systemInit.setDataFiles(Arrays.asList(dataFiles.split(";")));
         systemInit.setViewLoader(loader);
         systemInit.setJdbcService(jdbcService);
         systemInit.init();

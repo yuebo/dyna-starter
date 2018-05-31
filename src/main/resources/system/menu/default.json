@@ -113,60 +113,6 @@
           "icon": "glyphicon glyphicon-wrench"
         }
       ]
-    },
-    {
-      "label": "车辆管理",
-      "icon": "glyphicon-plus",
-      "submenu": [
-        {
-          "type": "search",
-          "view": "carSearchView",
-          "label": "车辆信息",
-          "icon": "glyphicon-plane"
-        },
-        {
-          "type": "search",
-          "view": "carUsageSearchView",
-          "label": "使用登记",
-          "icon": "glyphicon-th-list"
-        },
-        {
-          "type": "search",
-          "view": "carCheckSearchView",
-          "label": "自检情况",
-          "icon": "glyphicon-search"
-        },
-        {
-          "type": "search",
-          "view": "carRepairSearchView",
-          "label": "维修信息",
-          "icon": "glyphicon-wrench"
-        },
-        {
-          "type": "search",
-          "view": "carMaintenanceSearchView",
-          "label": "保养信息",
-          "icon": "glyphicon-tint"
-        },
-        {
-          "type": "search",
-          "view": "carCardSearchView",
-          "label": "油卡充值信息",
-          "icon": "glyphicon-qrcode"
-        },
-        {
-          "type": "search",
-          "view": "carMileageSearchView",
-          "label": "里程油耗信息",
-          "icon": "glyphicon-indent-right"
-        }
-      ]
-    },
-    {
-      "type": "create",
-      "view": "systemManageView",
-      "label": "系统设置",
-      "icon": "glyphicon-qrcode"
     }
   ],
   "name": "default",

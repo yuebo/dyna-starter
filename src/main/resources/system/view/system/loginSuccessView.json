@@ -17,6 +17,5 @@
   ],
   "readOnly": "true",
   "title": "登录信息",
-  "permission": [],
-  "path":"redirect:/spring/data/chart/pieChartView"
+  "permission": []
 }

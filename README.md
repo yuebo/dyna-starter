@@ -28,7 +28,7 @@ Maven 依赖
     <dependency>
         <groupId>com.github.yuebo</groupId>
         <artifactId>boot-dyna-starter</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.2-SNAPSHOT</version>
     </dependency>
     
 修改application.properties
@@ -40,6 +40,7 @@ Maven 依赖
     spring.datasource.driver-class-name=com.mysql.jdbc.Driver
     #应用路径
     server.context-path=/dyna
+    dyna.init.data=true
     #上传文件路径
     upload.defaultPath=d:/upload
         

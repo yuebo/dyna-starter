@@ -40,7 +40,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
     SpringBeanProvider springBeanProvider;
 
     @Autowired
-    FormUtils formUtils;
+    FormViewUtils formViewUtils;
     @Autowired
     SecurityInterceptor securityInterceptor;
     @Autowired
@@ -103,7 +103,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
         attributes.put("menu",menuProvider);
         attributes.put("provider",springBeanProvider);
         attributes.put("msg",defaultMessageProvider);
-        attributes.put("util",formUtils);
+        attributes.put("util",formViewUtils);
         resolver.setAttributesMap(attributes);
         return resolver;
     }

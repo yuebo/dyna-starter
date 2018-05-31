@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "json")
 public class JsonConfigProperties {
-    private String path="~/upload";
+    private String path="classpath*:system/**/*.json";
 
     public String getPath() {
         return path;
