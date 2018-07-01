@@ -230,46 +230,46 @@ public interface AppConstants extends DbConstant {
     String MODEL_ATTRIBUTE_PARAMS = "params";
 
 
-    String INPUT_TYPE_TEXT = "text";
-    String INPUT_TYPE_RADIO = "radio";
-    String INPUT_TYPE_TEXTAREA = "textarea";
-    String INPUT_TYPE_SELECT = "select";
-    String INPUT_TYPE_MULTI_SELECT = "muti-select";
-    String INPUT_TYPE_CHECK_BOX = "checkbox";
-    String INPUT_TYPE_FILE = "file";
-    String INPUT_TYPE_LABEL = "label";
-    String INPUT_TYPE_DYNA_LABEL = "dyna-label";
-    String INPUT_TYPE_RICHTEXT = "richtext";
-    String INPUT_TYPE_ELFINDER = "elfinder";
-    String INPUT_TYPE_PASSWORD = "password";
-    String INPUT_TYPE_NUMBER = "number";
-    String INPUT_TYPE_DATE = "date";
-    String INPUT_TYPE_HIDDEN = "hidden";
-    String INPUT_TYPE_EMAIL = "email";
-    String INPUT_TYPE_PICKER = "picker";
-    String INPUT_TYPE_AUTOCOMPLETE = "autocomplete";
-    String INPUT_TYPE_CODE = "code";
+//    String INPUT_TYPE_TEXT = "text";
+//    String INPUT_TYPE_RADIO = "radio";
+//    String INPUT_TYPE_TEXTAREA = "textarea";
+//    String INPUT_TYPE_SELECT = "select";
+//    String INPUT_TYPE_MULTI_SELECT = "muti-select";
+//    String INPUT_TYPE_CHECK_BOX = "checkbox";
+//    String INPUT_TYPE_FILE = "file";
+//    String INPUT_TYPE_LABEL = "label";
+//    String INPUT_TYPE_DYNA_LABEL = "dyna-label";
+//    String INPUT_TYPE_RICHTEXT = "richtext";
+//    String INPUT_TYPE_ELFINDER = "elfinder";
+//    String INPUT_TYPE_PASSWORD = "password";
+//    String INPUT_TYPE_NUMBER = "number";
+//    String INPUT_TYPE_DATE = "date";
+//    String INPUT_TYPE_HIDDEN = "hidden";
+//    String INPUT_TYPE_EMAIL = "email";
+//    String INPUT_TYPE_PICKER = "picker";
+//    String INPUT_TYPE_AUTOCOMPLETE = "autocomplete";
+//    String INPUT_TYPE_CODE = "code";
 
 
 
-    default boolean isLabelType(String type) {
-        String[] labels = new String[]{INPUT_TYPE_LABEL, INPUT_TYPE_DYNA_LABEL};
-        return Arrays.asList(labels).contains(type);
-    }
-
-    default boolean isSingleValue(String type) {
-        String[] controls = new String[]{INPUT_TYPE_TEXT, INPUT_TYPE_RADIO, INPUT_TYPE_TEXTAREA, INPUT_TYPE_SELECT, INPUT_TYPE_FILE, INPUT_TYPE_RICHTEXT, INPUT_TYPE_ELFINDER, INPUT_TYPE_PASSWORD, INPUT_TYPE_NUMBER, INPUT_TYPE_EMAIL, INPUT_TYPE_DATE, INPUT_TYPE_HIDDEN,INPUT_TYPE_AUTOCOMPLETE,INPUT_TYPE_PICKER,INPUT_TYPE_CODE};
-        return Arrays.asList(controls).contains(type);
-    }
-
-    default boolean isMultiValue(String type) {
-        String[] controls = new String[]{INPUT_TYPE_MULTI_SELECT, INPUT_TYPE_CHECK_BOX};
-        return Arrays.asList(controls).contains(type);
-    }
-    default boolean isOptionValue(String type) {
-        String[] controls = new String[]{INPUT_TYPE_SELECT, INPUT_TYPE_MULTI_SELECT,INPUT_TYPE_RADIO,INPUT_TYPE_AUTOCOMPLETE,INPUT_TYPE_CHECK_BOX,INPUT_TYPE_DYNA_LABEL};
-        return Arrays.asList(controls).contains(type);
-    }
+//    default boolean isLabelType(String type) {
+//        String[] labels = new String[]{INPUT_TYPE_LABEL, INPUT_TYPE_DYNA_LABEL};
+//        return Arrays.asList(labels).contains(type);
+//    }
+//
+//    default boolean isSingleValue(String type) {
+//        String[] controls = new String[]{INPUT_TYPE_TEXT, INPUT_TYPE_RADIO, INPUT_TYPE_TEXTAREA, INPUT_TYPE_SELECT, INPUT_TYPE_FILE, INPUT_TYPE_RICHTEXT, INPUT_TYPE_ELFINDER, INPUT_TYPE_PASSWORD, INPUT_TYPE_NUMBER, INPUT_TYPE_EMAIL, INPUT_TYPE_DATE, INPUT_TYPE_HIDDEN,INPUT_TYPE_AUTOCOMPLETE,INPUT_TYPE_PICKER,INPUT_TYPE_CODE};
+//        return Arrays.asList(controls).contains(type);
+//    }
+//
+//    default boolean isMultiValue(String type) {
+//        String[] controls = new String[]{INPUT_TYPE_MULTI_SELECT, INPUT_TYPE_CHECK_BOX};
+//        return Arrays.asList(controls).contains(type);
+//    }
+//    default boolean isOptionValue(String type) {
+//        String[] controls = new String[]{INPUT_TYPE_SELECT, INPUT_TYPE_MULTI_SELECT,INPUT_TYPE_RADIO,INPUT_TYPE_AUTOCOMPLETE,INPUT_TYPE_CHECK_BOX,INPUT_TYPE_DYNA_LABEL};
+//        return Arrays.asList(controls).contains(type);
+//    }
 
 
 

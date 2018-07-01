@@ -1,6 +1,6 @@
 #* @vtlmacrolibrary path="macro.vm" *#
 <div class="input-group">
-    <input id="$esc.html($id)" name="$esc.html($item.name)" #mapiterator($item,$attr.key) type="text"  readonly="readonly">
+    <input id="$esc.html($id)" name="$esc.html($item.name)" #mapiterator($component,$item,$attr.key) type="text"  readonly="readonly">
     <span class="input-group-btn">
         <button class="btn btn-default" data-picker="true" #if($item.title)data-title="$esc.html($item.title)"#end #if($item.view)data-view="$esc.html($item.view)"#end onclick="popupPicker(event)" type="button" #if($item.attributes.disabled)disabled="disabled" #end>$msg.get("btn_picker")</button>
         <button class="btn btn-default" onclick="popupClear(event)" type="button" #if($item.attributes.disabled)disabled="disabled" #end>$msg.get("btn_picker_clear")</button>

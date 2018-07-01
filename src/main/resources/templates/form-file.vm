@@ -1,5 +1,5 @@
 #* @vtlmacrolibrary path="macro.vm" *#
-<input id="$esc.html($id)" name="$esc.html($item.name)" type="file" #mapiterator($item,$attr.key)>
+<input id="$esc.html($id)" name="$esc.html($item.name)" type="file" #mapiterator($component,$item,$attr.key)>
 #if($view.get('_id')&&$item.attributes.value)
 <a class="glyphicon glyphicon-download-alt" href="$request.contextPath/spring/data/download/$esc.html($view.name)/$esc.html($item.name)?_id=$esc.html($view.get('_id'))"></a>
 #end

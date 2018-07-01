@@ -19,18 +19,19 @@
 package com.github.yuebo.dyna.utils;
 
 import com.github.yuebo.dyna.AppConstants;
+import com.github.yuebo.dyna.core.OrderedResourse;
 import com.github.yuebo.dyna.core.PermissionProvider;
+import com.github.yuebo.dyna.core.UIComponent;
 import com.github.yuebo.dyna.core.ViewContext;
 import com.mongodb.util.JSON;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yuebo on 5/18/2015.
@@ -44,6 +45,8 @@ public class FormViewUtils implements AppConstants {
     PermissionProvider permissionProvider;
     @Autowired
     JsonUtils jsonUtils;
+    @Autowired
+    SpringUtils springUtils;
 
     public Map<String, Object> getFormView(String viewname) {
         Map view = getViewFromDB(viewname);
@@ -88,7 +91,8 @@ public class FormViewUtils implements AppConstants {
         if (fields != null) {
             for (Map<String, Object> field : fields) {
                 String type = MapUtils.getString(field, VIEW_FIELD_TYPE);
-                if (INPUT_TYPE_FILE.equals(type)) {
+                UIComponent uiComponent=getComponentByType(type);
+                if (uiComponent.isBinaryType()) {
                     view.put(VIEW_FIELD_ENCTYPE, VIEW_FIELD_ENCTYPE_MULTIPART);
                 }
             }
@@ -194,6 +198,55 @@ public class FormViewUtils implements AppConstants {
             return context.getViewMap();
         }
         return null;
+    }
+    @Cacheable(value = "form")
+    public List<UIComponent> getComponents(){
+        return springUtils.getComponents();
+    }
 
+    @Cacheable(value = "form")
+    public UIComponent getComponentByType(String type){
+        List<UIComponent> list=getComponents();
+        for (UIComponent uiComponent:list){
+            if(StringUtils.equals(uiComponent.getComponentName(),type)){
+                return uiComponent;
+            }
+        }
+        return null;
+    }
+
+    public List<OrderedResourse> getExtentalJs(ViewContext viewContext){
+        List<String> list=viewContext.getComponentList();
+        List<OrderedResourse> resources=new ArrayList();
+        if (!list.isEmpty()){
+            for(String type:list){
+                UIComponent uiComponent=getComponentByType(type);
+                if(uiComponent.getRequiredJS()!=null){
+                    resources.addAll(uiComponent.getRequiredJS());
+                }
+
+            }
+
+
+        }
+        Collections.sort(resources);
+        return resources;
+    }
+    public List<OrderedResourse> getExtentalCss(ViewContext viewContext){
+        List<String> list=viewContext.getComponentList();
+        List<OrderedResourse> resources=new ArrayList();
+        if (!list.isEmpty()){
+            for(String type:list){
+                UIComponent uiComponent=getComponentByType(type);
+                if(uiComponent.getRequiredCss()!=null){
+                    resources.addAll(uiComponent.getRequiredCss());
+                }
+
+            }
+
+
+        }
+        Collections.sort(resources);
+        return resources;
     }
 }

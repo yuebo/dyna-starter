@@ -1,2 +1,2 @@
 #* @vtlmacrolibrary path="macro.vm" *#
-<textarea id="$esc.html($id)" data-code="true" name="$esc.html($item.name)" #mapiterator($item,$attr.key)>#if($item.attributes.value)$esc.html($item.attributes.value)#end</textarea>
+<textarea id="$esc.html($id)" data-code="true" name="$esc.html($item.name)" #mapiterator($component,$item,$attr.key)>#if($item.attributes.value)$esc.html($item.attributes.value)#end</textarea>

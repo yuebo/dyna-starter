@@ -21,6 +21,7 @@ package com.github.yuebo.dyna.utils;
 import com.github.yuebo.dyna.AppConstants;
 import com.github.yuebo.dyna.core.ConvertContext;
 import com.github.yuebo.dyna.core.ConvertProvider;
+import com.github.yuebo.dyna.core.UIComponent;
 import com.github.yuebo.dyna.core.ViewContext;
 import com.github.yuebo.dyna.event.FileUploadEvent;
 import com.github.yuebo.dyna.service.JDBCService;
@@ -53,6 +54,7 @@ public class FormUtils implements AppConstants {
     private JDBCService jdbcService;
 
     public void populateForSearch(Map<String, Object> field, String name, String type, Map converter, Map parameter, String operator, HttpServletRequest request, Map saveEntity) {
+        UIComponent uiComponent=formViewUtils.getComponentByType(type);
         if (StringUtils.isEmpty(request.getParameter(name)) && !"false".equals(field.get("allowEmpty"))) {
             return;
         }
@@ -61,7 +63,7 @@ public class FormUtils implements AppConstants {
         }
         ConvertProvider convertProvider = springUtils.getConvertProvider(converter);
 
-        if (isMultiValue(type)) {
+        if (uiComponent.isMultiValue()) {
             List<String> val = request.getParameterValues(name) == null ? new ArrayList() : Arrays.asList(request.getParameterValues(name));
             if (operator == null) {
                 operator = $in;
@@ -69,7 +71,7 @@ public class FormUtils implements AppConstants {
             saveEntity.put(name, new BasicDBObject(operator, convertProvider.convert(val, new ConvertContext(converter))));
         } else {
             Object value = convertProvider.convert(request.getParameter(name), new ConvertContext(converter));
-            if (value instanceof String && (isSingleValue(type))) {
+            if (value instanceof String && (!uiComponent.isMultiValue())) {
                 if (operator == null) {
                     saveEntity.put(name, value);
                 } else if ($like.equals(operator)) {
@@ -91,12 +93,13 @@ public class FormUtils implements AppConstants {
     }
 
     public void populateForRestore(String name, String type, Map converter, HttpServletRequest request, Map saveEntity, boolean escapeEmpty) {
+        UIComponent uiComponent=formViewUtils.getComponentByType(type);
         if (StringUtils.isEmpty(request.getParameter(name)) && escapeEmpty) {
             return;
         }
         String[] value = request.getParameterValues(name);
         ConvertProvider convertProvider = springUtils.getConvertProvider(converter);
-        if (isMultiValue(type)) {
+        if (uiComponent.isMultiValue()) {
             List<String> val = request.getParameterValues(name) == null ? new ArrayList() : Arrays.asList(value);
             ConvertUtils.setProperty(saveEntity, name, convertProvider.convert(val, new ConvertContext(converter)));
         } else {
@@ -105,11 +108,12 @@ public class FormUtils implements AppConstants {
     }
 
     public void populateForUpdate(String name, String type, Map converter, String processor, HttpServletRequest request, Map saveEntity, boolean escapeEmpty) {
+        UIComponent uiComponent=formViewUtils.getComponentByType(type);
         if (StringUtils.isEmpty(request.getParameter(name)) && escapeEmpty) {
             return;
         }
         ConvertProvider convertProvider = springUtils.getConvertProvider(converter);
-        if (INPUT_TYPE_FILE.equals(type) && request instanceof MultipartHttpServletRequest) {
+        if (uiComponent.isBinaryType() && request instanceof MultipartHttpServletRequest) {
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
             MultipartFile file = multipartHttpServletRequest.getFile(name);
             try {
@@ -132,7 +136,7 @@ public class FormUtils implements AppConstants {
             }
 
 
-        } else if (isMultiValue(type)) {
+        } else if (uiComponent.isMultiValue()) {
             List<String> val = request.getParameterValues(name) == null ? new ArrayList() : Arrays.asList(request.getParameterValues(name));
             ConvertUtils.setProperty(saveEntity, name, convertProvider.convert(val, new ConvertContext(converter)));
         } else {
@@ -155,6 +159,7 @@ public class FormUtils implements AppConstants {
             for (Map map : list) {
                 String name = MapUtils.getString(map,VIEW_FIELD_NAME);
                 String type = MapUtils.getString(map,VIEW_FIELD_TYPE);
+                UIComponent uiComponent=formViewUtils.getComponentByType(type);
                 String alias = MapUtils.getString(map,"alias");
                 Map converter = (Map) map.get("converter");
                 ConvertProvider provider = springUtils.getConvertProvider(converter);
@@ -201,12 +206,12 @@ public class FormUtils implements AppConstants {
                 //read alias name value to keep the value from source
                 Object v = ConvertUtils.getProperty(tempval, alias==null?name:alias);
                 if (v != null) {
-                    if (INPUT_TYPE_FILE.equalsIgnoreCase(type)) {
+                    if (uiComponent.isBinaryType()) {
                         attr.put("value", v);
-                    } else if (isSingleValue(type) || isLabelType(type)) {
+                    } else if (!uiComponent.isMultiValue()) {
 
                         attr.put("value", provider.restore(v, new ConvertContext(converter)));
-                    } else if (isMultiValue(type)) {
+                    } else if (uiComponent.isMultiValue()) {
                         if (v instanceof List) {
 
                         } else {

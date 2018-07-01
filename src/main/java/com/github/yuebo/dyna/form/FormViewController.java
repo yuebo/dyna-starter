@@ -267,7 +267,8 @@ public class FormViewController implements AppConstants {
             //fix for error
             for (Map<String, Object> v : list) {
 
-                if (isLabelType((String) v.get(VIEW_FIELD_FIELDS_TYPE))) {
+                UIComponent uiComponent=formViewUtils.getComponentByType(MapUtils.getString(v,VIEW_FIELD_FIELDS_TYPE));
+                if (!uiComponent.isValidationRequired()) {
                     continue;
                 }
                 String name = String.valueOf(v.get(VIEW_FIELD_FIELDS_NAME));
@@ -681,7 +682,8 @@ public class FormViewController implements AppConstants {
         logger.debug("start validation");
         if (viewContext.getFields() != null) {
             for (Map<String, Object> v : viewContext.getFields()) {
-                if (isLabelType((String) v.get(VIEW_FIELD_FIELDS_TYPE))) {
+                UIComponent uiComponent=formViewUtils.getComponentByType(MapUtils.getString(v,VIEW_FIELD_FIELDS_TYPE));
+                if (!uiComponent.isValidationRequired()) {
                     continue;
                 } else {
                     String name = String.valueOf(v.get(VIEW_FIELD_FIELDS_NAME));
@@ -884,6 +886,7 @@ public class FormViewController implements AppConstants {
             for (Map map : list) {
                 String name = String.valueOf(map.get("name"));
                 String type = String.valueOf(map.get("type"));
+                UIComponent uiComponent=formViewUtils.getComponentByType(type);
                 HashMap<String, Object> attr = (HashMap<String, Object>) map.get("attributes");
                 if (attr == null) {
                     attr = new HashMap<String, Object>();
@@ -891,11 +894,11 @@ public class FormViewController implements AppConstants {
                 }
                 String[] values = (String[]) value.get(name);
                 if (values != null && values.length > 0) {
-                    if (INPUT_TYPE_FILE.equals(type)) {
+                    if (uiComponent.isBinaryType()) {
                         attr.put("value", values[0]);
-                    } else if (isSingleValue(type) || isLabelType(type)) {
+                    } else if (!uiComponent.isMultiValue()) {
                         attr.put("value", values[0]);
-                    } else if (isMultiValue(type)) {
+                    } else if (uiComponent.isMultiValue()) {
                         attr.put("value", Arrays.asList(values));
                     }
                 }
@@ -988,7 +991,8 @@ public class FormViewController implements AppConstants {
             //fix for error
             for (Map<String, Object> v : viewContext.getFields()) {
 
-                if (isLabelType((String) v.get(VIEW_FIELD_FIELDS_TYPE))) {
+                UIComponent uiComponent=formViewUtils.getComponentByType(MapUtils.getString(v,VIEW_FIELD_FIELDS_TYPE));
+                if (!uiComponent.isValidationRequired()) {
                     continue;
                 }
                 String name = String.valueOf(v.get(VIEW_FIELD_FIELDS_NAME));

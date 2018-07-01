@@ -20,6 +20,7 @@ package com.github.yuebo.dyna.utils;
 import com.github.yuebo.dyna.AppConstants;
 import com.github.yuebo.dyna.DbConstant;
 import com.github.yuebo.dyna.FormConstants;
+import com.github.yuebo.dyna.core.UIComponent;
 import com.github.yuebo.dyna.service.JDBCService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
@@ -42,6 +43,8 @@ import java.util.Map;
 public class ExportJsonUtils implements AppConstants,FormConstants {
     @Autowired
     JDBCService jdbcService;
+    @Autowired
+    FormViewUtils formViewUtils;
     public String exportJson(String id){
         Map form= jdbcService.find(TBL_DYNA_FORM, new BasicBSONObject("_id",id));
         if(form==null){
@@ -126,6 +129,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                 field.append(VIEW_FIELD_FIELDS_NAME,MapUtils.getString(f,VIEW_FIELD_FIELDS_NAME));
                 field.append(VIEW_FIELD_FIELDS_LABEL,MapUtils.getString(f,VIEW_FIELD_FIELDS_LABEL));
                 field.append(VIEW_FIELD_FIELDS_TYPE,MapUtils.getString(f,VIEW_FIELD_FIELDS_TYPE));
+                UIComponent uiComponent=formViewUtils.getComponentByType(MapUtils.getString(f,VIEW_FIELD_FIELDS_TYPE));
                 if(StringUtils.isNotEmpty(MapUtils.getString(f,VIEW_FIELD_FIELDS_ATTRIBUTES))){
                     field.append(VIEW_FIELD_FIELDS_ATTRIBUTES, JSON.parse(MapUtils.getString(f,VIEW_FIELD_FIELDS_ATTRIBUTES)));
                 }
@@ -141,7 +145,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                 if(StringUtils.isNotEmpty(MapUtils.getString(f,VIEW_FIELD_FIELDS_TITLE))){
                     field.append(VIEW_FIELD_FIELDS_TITLE,MapUtils.getString(f,VIEW_FIELD_FIELDS_TITLE));
                 }
-                if("false".equals(MapUtils.getString(f,VIEW_FIELD_FIELDS_DEFAULT))&&INPUT_TYPE_SELECT.equals(MapUtils.getString(f,VIEW_FIELD_FIELDS_TYPE))){
+                if("false".equals(MapUtils.getString(f,VIEW_FIELD_FIELDS_DEFAULT))&&uiComponent.hasDefaultValue()){
                     field.append(VIEW_FIELD_FIELDS_DEFAULT,false);
                 }
                 if("false".equals(MapUtils.getString(f,VIEW_FIELD_FIELDS_UPDATE))){
@@ -177,7 +181,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                 String optionId=MapUtils.getString(f,VIEW_FIELD_FIELDS_OPTION);
 
 
-                if(isOptionValue(MapUtils.getString(f,VIEW_FIELD_FIELDS_TYPE))){
+                if(uiComponent.hasOptions()){
                     //get option provider
                     if(StringUtils.isNotEmpty(optionId)){
                         BasicDBObject optionObject=new BasicDBObject();

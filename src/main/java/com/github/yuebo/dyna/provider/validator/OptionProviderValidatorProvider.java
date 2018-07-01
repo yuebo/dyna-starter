@@ -21,6 +21,7 @@ package com.github.yuebo.dyna.provider.validator;
 import com.github.yuebo.dyna.AppConstants;
 import com.github.yuebo.dyna.core.FileValidatorProvider;
 import com.github.yuebo.dyna.core.OptionProvider;
+import com.github.yuebo.dyna.core.UIComponent;
 import com.github.yuebo.dyna.core.ValidateContext;
 import com.github.yuebo.dyna.utils.FormViewUtils;
 import com.github.yuebo.dyna.utils.SpringUtils;
@@ -50,9 +51,8 @@ public class OptionProviderValidatorProvider implements FileValidatorProvider,Ap
 
 
         Map<String,Object> field=formViewUtils.getField(validateContext.getViewContext(),validateContext.getField());
-
-        if(isOptionValue(MapUtils.getString(field,VIEW_FIELD_FIELDS_TYPE))){
-
+        UIComponent uiComponent=formViewUtils.getComponentByType(MapUtils.getString(field,VIEW_FIELD_FIELDS_TYPE));
+        if(uiComponent.hasOptions()){
             Map<String,Object> option=MapUtils.getMap(field,VIEW_FIELD_FIELDS_OPTION);
 
             if(MapUtils.getString(option,"provider")!=null){

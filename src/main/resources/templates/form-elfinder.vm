@@ -1,6 +1,6 @@
 #* @vtlmacrolibrary path="macro.vm" *#
 <div class="elfinder_container">
-    <input id="$esc.html($id)" name="$esc.html($item.name)" type="hidden" #mapiterator($item,$attr.key)>
+    <input id="$esc.html($id)" name="$esc.html($item.name)" type="hidden" #mapiterator($component,$item,$attr.key)>
     <button class="elfinder_action btn btn-default" type="button" target="$esc.html($id)" #if($item.attributes.disabled) disabled="disabled" #end>#if($item.attributes.label) $esc.html($item.attributes.label) #else 选择文件#end</button>
     <ul class="files">
         #foreach($filename in $msg.split($item.attributes.value,"\|"))
