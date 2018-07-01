@@ -2,7 +2,7 @@
 #if($item.option.provider)
     #set($list=$provider.provider($item.option.provider).option($viewContext,$item,$item.option.parameter))
     #foreach($map in $list)
-        #foreach($attr in $map.keySet())
+        #foreach($attr in $map.entrySet())
         <div class="checkbox"><label><input type="checkbox" name="$esc.html($item.name)" value="$esc.html($attr.key)" #mapiterator($component,$item,$attr.key)>$esc.html($attr.value)</label></div>
         #end
     #end
