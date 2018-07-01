@@ -204,4 +204,14 @@ public class SpringUtils implements ApplicationContextAware, AppConstants {
         }
         return c.getName();
     }
+
+    public List<UIComponent> getComponents() {
+        String [] beans=applicationContext.getBeanNamesForType(UIComponent.class);
+
+        List<UIComponent> result=new ArrayList();
+        for (String name:beans){
+            result.add((UIComponent)applicationContext.getBean(name));
+        }
+        return result;
+    }
 }

@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedCaseInsensitiveMap;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -104,17 +105,20 @@ public class DefaultOptionProvider implements OptionProvider {
 
 
         //processConverter
+        boolean hasConverter=false;
         if(param.get("converter")!=null&&result!=null){
+
             List<Map<String, Object>> resultTemp=new ArrayList();
 
             ConvertProvider convertProvider=springUtils.getConvertProvider((Map) param.get("converter"));
+            hasConverter=true;
             for (Map<String,Object> val:result){
                 Map<String,Object> tempValue=new LinkedCaseInsensitiveMap();
                 tempValue.putAll(val);
                 String key= MapUtils.getString(param,"key");
-                String value= MapUtils.getString(param,"value");
+//                String value= MapUtils.getString(param,"value");
                 Object object=convertProvider.restore(MapUtils.getObject(val,key),new ConvertContext(MapUtils.getMap(param,"converter")));
-                tempValue.put(value,object);
+                tempValue.put(key.concat("_converted"),object);
                 resultTemp.add(tempValue);
             }
             result=resultTemp;
@@ -127,7 +131,7 @@ public class DefaultOptionProvider implements OptionProvider {
 
         for (Map m : result) {
             Map<String, String> kv = new LinkedCaseInsensitiveMap();
-            kv.put(MapUtils.getString(m,MapUtils.getString(param,"key")), MapUtils.getString(m,MapUtils.getString(param,"value")));
+            kv.put(MapUtils.getString(m,MapUtils.getString(param,"key")), hasConverter?MapUtils.getString(m,MapUtils.getString(param,"key").concat("_converted")):MapUtils.getString(m,MapUtils.getString(param,"value")));
             optionList.add(kv);
         }
 

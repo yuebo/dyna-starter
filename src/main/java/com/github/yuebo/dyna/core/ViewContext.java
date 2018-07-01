@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -254,5 +255,19 @@ public class ViewContext implements AppConstants {
 
     public List<String> getDataPermission() {
         return (List)MapUtils.getObject(viewMap,VIEW_FIELD_DATA_PERMISSION);
+    }
+
+    public List<String> getComponentList(){
+        List<Map<String,Object>> fields=getFields();
+        List<String> paths=new ArrayList();
+        if(!fields.isEmpty()){
+            for(Map<String,Object> field:fields){
+                String type=MapUtils.getString(field,VIEW_FIELD_FIELDS_TYPE);
+                if(!paths.contains(type)){
+                    paths.add(type);
+                }
+            }
+        }
+        return paths;
     }
 }

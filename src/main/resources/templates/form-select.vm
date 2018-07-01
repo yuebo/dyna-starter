@@ -1,5 +1,5 @@
 #* @vtlmacrolibrary path="macro.vm" *#
-<select id="$esc.html($id)" name="$esc.html($item.name)" #mapiterator($item,$attr.key)>
+<select id="$esc.html($id)" name="$esc.html($item.name)" #mapiterator($component,$item,$attr.key)>
     #if($item.type=='select'&&$msg.isNull($item.default)||$item.type=='select'&&$item.default)
         <option value="">$esc.html($msg.get("select_default"))</option>
     #end

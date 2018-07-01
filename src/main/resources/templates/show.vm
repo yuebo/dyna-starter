@@ -28,14 +28,11 @@
 
     <link href="$request.contextPath/resources/charisma/css/charisma-app.css" rel="stylesheet">
     <link href='$request.contextPath/resources/charisma/css/animate.min.css' rel='stylesheet'>
-    #if($viewContext.hasFieldType('select')||$viewContext.hasFieldType('muti-select'))
-    <link rel="stylesheet" href="$request.contextPath/resources/css/select2.css">
-    <link rel="stylesheet" href="$request.contextPath/resources/css/select2-bootstrap.css">
-    #end
     <link rel="stylesheet" href="$request.contextPath/resources/css/bootstrap-table.css">
-    #if($viewContext.hasFieldType('date'))
-    <link rel="stylesheet" href="$request.contextPath/resources/css/bootstrap-datetimepicker.min.css">
+    #foreach($cssPath in $util.getExtentalCss($viewContext))
+    <link rel="stylesheet" href="$request.contextPath/$esc.html(${cssPath.name})">
     #end
+
     <link rel="stylesheet" href="$request.contextPath/resources/css/jquery.noty.css">
     <link rel="stylesheet" href="$request.contextPath/resources/css/noty_theme_default.css">
     <!-- jQuery -->
@@ -274,53 +271,27 @@
 <!-- external javascript -->
 <script src="$request.contextPath/resources/js/bootstrap.min.js"></script>
 <script src="$request.contextPath/resources/js/jquery.noty.js"></script>
+<script src="$request.contextPath/resources/jquery-ui/jquery-ui.min.js"></script>
 
-#if($viewContext.hasFieldType('richtext'))
-##<script src="$request.contextPath/resources/js/editor/ckeditor.js"></script>
-##<script src="$request.contextPath/resources/js/editor/adapters/jquery.js"></script>
-<script src="$request.contextPath/resources/tinymce/tinymce.min.js"></script>
-<script src="$request.contextPath/resources/tinymce/jquery.tinymce.min.js"></script>
+#foreach($jsPath in $util.getExtentalJs($viewContext))
+<script src="$request.contextPath/$esc.html(${jsPath.name})"></script>
 #end
-#if($viewContext.hasFieldType('select')||$viewContext.hasFieldType('muti-select'))
-<script src="$request.contextPath/resources/js/select2.min.js"></script>
+
+#if($viewContext.getType()=='chart')
+<script src="$request.contextPath/resources/echarts/echarts.common.min.js"></script>
 #end
+
+
 <!-- library for cookie management -->
 <script src="$request.contextPath/resources/charisma/js/jquery.cookie.js"></script>
 <script src="$request.contextPath/resources/charisma/js/jquery.history.js"></script>
 <!-- application script for Charisma demo -->
 <script src="$request.contextPath/resources/charisma/js/charisma.js"></script>
-
-
-
-#if($viewContext.hasFieldType('date'))
-<script src="$request.contextPath/resources/js/bootstrap-datetimepicker.js"></script>
-<script src="$request.contextPath/resources/js/bootstrap-datetimepicker.zh-CN.js"></script>
-#end
-
 <script src="$request.contextPath/resources/js/bootstrap-table.js"></script>
 <script src="$request.contextPath/resources/js/bootstrap-table-zh-CN.min.js"></script>
 <script src="$request.contextPath/resources/js/jquery.scrollToTop.js"></script>
 <script src="$request.contextPath/resources/js/searchResult.js"></script>
 
-
-<script src="$request.contextPath/resources/jquery-ui/jquery-ui.min.js"></script>
-<script src="$request.contextPath/resources/jquery-ui/jquery-ui-autocomplete.js"></script>
-
-<!-- tinymce will use the elfinder upload so need to load the js when there is a richtext type-->
-#if($viewContext.hasFieldType('elfinder')||$viewContext.hasFieldType('richtext'))
-<!-- elFinder JS (REQUIRED) -->
-<script src="$request.contextPath/resources/elfinder/js/elfinder.min.js"></script>
-<!-- elFinder translation (OPTIONAL) -->
-<script src="$request.contextPath/resources/elfinder/js/i18n/elfinder.zh_CN.js"></script>
-#end
-
-#if($viewContext.hasFieldType('code'))
-<script src="$request.contextPath/resources/codemirror/codemirror.js"></script>
-<script src="$request.contextPath/resources/codemirror/mode/javascript/javascript.js"></script>
-#end
-#if($viewContext.getType()=='chart')
-<script src="$request.contextPath/resources/echarts/echarts.common.min.js"></script>
-#end
 
 </body>
 </html>

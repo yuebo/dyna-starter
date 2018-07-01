@@ -1,7 +1,7 @@
 #* @vtlmacrolibrary path="macro.vm" *#
 <div class="uploadify_container">
     <input type="file" id="$esc.html($id)_control" uploadify="true" target="$esc.html($id)" >
-    <input id="$esc.html($id)" name="$esc.html($item.name)" type="hidden" #mapiterator($item,$attr.key)>
+    <input id="$esc.html($id)" name="$esc.html($item.name)" type="hidden" #mapiterator($component,$item,$attr.key)>
     <ul class="files">
         #foreach($filename in $msg.split($item.attributes.value))
             <li file="$esc.html($filename)">

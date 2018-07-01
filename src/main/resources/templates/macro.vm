@@ -1,4 +1,4 @@
-#macro(mapiterator $item $key)
+#macro(mapiterator $component $item $key)
     #set($map=$item.attributes)
     #if($msg.isNull($map))
         #set($map=$util.map())
@@ -10,13 +10,10 @@
         #set($temp=$map.put("class","form-control"))
     #end
     #foreach($attribute in $map.entrySet())
-        #if($attribute.key=='value'&&$item.type!='text'&&$item.type!='hidden'&&$item.type!='date'&&$item.type!='number'&&$item.type!='email'&&$item.type!='elfinder'&&$item.type!='autocomplete'&&$item.type!='picker'&&$item.type!='code')
+##        #if($attribute.key=='value'&&$item.type!='text'&&$item.type!='hidden'&&$item.type!='date'&&$item.type!='number'&&$item.type!='email'&&$item.type!='elfinder'&&$item.type!='autocomplete'&&$item.type!='picker'&&$item.type!='code')
+        #if($attribute.key=='value'&&($component.checkedComponent||$component.multiValue))
             #if($key==$attribute.value||($attribute.value.class.name!='java.lang.String'&&$attribute.value.contains($key)))
-                #if($item.type=='select')
-
-                #elseif($item.type=='textarea')
-                #elseif($item.type=='muti-select')
-                #elseif($item.type=='checkbox'|| $item.type=='radio')
+                #if($component.checkedComponent)
                     checked="checked"
                 #else
                     value="$esc.html($attribute.value)"
