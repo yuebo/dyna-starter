@@ -1,0 +1,5 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+## the onchange will pass a data
+##<script>
+    jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").parent('div').html(data);
+##</script>

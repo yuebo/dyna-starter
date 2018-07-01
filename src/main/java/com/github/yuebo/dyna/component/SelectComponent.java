@@ -58,4 +58,14 @@ public class SelectComponent implements UIComponent {
         list.add(new OrderedResourse(21,"/static/resources/css/select2-bootstrap.css"));
         return list;
     }
+
+    @Override
+    public boolean isDynamicValue() {
+        return true;
+    }
+
+    @Override
+    public String getCustomOnChangeTemplate() {
+        return "/templates/onchange-select.vm";
+    }
 }

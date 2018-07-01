@@ -260,7 +260,7 @@ public class ViewContext implements AppConstants {
     public List<String> getComponentList(){
         List<Map<String,Object>> fields=getFields();
         List<String> paths=new ArrayList();
-        if(!fields.isEmpty()){
+        if(fields!=null&&!fields.isEmpty()){
             for(Map<String,Object> field:fields){
                 String type=MapUtils.getString(field,VIEW_FIELD_FIELDS_TYPE);
                 if(!paths.contains(type)){
