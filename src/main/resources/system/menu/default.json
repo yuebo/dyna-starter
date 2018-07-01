@@ -37,6 +37,24 @@
       ]
     },
     {
+      "label":"数据字典",
+      "icon":"glyphicon-plus",
+      "submenu":[
+        {
+          "type":"search",
+          "view":"codeTypeSearchView",
+          "label":"类型查询",
+          "icon":"glyphicon-user"
+        },
+        {
+          "type":"search",
+          "view":"codeSearchView",
+          "label":"字典查询",
+          "icon":"glyphicon-user"
+        }
+      ]
+    },
+    {
       "label": "流程管理",
       "icon": "glyphicon-plus",
       "submenu": [
