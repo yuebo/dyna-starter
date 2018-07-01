@@ -5,7 +5,7 @@
     #if($view.change)
         #set($changeType={})
         #foreach($item in $view.fields)
-            #set($ten=$changeType.put($item.name,$item.type))
+            #set($ten=$changeType.put($item.name,$util.getComponentByType($item.type)))
         #end
         function bindTheMethod() {
         #foreach($item in $view.change)
@@ -19,18 +19,21 @@
                             data: jQuery("form").serialize()
                         }).success(function (data){
                             #set($tem1=$changeType.get("$esc.javascript($item.target)"))
-                            #if($tem1=='select'||$tem1=='muti-select')
-                                jQuery("#s2id_"+"$esc.javascript($msg.escapeName($item.target))").parent('div').html(data);
-                                if(jQuery.fn.select2){
-                                    jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").select2();
-                                }
-                                unbindTheMethod();
-                                bindTheMethod();
-                                jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").trigger("change");
+                            #if($tem1.customOnChangeTemplate)
+                                #parse($tem1.customOnChangeTemplate)
                             #end
-                            #if($tem1=='dyna-label')
-                                jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").parent('div').html(data);
-                            #end
+##                            #if($tem1=='select'||$tem1=='muti-select')
+##                                jQuery("#s2id_"+"$esc.javascript($msg.escapeName($item.target))").parent('div').html(data);
+##                                if(jQuery.fn.select2){
+##                                    jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").select2();
+##                                }
+##                                unbindTheMethod();
+##                                bindTheMethod();
+##                                jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").trigger("change");
+##                            #end
+##                            #if($tem1=='dyna-label')
+##                                jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").parent('div').html(data);
+##                            #end
 
                         })
                     })

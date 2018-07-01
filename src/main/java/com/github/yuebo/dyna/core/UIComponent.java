@@ -90,4 +90,17 @@ public interface UIComponent {
     default boolean isNoLabel(){
         return false;
     }
+
+    /**
+     * 是否是动态值，动态值的会被change事件刷新组件
+     * @return
+     */
+    default boolean isDynamicValue(){
+        return false;
+    }
+
+
+    default String getCustomOnChangeTemplate(){
+        return "";
+    }
 }

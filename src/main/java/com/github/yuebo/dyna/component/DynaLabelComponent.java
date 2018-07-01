@@ -41,4 +41,14 @@ public class DynaLabelComponent implements UIComponent {
     public boolean hasOptions() {
         return true;
     }
+
+    @Override
+    public boolean isDynamicValue() {
+        return true;
+    }
+
+    @Override
+    public String getCustomOnChangeTemplate() {
+        return "/templates/onchange-dyna-label.vm";
+    }
 }

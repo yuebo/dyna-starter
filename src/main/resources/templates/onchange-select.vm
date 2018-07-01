@@ -1,0 +1,12 @@
+#* @vtlmacrolibrary path="macro.vm" *#
+## the onchange will pass a data
+##<script>
+    jQuery("#s2id_"+"$esc.javascript($msg.escapeName($item.target))").parent('div').html(data);
+    if(jQuery.fn.select2){
+        jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").select2();
+    }
+    ##重新绑定change事件
+    unbindTheMethod();
+    bindTheMethod();
+    jQuery("#"+"$esc.javascript($msg.escapeName($item.target))").trigger("change");
+##</script>

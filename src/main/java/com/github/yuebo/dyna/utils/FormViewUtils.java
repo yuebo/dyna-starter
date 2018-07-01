@@ -212,7 +212,26 @@ public class FormViewUtils implements AppConstants {
                 return uiComponent;
             }
         }
-        return null;
+        return new UIComponent() {
+            @Override
+            public String getComponentName() {
+                return "default";
+            }
+            @Override
+            public boolean isNoLabel() {
+                return true;
+            }
+
+            @Override
+            public boolean isValidationRequired() {
+                return false;
+            }
+
+            @Override
+            public String getTemplateName() {
+                return "/templates/empty.vm";
+            }
+        };
     }
 
     public List<OrderedResourse> getExtentalJs(ViewContext viewContext){
