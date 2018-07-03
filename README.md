@@ -93,6 +93,7 @@ Maven 依赖
 解决子视图问题
 #### 1.0.3-SNAPSHOT
 增加自定义组件API，用户可以通过扩展UIComponent接口自定义组件
-
+#### 1.0.4-SNAPSHOT
+增加自定义视图的支持
 ## 详细资料
 [官方教程](https://dyna.eappcat.com/2017/12/01/%E5%8A%A8%E6%80%81%E8%A1%A8%E5%8D%95%E6%A6%82%E8%BF%B0/)

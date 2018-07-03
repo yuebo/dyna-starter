@@ -16,7 +16,15 @@ $util.prepareParameter($view,$subview,$subviewConf.parameter)
                 sortOrder:'$esc.javascript($subview.defaultSort.order)',
             #end
             sidePagination: "server",
-            pagination: true
+            pagination: true,
+            onLoadSuccess: function(){
+                jQuery(".editable_row").editable({
+                            "error":function(response, newValue) {
+                                return JSON.parse(response.responseText).message;
+                            }
+                        }
+                );
+            }
         });
 //        console.log(temp);
 //        temp.refresh()`

@@ -73,6 +73,14 @@
       }
     },
     {
+      "name": "data",
+      "type": "text",
+      "label": "数据类型",
+      "attributes": {
+        "placeholder": "请输入保存的数据类型"
+      }
+    },
+    {
       "name": "attributes",
       "label": "属性",
       "type": "textarea",

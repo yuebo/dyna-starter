@@ -99,7 +99,10 @@ public interface UIComponent {
         return false;
     }
 
-
+    /**
+     * change 事件的回调处理，是一个javascript函数
+     * @return
+     */
     default String getCustomOnChangeTemplate(){
         return "";
     }

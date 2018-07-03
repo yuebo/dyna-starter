@@ -14,7 +14,6 @@
     #set($subview=$view)
     #parse("/templates/operate.vm")
 <script>
-
         #if($view.actions)
         function doSelectAction(url,checked){
             if(checked=='true'&&jQuery("input[name=_id]:checked").length==0){
@@ -52,18 +51,25 @@
                     sidePagination: "server",
                     pagination: true,
                     selectItemName:"_id",
-                    idField: "$esc.javascript($viewContext.idFieldName)"
+                    idField: "$esc.javascript($viewContext.idFieldName)",
+                    onLoadSuccess: function(){
+                        jQuery(".editable_row").editable({
+                                    "error":function(response, newValue) {
+                                        return JSON.parse(response.responseText).message;
+                                    }
+                                }
+                        );
+                    }
                 });
             });
         }
         #end
-        #if($view.dataview)
-
-        function linkFormatter(value,row,index,col){
-            var str= "$request.contextPath/spring/data/$esc.javascript($view.dataview.type)/$esc.javascript($view.dataview.name)?_id="+row['_id']+"&_col="+col;
-            return "<a href=\""+str+"\">"+value+"</a>"
-        }
-        #end
+##        #if($view.dataview)
+##        function linkFormatter(value,row,index,col){
+##            var str= "$request.contextPath/spring/data/$esc.javascript($view.dataview.type)/$esc.javascript($view.dataview.name)?_id="+row['_id']+"&_col="+col;
+##            return "<a href=\""+str+"\">"+value+"</a>"
+##        }
+##        #end
         #if($params)
         jQuery(document).ready(function(){
             var data=jQuery("#searchform").serialize();
@@ -82,7 +88,15 @@
                     sortOrder: "$esc.javascript($params.order[0])",
                 #end
                 pageSize: $esc.javascript($params.limit[0]),
-                pageNumber: (($esc.javascript($params.offset[0])+$esc.javascript($params.limit[0])))/$esc.javascript($params.limit[0])
+                pageNumber: (($esc.javascript($params.offset[0])+$esc.javascript($params.limit[0])))/$esc.javascript($params.limit[0]),
+                onLoadSuccess: function(){
+                    jQuery(".editable_row").editable({
+                            "error":function(response, newValue) {
+                                return JSON.parse(response.responseText).message;
+                            }
+                        }
+                    );
+                }
             });
         })
         #end

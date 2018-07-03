@@ -15,38 +15,34 @@
  *  * limitations under the License.
  *
  */
+package com.github.yuebo.dyna.form;
 
-package com.github.yuebo.dyna.provider.option;
-
-import com.github.yuebo.dyna.core.OptionProvider;
+import com.github.yuebo.dyna.AppConstants;
 import com.github.yuebo.dyna.core.ViewContext;
+import com.github.yuebo.dyna.utils.FormViewUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
- * Created by yuebo on 23/11/2017.
+ * User: yuebo
+ * Date: 2018/7/3
+ * Time: 21:26
  */
-@Component
-public class CurrentUserOptionProvider implements OptionProvider {
-
+@RequestMapping("/spring/data")
+public class AbstractFormViewController implements AppConstants {
+    @Autowired
+    protected FormViewUtils formViewUtils;
     @Autowired
     HttpServletRequest request;
-
-    @Override
-    public List<Map<String, String>> option(ViewContext viewContext, Map item, Map parameter) {
-        List<Map<String, String>> options = new ArrayList();
-        if (request.getSession().getAttribute("user") != null) {
-            Map<String, Object> user = (Map) request.getSession().getAttribute("user");
-            Map<String, String> option = new HashMap();
-            option.put((String) user.get("_id"), (String) user.get("name"));
-            options.add(option);
-        }
-        return options;
+    protected ViewContext init(String view, Model model){
+        ViewContext viewContext=new ViewContext(formViewUtils.getFormView(view));
+        model.addAttribute(MODEL_ATTRIBUTE_VIEW, viewContext.getViewMap());
+        model.addAttribute(MODEL_ATTRIBUTE_VIEW_CONTEXT, viewContext);
+        model.addAttribute(MODEL_ATTRIBUTE_REQUEST, request);
+        viewContext.setId(request.getParameter(VIEW_FIELD__ID));
+        return viewContext;
     }
 }

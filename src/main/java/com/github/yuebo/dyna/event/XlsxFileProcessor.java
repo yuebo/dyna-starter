@@ -169,7 +169,7 @@ public class XlsxFileProcessor extends DefaultFileProcessor {
             }
             //process validator
             boolean isValid = true;
-            List<Map<String, Object>> validators = viewContext.getValidators();
+            List<Map<String, Object>> validators = viewContext.getFieldValidators();
             for (Map<String, Object> validator : validators) {
                 if (validator != null) {
                     ValidateContext validateContext = new ValidateContext(viewContext, validator);

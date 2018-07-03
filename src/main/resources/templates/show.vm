@@ -35,6 +35,7 @@
 
     <link rel="stylesheet" href="$request.contextPath/resources/css/jquery.noty.css">
     <link rel="stylesheet" href="$request.contextPath/resources/css/noty_theme_default.css">
+    <link rel="stylesheet" href="$request.contextPath/resources/xeditable/bootstrap3-editable/css/bootstrap-editable.css">
     <!-- jQuery -->
     <script src="$request.contextPath/resources/js/jquery.min.js"></script>
 
@@ -204,7 +205,11 @@
 
             <div class="row">
                 <div class="box col-md-12">
-                    #formbody($request,$view)
+                    #if($viewContext.customView)
+                        #parse("/templates/views/${viewContext.name}.vm")
+                    #else
+                        #formbody($request,$view)
+                    #end
                 </div>
                 <!--/span-->
 
@@ -228,7 +233,6 @@
     <div id="msgDiv" class="row">
         #if($messages.info)
            <div class="alert alert-info">
-
                 #foreach($item in $messages.info.entrySet())
                     <p>$esc.html($item.value)</p>
                 #end
@@ -244,7 +248,11 @@
     </div>
 
     <div class="row">
-        #formbody($request,$view)
+        #if($viewContext.customView)
+            #parse("/templates/views/${viewContext.name}.vm")
+        #else
+            #formbody($request,$view)
+        #end
     </div>
     <a href="#top" id="toTop"></a>
 </div>
@@ -272,6 +280,7 @@
 <script src="$request.contextPath/resources/js/bootstrap.min.js"></script>
 <script src="$request.contextPath/resources/js/jquery.noty.js"></script>
 <script src="$request.contextPath/resources/jquery-ui/jquery-ui.min.js"></script>
+<script src="$request.contextPath/resources/xeditable/bootstrap3-editable/js/bootstrap-editable.js"></script>
 
 #foreach($jsPath in $util.getExtentalJs($viewContext))
 <script src="$request.contextPath/$esc.html(${jsPath.name})"></script>
