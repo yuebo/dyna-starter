@@ -34,7 +34,7 @@
 
         #if($component.checkedComponent)
             <div class="form-group #if($colSpan)col-sm-$colSpanTemp#end #if($msg.hasError($messages,$item.name))has-error#end">
-                #if($item.label)<label class="col-sm-$colLabel">$esc.html($item.label)#checkrequired($item,$view.validators)</label>#end
+                #if($item.label)<label class="col-sm-$colLabel">$esc.html($item.label)#checkrequired($item,$viewContext.fieldValidators)</label>#end
                 <div class="col-md-$colWedget">
                     #parse($component.templateName)
                 </div>
@@ -46,7 +46,7 @@
             #parse($component.templateName)
         #else
             <div class="form-group #if($colSpan)col-sm-$colSpanTemp#end #if($msg.hasError($messages,$item.name))has-error#end">
-                #if($item.label)<label for="$esc.html($id)" class="col-sm-$colLabel">$esc.html($item.label) #checkrequired($item,$view.validators)
+                #if($item.label)<label for="$esc.html($id)" class="col-sm-$colLabel">$esc.html($item.label) #checkrequired($item,$viewContext.fieldValidators)
                     #if($item.allowEmpty=='false')
                         <input type="checkbox" class="toggleBox" #if($msg.isNull($item.attributes.value))checked="checked"#end>
                         #if($msg.isNull($item.attributes.value))#set($x=$item.attributes.put("disabled","disabled")) #set($x=$item.attributes.put("value",""))#end

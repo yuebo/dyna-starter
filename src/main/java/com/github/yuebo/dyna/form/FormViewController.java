@@ -25,7 +25,6 @@ import com.github.yuebo.dyna.AppConstants;
 import com.github.yuebo.dyna.core.*;
 import com.github.yuebo.dyna.security.PermissionCheck;
 import com.github.yuebo.dyna.service.JDBCService;
-import com.github.yuebo.dyna.utils.*;
 import com.mongodb.BasicDBObject;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
@@ -703,7 +702,7 @@ public class FormViewController implements AppConstants {
             }
         }
 
-        List<Map<String, Object>> validatorList = viewContext.getValidators();
+        List<Map<String, Object>> validatorList = viewContext.getFieldValidators();
         if (validatorList == null)
             validatorList = new ArrayList();
         //add a simple validation on the field
@@ -1077,6 +1076,56 @@ public class FormViewController implements AppConstants {
         model.addAttribute(MODEL_ATTRIBUTE_REQUEST, request);
         return VIEW_OUTPUT_SHOW;
 
+    }
+    @PostMapping(value = "/search/update/{viewname}")
+    @ResponseBody
+    public void editTbaleUpdate(@PathVariable("viewname")String viewname,HttpServletRequest rerequest,HttpServletResponse response) throws IOException {
+        ViewContext viewContext=new ViewContext(formViewUtils.getFormView(viewname));
+        List<Map<String,Object>> validators = viewContext.getResultValidators();
+        String id=rerequest.getParameter("pk");
+        String name=rerequest.getParameter("name");
+        String valueParam=rerequest.getParameter("value");
+        Object value=rerequest.getParameter("value");
+
+
+        HashMap fieldValueMap=new HashMap();
+        fieldValueMap.put(name,value);
+        if (!validators.isEmpty()){
+            List<Map<String,Object>> result=springUtils.getActualResultList(viewContext);
+            for (Map<String,Object> r:result) {
+                String n = MapUtils.getString(r, VIEW_FIELD_RESULT_NAME);
+                Map converter = (Map) r.get(VIEW_FIELD_RESULT_CONVERTER);
+                String data = r.get(VIEW_FIELD_RESULT_DATA)==null?MapUtils.getString(r,VIEW_FIELD_RESULT_DATA):viewContext.getData();
+                ConvertProvider provider = springUtils.getConvertProvider(converter);
+                if (!name.startsWith($)) {
+                    value = provider.convert(valueParam, new ConvertContext(converter));
+                }
+                if (StringUtils.equals(name, n)) {
+                    boolean validated=true;
+                    for(Map<String,Object> v:validators){
+                        String vName=MapUtils.getString(v,VIEW_FIELD_VALIDATORS_FIELD);
+                        if(StringUtils.equals(n,vName)){
+                            ValidateContext validateContext = new ValidateContext(viewContext, v);
+                            ValidatorProvider validatorProvider = springUtils.getValidatorProvider(validateContext.getProvider());
+                            if(!validatorProvider.validate(validateContext,fieldValueMap)){
+                                validated=false;
+                                messageUtils.addErrorMessage(viewContext.getMessagesContext(), validateContext.getField(), validateContext.getMessage(), viewContext,MapUtils.getString(r,VIEW_FIELD_RESULT_LABEL));
+
+                            }
+                        }
+                    }
+                    if (validated){
+                        jdbcService.update(viewContext.getData(),new BasicDBObject("_id",id),new BasicDBObject(name,value));
+                    }else {
+                        response.setHeader("Content-Type","text/plain");
+                        response.sendError(400,(String)viewContext.getMessagesContext().get("error").get(0).get("msg"));
+                    }
+                    return;
+                }
+            }
+        }else {
+            jdbcService.update(viewContext.getData(),new BasicDBObject("_id",id),new BasicDBObject(name,value));
+        }
     }
 }
 

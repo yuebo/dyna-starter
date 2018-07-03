@@ -97,6 +97,7 @@ public interface AppConstants extends DbConstant {
     String VIEW_FIELD_RESULT = "result";
     //search result set converter
     String VIEW_FIELD_RESULT_CONVERTER = "converter";
+    String VIEW_FIELD_RESULT_DATA = "data";
     //search result field column name
     String VIEW_FIELD_RESULT_NAME = "name";
     String VIEW_FIELD_RESULT_LABEL = "label";
@@ -128,6 +129,7 @@ public interface AppConstants extends DbConstant {
     //define if the view validate token
     String VIEW_FIELD_TOKEN = "token";
     String VIEW_FIELD_VALIDATORS_FIELD = "field";
+    String VIEW_FIELD_VALIDATORS_TYPE = "type";
     String VIEW_FIELD_VALIDATORS_MATCH = "match";
     String VIEW_FIELD_VALIDATORS_MSG = "msg";
     String VIEW_FIELD_VALIDATORS_PROVIDER = "provider";

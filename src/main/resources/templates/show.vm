@@ -35,6 +35,7 @@
 
     <link rel="stylesheet" href="$request.contextPath/resources/css/jquery.noty.css">
     <link rel="stylesheet" href="$request.contextPath/resources/css/noty_theme_default.css">
+    <link rel="stylesheet" href="$request.contextPath/resources/xeditable/bootstrap3-editable/css/bootstrap-editable.css">
     <!-- jQuery -->
     <script src="$request.contextPath/resources/js/jquery.min.js"></script>
 
@@ -272,6 +273,7 @@
 <script src="$request.contextPath/resources/js/bootstrap.min.js"></script>
 <script src="$request.contextPath/resources/js/jquery.noty.js"></script>
 <script src="$request.contextPath/resources/jquery-ui/jquery-ui.min.js"></script>
+<script src="$request.contextPath/resources/xeditable/bootstrap3-editable/js/bootstrap-editable.js"></script>
 
 #foreach($jsPath in $util.getExtentalJs($viewContext))
 <script src="$request.contextPath/$esc.html(${jsPath.name})"></script>

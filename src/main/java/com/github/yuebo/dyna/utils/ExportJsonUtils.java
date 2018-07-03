@@ -220,6 +220,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                 BasicDBObject validatorObject=new BasicDBObject();
 
                 validatorObject.append(VIEW_FIELD_VALIDATORS_FIELD,MapUtils.getString(v,VIEW_FIELD_VALIDATORS_FIELD));
+                validatorObject.append(VIEW_FIELD_VALIDATORS_TYPE,MapUtils.getString(v,VIEW_FIELD_VALIDATORS_TYPE,"field"));
                 validatorObject.append(VIEW_FIELD_VALIDATORS_PROVIDER,MapUtils.getString(v,VIEW_FIELD_VALIDATORS_PROVIDER));
                 validatorObject.append(VIEW_FIELD_VALIDATORS_MSG,MapUtils.getString(v,VIEW_FIELD_VALIDATORS_MSG));
                 if(VIEW_FIELD_VALIDATORS_MATCH.equals(MapUtils.getString(v,VIEW_FIELD_VALIDATORS_PROVIDER))){
@@ -340,6 +341,9 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                     result.append(VIEW_FIELD_RESULT_LABEL,MapUtils.getString(r,VIEW_FIELD_RESULT_LABEL));
                     if(StringUtils.isNotEmpty(MapUtils.getString(r,VIEW_FIELD_RESULT_ATTIBUTES))){
                         result.append(VIEW_FIELD_RESULT_ATTIBUTES, JSON.parse(MapUtils.getString(r,VIEW_FIELD_RESULT_ATTIBUTES)));
+                    }
+                    if(StringUtils.isNotEmpty(MapUtils.getString(r,VIEW_FIELD_RESULT_DATA))){
+                        result.append(VIEW_FIELD_RESULT_DATA, MapUtils.getString(r,VIEW_FIELD_RESULT_DATA));
                     }
                     //get permission
                     if("true".equals(MapUtils.getString(r,"usePermission"))){

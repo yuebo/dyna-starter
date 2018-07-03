@@ -34,6 +34,7 @@ import java.util.Map;
  */
 @Component
 public class CurrentUserOptionProvider implements OptionProvider {
+
     @Autowired
     HttpServletRequest request;
 

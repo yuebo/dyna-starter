@@ -32,6 +32,21 @@
       }
     },
     {
+      "name": "type",
+      "type": "select",
+      "label": "验证器",
+      "attributes": {
+        "placeholder": "请输入验证类型"
+      },
+      "option": {
+        "values":{
+          "field":"field",
+          "result":"result"
+        }
+
+      }
+    },
+    {
       "name": "provider",
       "type": "autocomplete",
       "label": "验证器",

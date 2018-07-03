@@ -8,10 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yuebo on 29/11/2017.
@@ -29,8 +26,28 @@ public class ViewContext implements AppConstants {
         return (List) MapUtils.getObject(viewMap, VIEW_FIELD_FIELDS);
     }
 
-    public List<Map<String, Object>> getValidators() {
-        return (List) MapUtils.getObject(viewMap, VIEW_FIELD_VALIDATORS);
+    public List<Map<String, Object>> getFieldValidators() {
+        List<Map<String,Object>> validators= (List) MapUtils.getObject(viewMap, VIEW_FIELD_VALIDATORS,Collections.emptyList());
+        List<Map<String, Object>> result=new ArrayList();
+        for (Map<String,Object> validator:validators){
+            String type=MapUtils.getString(validator,"type","field");
+            if("field".equals(type)){
+                result.add(validator);
+            }
+        }
+        return result;
+    }
+
+    public List<Map<String, Object>> getResultValidators() {
+        List<Map<String,Object>> validators= (List) MapUtils.getObject(viewMap, VIEW_FIELD_VALIDATORS,Collections.emptyList());
+        List<Map<String, Object>> result=new ArrayList();
+        for (Map<String,Object> validator:validators){
+            String type=MapUtils.getString(validator,"type","field");
+            if("result".equals(type)){
+                result.add(validator);
+            }
+        }
+        return result;
     }
 
     public Map<String, Object> getProcess() {
@@ -143,7 +160,7 @@ public class ViewContext implements AppConstants {
     }
 
     public List<Map<String, Object>> getResult() {
-        return (List) MapUtils.getObject(viewMap, VIEW_FIELD_RESULT);
+        return (List) MapUtils.getObject(viewMap, VIEW_FIELD_RESULT,Collections.emptyList());
     }
 
     public void setResult(List<Map<String, Object>> result) {
