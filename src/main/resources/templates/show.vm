@@ -205,7 +205,11 @@
 
             <div class="row">
                 <div class="box col-md-12">
-                    #formbody($request,$view)
+                    #if($viewContext.customView)
+                        #parse("/templates/views/${viewContext.name}.vm")
+                    #else
+                        #formbody($request,$view)
+                    #end
                 </div>
                 <!--/span-->
 
@@ -229,7 +233,6 @@
     <div id="msgDiv" class="row">
         #if($messages.info)
            <div class="alert alert-info">
-
                 #foreach($item in $messages.info.entrySet())
                     <p>$esc.html($item.value)</p>
                 #end
@@ -245,7 +248,11 @@
     </div>
 
     <div class="row">
-        #formbody($request,$view)
+        #if($viewContext.customView)
+            #parse("/templates/views/${viewContext.name}.vm")
+        #else
+            #formbody($request,$view)
+        #end
     </div>
     <a href="#top" id="toTop"></a>
 </div>

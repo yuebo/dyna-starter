@@ -287,4 +287,8 @@ public class ViewContext implements AppConstants {
         }
         return paths;
     }
+
+    public boolean getCustomView(){
+        return StringUtils.equals("custom",MapUtils.getString(this.viewMap,VIEW_FIELD_TYPE));
+    }
 }

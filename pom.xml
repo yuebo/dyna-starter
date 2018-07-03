@@ -6,7 +6,7 @@
 
     <groupId>com.github.yuebo</groupId>
     <artifactId>boot-dyna-starter</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
