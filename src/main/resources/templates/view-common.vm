@@ -6,7 +6,6 @@
         var template='<a class="editable_row" href="#" data-name=":name" data-type=":type" data-pk=":id" data-url=":url">:value</a>'
         return template.replace(":name",col).replace(":type","text").replace(":id",id).replace(":url",rootPath+"/spring/data/search/update/$esc.javascript($view.name)").replace(":value",value);
     }
-    function bindTheMethod(){};
     #if($view.change)
         #set($changeType={})
         #foreach($item in $view.fields)
