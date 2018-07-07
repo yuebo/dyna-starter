@@ -42,12 +42,15 @@ public class DynaAutoConfiguration {
     boolean initView;
     @Value("${dyna.data.files:user.json;message.json}")
     String dataFiles;
+    @Value("${dyna.jdbc.autoUpdate:true}")
+    boolean autoUpdate;
     @ConfigurationProperties
     @Bean
     JDBCService jdbcService(@Autowired NamedParameterJdbcTemplate jdbcTemplate,@Autowired TableGenerator tableGenerator){
         MysqlJDBCService mysqlJDBCService=new MysqlJDBCService();
         mysqlJDBCService.setJdbcTemplate(jdbcTemplate);
         mysqlJDBCService.setGenerator(tableGenerator);
+        mysqlJDBCService.setAutoUpdate(autoUpdate);
         return mysqlJDBCService;
     }
     @Bean NamedParameterJdbcTemplate namedParameterJdbcTemplate(@Autowired DataSource dataSource){

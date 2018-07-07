@@ -46,7 +46,6 @@
     }
   ],
   "data": "tbl_user",
-  "permission": [],
   "type": "search",
   "actions": [
     {
@@ -96,5 +95,6 @@
   },
   "export": {
     "template": "export/default.xlsx"
-  }
+  },
+  "permission":["系统配置"]
 }

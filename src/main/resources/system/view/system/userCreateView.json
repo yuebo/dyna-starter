@@ -205,7 +205,7 @@
       }
     }
   ],
-  "permission": [],
+  "permission":["系统配置"],
   "actions": [
     {
       "submit": true,

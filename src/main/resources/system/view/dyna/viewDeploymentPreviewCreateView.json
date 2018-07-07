@@ -3,5 +3,5 @@
   "type": "create",
   "processor": "previewFormProcessor",
   "data": "",
-  "permission": []
+  "permission": ["表单配置"]
 }

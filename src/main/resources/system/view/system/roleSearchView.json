@@ -48,5 +48,5 @@
     }
   ],
   "processor": "roleSearchSearchFormProcessor",
-  "permission": []
+  "permission":["系统配置"]
 }

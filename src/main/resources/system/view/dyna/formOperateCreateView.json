@@ -241,5 +241,5 @@
     }
   ],
   "searchview": "formSearchView",
-  "permission": []
+  "permission": ["表单配置"]
 }

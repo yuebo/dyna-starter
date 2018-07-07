@@ -3,7 +3,7 @@
   "type":"search",
   "title":"数据字典定义查询",
   "data":"tbl_code_type",
-  "permission":[],
+  "permission":["系统配置"],
   "fields":[
     {
       "name":"name",

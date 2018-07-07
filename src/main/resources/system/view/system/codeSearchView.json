@@ -3,7 +3,7 @@
   "type":"search",
   "title":"数据字典",
   "data":"tbl_code",
-  "permission":[],
+  "permission":["系统配置"],
   "fields":[
     {
       "name":"code",

@@ -85,5 +85,5 @@
     }
   ],
   "searchview": "optionProviderSearchView",
-  "permission": []
+  "permission": ["表单配置"]
 }

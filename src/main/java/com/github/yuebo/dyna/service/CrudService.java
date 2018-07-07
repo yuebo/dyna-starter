@@ -23,6 +23,7 @@ import org.apache.commons.beanutils.BeanMap;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.map.LinkedMap;
 import org.apache.commons.lang.StringUtils;
+import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
@@ -93,6 +94,13 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
         if(findById(id)!=null){
             jdbcService.update(table().value(),new BasicDBObject("_id",id),update);
         }else {
+            if (id==null){
+                try {
+                    PropertyUtils.setProperty(t,"id",new ObjectId().toHexString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
             jdbcService.save(table().value(),update);
         }
     }

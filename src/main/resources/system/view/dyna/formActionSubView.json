@@ -30,10 +30,6 @@
       "parameter": {
         "formId": "formId"
       }
-    },
-    {
-      "export": true,
-      "view": "formActionSubView"
     }
   ],
   "operate": [

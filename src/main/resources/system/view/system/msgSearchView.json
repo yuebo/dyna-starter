@@ -29,7 +29,7 @@
     "name": "msgCreateView",
     "type": "create"
   },
-  "permission": [],
+  "permission":["系统配置"],
   "operate": [
     {
       "view": "msgCreateView",

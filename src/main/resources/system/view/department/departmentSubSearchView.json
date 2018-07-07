@@ -39,5 +39,6 @@
       }
     }
   ],
-  "clear": false
+  "clear": false,
+  "permission": ["系统配置"]
 }
