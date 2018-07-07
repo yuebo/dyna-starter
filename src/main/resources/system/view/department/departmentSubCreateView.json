@@ -64,5 +64,6 @@
     {
       "submit": true
     }
-  ]
+  ],
+  "permission": ["系统配置"]
 }

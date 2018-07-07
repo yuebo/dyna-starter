@@ -45,7 +45,7 @@
       "submit": true
     }
   ],
-  "permission": [],
+  "permission": ["上传管理"],
   "result": [
     {
       "name": "upload",

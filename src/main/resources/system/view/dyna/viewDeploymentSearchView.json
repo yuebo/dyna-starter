@@ -68,7 +68,7 @@
       "view": "viewDeploymentPreviewCreateView"
     }
   ],
-  "permission": [],
+  "permission": ["表单配置"],
   "defaultSort": {
     "name": "name",
     "order": "asc"

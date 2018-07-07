@@ -46,5 +46,5 @@
       "provider": "deleteOperateProvider"
     }
   ],
-  "permission": []
+  "permission": ["表单配置"]
 }

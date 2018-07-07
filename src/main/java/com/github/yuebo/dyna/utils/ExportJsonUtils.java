@@ -332,7 +332,9 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
         //for search type
         if("search".equals(type)){
             List<BasicDBObject> results=new ArrayList();
-            List<Map<String,Object>> resultList=jdbcService.findList(TBL_DYNA_FORM_RESULT,new BasicBSONObject("formId",id),sort,0,0);
+            OrderedMap sort2=new ListOrderedMap();
+            sort2.put("seq","asc");
+            List<Map<String,Object>> resultList=jdbcService.findList(TBL_DYNA_FORM_RESULT,new BasicBSONObject("formId",id),sort2,0,0);
             if(resultList!=null){
                 for (Map<String,Object> r:resultList){
                     BasicDBObject result=new BasicDBObject();

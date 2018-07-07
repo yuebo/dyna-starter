@@ -106,6 +106,21 @@
       }
     },
     {
+      "name": "seq",
+      "type": "number",
+      "label": "顺序",
+      "converter":{
+        "provider":"numberConverter",
+        "parameter":{
+          "format":"#"
+        }
+      },
+      "attributes": {
+        "placeholder": "请输入字段顺序",
+        "value":"0"
+      }
+    },
+    {
       "name": "$trigger2",
       "type": "hidden"
     },
@@ -164,5 +179,5 @@
     }
   ],
   "searchview": "formSearchView",
-  "permission": []
+  "permission": ["表单配置"]
 }

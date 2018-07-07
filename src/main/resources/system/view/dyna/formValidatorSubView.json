@@ -49,5 +49,5 @@
     "name": "createdDate",
     "order": "asc"
   },
-  "permission": []
+  "permission": ["表单配置"]
 }

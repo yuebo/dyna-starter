@@ -61,6 +61,7 @@
         var contextPath='$request.contextPath/resources/charisma/';
         var rootPath='$request.contextPath';
         var viewname='$esc.javascript($view.name)';
+        function bindTheMethod(){};
     </script>
 </head>
 

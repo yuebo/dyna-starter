@@ -68,5 +68,5 @@
     "name": "seq",
     "order": "asc"
   },
-  "permission": []
+  "permission": ["表单配置"]
 }

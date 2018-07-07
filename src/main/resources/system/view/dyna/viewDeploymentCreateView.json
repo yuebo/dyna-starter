@@ -52,5 +52,5 @@
     }
   ],
   "searchview": "viewDeploymentSearchView",
-  "permission": []
+  "permission": ["表单配置"]
 }

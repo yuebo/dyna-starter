@@ -33,5 +33,6 @@
       "submit": true,
       "style": "btn-primary"
     }
-  ]
+  ],
+  "permission":["系统配置"]
 }

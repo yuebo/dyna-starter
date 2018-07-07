@@ -12,7 +12,7 @@
       "operator": "$like"
     }
   ],
-  "permission": [],
+  "permission": ["系统配置"],
   "data": "tbl_department",
   "actions": [
     {
@@ -49,10 +49,7 @@
           "table": "tbl_user",
           "column": "name"
         }
-      },
-      "permission": [
-        "test"
-      ]
+      }
     }
   ],
   "operate": [

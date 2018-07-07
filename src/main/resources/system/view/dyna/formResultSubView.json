@@ -38,6 +38,20 @@
       "refresh": "formResultSubView"
     },
     {
+      "icon": "glyphicon-chevron-up",
+      "name": "moveUp",
+      "refresh": "formResultSubView",
+      "operate": true,
+      "provider": "moveUpFieldProvider"
+    },
+    {
+      "icon": "glyphicon-chevron-down",
+      "name": "moveDown",
+      "refresh": "formResultSubView",
+      "operate": true,
+      "provider": "moveDownFieldProvider"
+    },
+    {
       "icon": "glyphicon-trash",
       "name": "delete",
       "refresh": "formResultSubView",
@@ -46,8 +60,8 @@
     }
   ],
   "defaultSort": {
-    "name": "createdDate",
+    "name": "seq",
     "order": "asc"
   },
-  "permission": []
+  "permission": ["表单配置"]
 }
