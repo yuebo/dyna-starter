@@ -162,7 +162,7 @@ public class FormViewController implements AppConstants {
             if (map2 != null) {
                 //add for check createdBy
                 if(viewContext.isSelfOnly()&&(viewContext.getDataPermission()==null||!permissionProvider.hasPermission(viewContext.getDataPermission()))){
-                    if(!MapUtils.getString(map2,"createdBy").equals(getUserId(request))){
+                    if(!MapUtils.getString(map2,AUDIT_CREATED_BY).equals(getUserId(request))){
                         logger.debug("invalid data access");
                         return VIEW_OUTPUT_ERROR;
                     }
@@ -396,7 +396,7 @@ public class FormViewController implements AppConstants {
         }
         //add for check createdBy
         if(viewContext.isSelfOnly()&&(viewContext.getDataPermission()==null||!permissionProvider.hasPermission(viewContext.getDataPermission()))){
-            searchCondition.put("createdBy",getUserId(request));
+            searchCondition.put(AUDIT_CREATED_BY,getUserId(request));
         }
 
         boolean isValid = this.doValidation(viewContext, null, searchCondition, request);
@@ -979,7 +979,7 @@ public class FormViewController implements AppConstants {
 
         //add for check createdBy
         if(viewContext.isSelfOnly()&&(viewContext.getDataPermission()==null||!permissionProvider.hasPermission(viewContext.getDataPermission()))){
-            searchCondition.put("createdBy",getUserId(request));
+            searchCondition.put(AUDIT_CREATED_BY,getUserId(request));
         }
 
         boolean isValid = doValidation(viewContext, null, searchCondition, request);

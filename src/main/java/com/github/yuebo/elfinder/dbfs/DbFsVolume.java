@@ -44,6 +44,9 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.Callable;
 
+import static com.github.yuebo.dyna.AppConstants.AUDIT_CREATED_BY;
+import static com.github.yuebo.dyna.AppConstants.AUDIT_CREATED_TIME;
+
 /**
  * Created by yuebo on 2018/2/12.
  */
@@ -72,8 +75,8 @@ public class DbFsVolume extends LocalFsVolume {
             param.put("type","file");
             param.put("name",filename(fsi));
             param.put("parent",asFile(getParent(fsi)).get("id"));
-            param.put("createdDate",new Date());
-            param.put("createdBy",getUserId());
+            param.put(AUDIT_CREATED_TIME,new Date());
+            param.put(AUDIT_CREATED_BY,getUserId());
             param.put("size",0);
             jdbcService.save(DATA_DBFS,param);
 //            File file=File.createTempFile("empty","txt");
@@ -91,8 +94,8 @@ public class DbFsVolume extends LocalFsVolume {
             param.put("type","folder");
             param.put("name",filename(fsi));
             param.put("parent",asFile(getParent(fsi)).get("id"));
-            param.put("createdDate",new Date());
-            param.put("createdBy",getUserId());
+            param.put(AUDIT_CREATED_TIME,new Date());
+            param.put(AUDIT_CREATED_BY,getUserId());
             param.put("size",0);
             jdbcService.save(DATA_DBFS,param);
         }
@@ -154,7 +157,7 @@ public class DbFsVolume extends LocalFsVolume {
     @Override
     public long getLastModified(FsItem fsi) {
         Map<String,Object> fs=asFile(fsi);
-        return fs==null?0:((Date)fs.get("createdDate")).getTime();
+        return fs==null?0:((Date)fs.get(AUDIT_CREATED_TIME)).getTime();
     }
 
     @Override

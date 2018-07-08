@@ -211,7 +211,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
         }
         //validator
         sort.clear();
-        sort.put("createdDate","asc");
+        sort.put(AUDIT_CREATED_TIME,"asc");
         List<BasicDBObject> validators=new ArrayList();
         List<Map<String,Object>> validatorList=jdbcService.findList(TBL_DYNA_FORM_VALIDATOR,new BasicBSONObject("formId",id),sort,0,0);
 

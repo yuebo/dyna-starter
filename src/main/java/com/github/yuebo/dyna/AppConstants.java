@@ -274,5 +274,10 @@ public interface AppConstants extends DbConstant {
 //    }
 
 
+    String AUDIT_UPDATED_BY="updated_by";
+    String AUDIT_UPDATED_TIME="updated_time";
+    String AUDIT_CREATED_BY="created_by";
+    String AUDIT_CREATED_TIME="created_time";
+
 
 }

@@ -104,13 +104,13 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
     }
 
     protected void initCreateInfo(Map saveEntity, Map user) {
-        saveEntity.put("created_by", getUserId(user));
-        saveEntity.put("created_date", new Date());
+        saveEntity.put(AUDIT_CREATED_BY, getUserId(user));
+        saveEntity.put(AUDIT_CREATED_TIME, new Date());
     }
 
     protected void initUpdateInfo(Map saveEntity, Map user) {
-        saveEntity.put("updated_by", getUserId(user));
-        saveEntity.put("updated_date", new Date());
+        saveEntity.put(AUDIT_UPDATED_BY,getUserId(user));
+        saveEntity.put(AUDIT_UPDATED_TIME, new Date());
     }
 
     protected String getUserId(Map user) {
