@@ -42,7 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+import static com.github.yuebo.dyna.AppConstants.*;
 
 /**
  * User: yuebo
@@ -121,6 +121,10 @@ public class SystemInit {
                         }
                         Map result = jdbcService.find(val[0], condition);
                         if (result == null) {
+                            d.put(AUDIT_CREATED_BY, "system");
+                            d.put(AUDIT_CREATED_TIME, new Date());
+                            d.put(AUDIT_UPDATED_BY, "system");
+                            d.put(AUDIT_UPDATED_TIME, new Date());
                             jdbcService.save(val[0], d);
                         } else {
                             //no update if found

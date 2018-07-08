@@ -192,6 +192,7 @@ public class DefaultFormProcessor implements FormProcessor, AppConstants {
     protected void initCreateInfo(Map saveEntity) {
         saveEntity.put(AUDIT_CREATED_BY, getUserId(request));
         saveEntity.put(AUDIT_CREATED_TIME, new Date());
+        initUpdateInfo(saveEntity);
     }
 
     protected void initUpdateInfo(Map saveEntity) {

@@ -106,6 +106,7 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
     protected void initCreateInfo(Map saveEntity, Map user) {
         saveEntity.put(AUDIT_CREATED_BY, getUserId(user));
         saveEntity.put(AUDIT_CREATED_TIME, new Date());
+        initUpdateInfo(saveEntity,user);
     }
 
     protected void initUpdateInfo(Map saveEntity, Map user) {

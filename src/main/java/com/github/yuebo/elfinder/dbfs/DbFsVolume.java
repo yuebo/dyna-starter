@@ -44,9 +44,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.Callable;
 
-import static com.github.yuebo.dyna.AppConstants.AUDIT_CREATED_BY;
-import static com.github.yuebo.dyna.AppConstants.AUDIT_CREATED_TIME;
-import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+import static com.github.yuebo.dyna.AppConstants.*;
 
 /**
  * Created by yuebo on 2018/2/12.
@@ -78,6 +76,8 @@ public class DbFsVolume extends LocalFsVolume {
             param.put("parent",asFile(getParent(fsi)).get(DB_FIELD__ID));
             param.put(AUDIT_CREATED_TIME,new Date());
             param.put(AUDIT_CREATED_BY,getUserId());
+            param.put(AUDIT_UPDATED_TIME,new Date());
+            param.put(AUDIT_UPDATED_BY,getUserId());
             param.put("size",0);
             jdbcService.save(DATA_DBFS,param);
 //            File file=File.createTempFile("empty","txt");
@@ -97,6 +97,8 @@ public class DbFsVolume extends LocalFsVolume {
             param.put("parent",asFile(getParent(fsi)).get(DB_FIELD__ID));
             param.put(AUDIT_CREATED_TIME,new Date());
             param.put(AUDIT_CREATED_BY,getUserId());
+            param.put(AUDIT_UPDATED_TIME,new Date());
+            param.put(AUDIT_UPDATED_BY,getUserId());
             param.put("size",0);
             jdbcService.save(DATA_DBFS,param);
         }
