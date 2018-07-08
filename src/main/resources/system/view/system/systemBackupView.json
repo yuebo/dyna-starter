@@ -1,0 +1,6 @@
+{
+  "type":"hidden",
+  "name":"systemBackupView",
+  "data":"tbl_view_deployment",
+  "permission": ["系统配置"]
+}
