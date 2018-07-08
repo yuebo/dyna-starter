@@ -46,6 +46,7 @@ import java.util.concurrent.Callable;
 
 import static com.github.yuebo.dyna.AppConstants.AUDIT_CREATED_BY;
 import static com.github.yuebo.dyna.AppConstants.AUDIT_CREATED_TIME;
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
 
 /**
  * Created by yuebo on 2018/2/12.
@@ -65,7 +66,7 @@ public class DbFsVolume extends LocalFsVolume {
 
     protected String getUserId() {
         Map map = (Map) request.getSession().getAttribute("user");
-        return map == null ? null : String.valueOf(map.get("id"));
+        return map == null ? null : String.valueOf(map.get(DB_FIELD__ID));
     }
     @Override
     public void createFile(FsItem fsi) throws IOException {
@@ -74,7 +75,7 @@ public class DbFsVolume extends LocalFsVolume {
         if(!exists(fsi)){
             param.put("type","file");
             param.put("name",filename(fsi));
-            param.put("parent",asFile(getParent(fsi)).get("id"));
+            param.put("parent",asFile(getParent(fsi)).get(DB_FIELD__ID));
             param.put(AUDIT_CREATED_TIME,new Date());
             param.put(AUDIT_CREATED_BY,getUserId());
             param.put("size",0);
@@ -93,7 +94,7 @@ public class DbFsVolume extends LocalFsVolume {
         if(!exists(fsi)){
             param.put("type","folder");
             param.put("name",filename(fsi));
-            param.put("parent",asFile(getParent(fsi)).get("id"));
+            param.put("parent",asFile(getParent(fsi)).get(DB_FIELD__ID));
             param.put(AUDIT_CREATED_TIME,new Date());
             param.put(AUDIT_CREATED_BY,getUserId());
             param.put("size",0);
@@ -109,7 +110,7 @@ public class DbFsVolume extends LocalFsVolume {
         Map<String,Object> file=asFile(fsi);
         jdbcService.delete(DATA_DBFS,param);
         //deleteRemote
-        qiniuService.delete(MapUtils.getString(file,"id"));
+        qiniuService.delete(MapUtils.getString(file,DB_FIELD__ID));
     }
 
     @Override
@@ -124,7 +125,7 @@ public class DbFsVolume extends LocalFsVolume {
                 Map<String,Object> p=new HashMap<String,Object>();
                 p.put("path", MapUtils.getString(r,"path"));
                 if("file".equals(MapUtils.getString(r,"type"))){
-                    ids.add(MapUtils.getString(r,"id"));
+                    ids.add(MapUtils.getString(r,DB_FIELD__ID));
                 }
                 jdbcService.delete(DATA_DBFS,p);
             }
@@ -233,7 +234,7 @@ public class DbFsVolume extends LocalFsVolume {
         String objectId=fsi.getObjectId();
         BasicDBObject query=new BasicDBObject();
         if(objectId!=null){
-            query.append("parent",asFile(fsi).get("id"));
+            query.append("parent",asFile(fsi).get(DB_FIELD__ID));
         }else {
             query.append("parent","");
         }
@@ -257,7 +258,7 @@ public class DbFsVolume extends LocalFsVolume {
         if(isFolder(fsi)){
             return null;
         }
-        java.net.URLConnection urlConnection= new URL(qiniuApiConfig.getBaseUrl()+MapUtils.getString(asFile(fsi),"id")+"?"+System.currentTimeMillis()).openConnection();
+        java.net.URLConnection urlConnection= new URL(qiniuApiConfig.getBaseUrl()+MapUtils.getString(asFile(fsi),DB_FIELD__ID)+"?"+System.currentTimeMillis()).openConnection();
         urlConnection.setDefaultUseCaches(false);
         urlConnection.setUseCaches(false);
         return urlConnection.getInputStream();
@@ -270,9 +271,9 @@ public class DbFsVolume extends LocalFsVolume {
             @Override
             public Object call() throws Exception {
                 Map<String,Object> file=asFile(fsi);
-                String id=MapUtils.getString(file,"id");
+                String id=MapUtils.getString(file,DB_FIELD__ID);
                 qiniuService.upload(temp,id);
-                jdbcService.update(DATA_DBFS,new BasicDBObject("id",id),new BasicDBObject("size",temp.length()));
+                jdbcService.update(DATA_DBFS,new BasicDBObject(DB_FIELD__ID,id),new BasicDBObject("size",temp.length()));
                 return 0;
             }
         });
@@ -281,11 +282,11 @@ public class DbFsVolume extends LocalFsVolume {
     @Override
     public void rename(FsItem src, FsItem dst) throws IOException {
         Map<String,Object>  srcFile=asFile(src);
-        jdbcService.update(DATA_DBFS,new BasicDBObject("id",srcFile.get("id")),new BasicDBObject("path",dst.getObjectId()).append("name",filename(dst)));
+        jdbcService.update(DATA_DBFS,new BasicDBObject(DB_FIELD__ID,srcFile.get(DB_FIELD__ID)),new BasicDBObject("path",dst.getObjectId()).append("name",filename(dst)));
         if(isFolder(dst)) {
             BasicDBObject query=new BasicDBObject();
             if(src.getObjectId()!=null){
-                query.append("parent",srcFile.get("id"));
+                query.append("parent",srcFile.get(DB_FIELD__ID));
             }else {
                 query.append("parent","");
             }
@@ -293,14 +294,14 @@ public class DbFsVolume extends LocalFsVolume {
             List<Map<String,Object>>files= jdbcService.findList(DATA_DBFS,query,null,0,0);
             if(files!=null){
                 for(Map<String,Object> file:files){
-                    jdbcService.update(DATA_DBFS,new BasicDBObject("id",file.get("id")),new BasicDBObject("path", StringUtils.replaceOnce(MapUtils.getString(file,"path"),src.getObjectId(),dst.getObjectId())));
+                    jdbcService.update(DATA_DBFS,new BasicDBObject(DB_FIELD__ID,file.get(DB_FIELD__ID)),new BasicDBObject("path", StringUtils.replaceOnce(MapUtils.getString(file,"path"),src.getObjectId(),dst.getObjectId())));
                 }
             }
             //update child path
             List<Map<String,Object>> subFiles= jdbcService.queryForList("select * from "+DATA_DBFS +" where PATH like concat(:path,'/%')",new BasicDBObject("path",src.getObjectId()),null,0,0);
             if(subFiles!=null){
                 for(Map<String,Object> file:subFiles){
-                    jdbcService.update(DATA_DBFS,new BasicDBObject("id",file.get("id")),new BasicDBObject("path", StringUtils.replaceOnce(MapUtils.getString(file,"path"),src.getObjectId(),dst.getObjectId())));
+                    jdbcService.update(DATA_DBFS,new BasicDBObject(DB_FIELD__ID,file.get(DB_FIELD__ID)),new BasicDBObject("path", StringUtils.replaceOnce(MapUtils.getString(file,"path"),src.getObjectId(),dst.getObjectId())));
                 }
             }
 
@@ -313,7 +314,7 @@ public class DbFsVolume extends LocalFsVolume {
         if(isFolder(f)){
            return null;
         }
-        return qiniuApiConfig.getBaseUrl()+MapUtils.getString(asFile(f),"id")+"?view";
+        return qiniuApiConfig.getBaseUrl()+MapUtils.getString(asFile(f),DB_FIELD__ID)+"?view";
     }
 
     private DbFsItem fromFile(File file)

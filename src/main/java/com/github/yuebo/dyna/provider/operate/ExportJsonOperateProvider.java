@@ -44,7 +44,7 @@ public class ExportJsonOperateProvider extends DefaultOperateProvider implements
     @Override
     protected boolean doOperate(ViewContext viewContext, OperateContext operateContext) {
         //get the id from parameter,
-        String id=request.getParameter("id");
+        String id=request.getParameter(PARAMETER_FIELD__ID);
         if (id==null){
             throw new RuntimeException("error id found");
         }

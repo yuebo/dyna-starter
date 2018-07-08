@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+
 /**
  * Created by yuebo on 23/11/2017.
  */
@@ -44,7 +46,7 @@ public class CurrentUserOptionProvider implements OptionProvider {
         if (request.getSession().getAttribute("user") != null) {
             Map<String, Object> user = (Map) request.getSession().getAttribute("user");
             Map<String, String> option = new HashMap();
-            option.put((String) user.get("id"), (String) user.get("name"));
+            option.put((String) user.get(DB_FIELD__ID), (String) user.get("name"));
             options.add(option);
         }
         return options;

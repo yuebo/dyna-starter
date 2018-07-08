@@ -71,10 +71,10 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
         job.put("fileName", event.getFileName());
         job.put("baseName", event.getBaseName());
         job.put("upload", event.getUpload());
-        job.put("id", event.getId());
+        job.put(DB_FIELD__ID, event.getId());
         initCreateInfo(job, event.getUser());
         jdbcService.save(TBL_JOB, job);
-        return (String) job.get("id");
+        return (String) job.get(DB_FIELD__ID);
 
     }
 
@@ -93,7 +93,7 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
 
     protected void updateJob(FileUploadEvent event, String status, String jobId, long errorCount) {
         HashMap condition = new HashMap();
-        condition.put("id", jobId);
+        condition.put(DB_FIELD__ID, jobId);
         Map job = new HashMap();
         job.put("status", status);
         job.put("completeDate", new Date());
@@ -114,6 +114,6 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
     }
 
     protected String getUserId(Map user) {
-        return String.valueOf(user.get("id"));
+        return String.valueOf(user.get(DB_FIELD__ID));
     }
 }

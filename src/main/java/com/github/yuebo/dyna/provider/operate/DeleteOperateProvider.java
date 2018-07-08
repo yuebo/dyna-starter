@@ -42,7 +42,7 @@ public class DeleteOperateProvider extends DefaultOperateProvider {
     @Override
     protected boolean doOperate(ViewContext viewContext, OperateContext operateContext) {
 
-        String id=request.getParameter("id");
+        String id=request.getParameter(PARAMETER_FIELD__ID);
         String table=viewContext.getData();
 
         Map<String,Object> parameter=operateContext.getParameter();
@@ -59,7 +59,7 @@ public class DeleteOperateProvider extends DefaultOperateProvider {
         }
         if(StringUtils.isNotEmpty(table)){
             logger.debug("delete from table: {} with {}:{}",table,"id",id);
-            jdbcService.delete(table,new BasicBSONObject("id",id));
+            jdbcService.delete(table,new BasicBSONObject(DB_FIELD__ID,id));
         }
         return false;
     }

@@ -27,6 +27,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.util.*;
 
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+
 /**
  * Created by yuebo on 9/11/2017.
  */
@@ -237,8 +239,8 @@ public class MysqlJDBCService extends JDBCService {
     public void save(String collection, Map o) {
         ensureTable(collection);
         ensureColumns(collection, o);
-        if (o.get("id") == null) {
-            o.put("id", new ObjectId().toHexString());
+        if (o.get(DB_FIELD__ID) == null) {
+            o.put(DB_FIELD__ID, new ObjectId().toHexString());
         }
         StringBuffer buffer = new StringBuffer("insert into ");
         buffer.append(collection);

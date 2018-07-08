@@ -42,6 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+
 /**
  * User: yuebo
  * Date: 1/7/15
@@ -180,7 +182,7 @@ public class SystemInit {
         Map param = new HashMap();
         param.put("_data", table);
         param.put(name, value);
-        return jdbcService.findData(param).get("id");
+        return jdbcService.findData(param).get(DB_FIELD__ID);
     }
     public Date now(){
         return new Date();

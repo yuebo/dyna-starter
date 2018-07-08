@@ -30,6 +30,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+
 /**
  * Created by yuebo on 17/11/2017.
  */
@@ -62,7 +64,7 @@ public class DefaultExpressionProvider implements ExpressionProvider {
         Map param = new HashMap();
         param.put("_data", table);
         param.put(name, value);
-        return jdbcService.findData(param).get("id");
+        return jdbcService.findData(param).get(DB_FIELD__ID);
     }
     public Object find(String table,String column,Object ... filter){
 
@@ -100,7 +102,7 @@ public class DefaultExpressionProvider implements ExpressionProvider {
     }
 
     public String getUserId(){
-        return MapUtils.getString(userUtils.currentUser(),"id");
+        return MapUtils.getString(userUtils.currentUser(),DB_FIELD__ID);
     }
 
     public String getUserName(){

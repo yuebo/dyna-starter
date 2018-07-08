@@ -202,7 +202,7 @@ public class DefaultFormProcessor implements FormProcessor, AppConstants {
 
     protected String getUserId(HttpServletRequest request) {
         Map map = (Map) request.getSession().getAttribute("user");
-        return map == null ? null : String.valueOf(map.get("id"));
+        return map == null ? null : String.valueOf(map.get(DB_FIELD__ID));
     }
 
 }

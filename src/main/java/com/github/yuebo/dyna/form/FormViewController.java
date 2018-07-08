@@ -827,7 +827,7 @@ public class FormViewController implements AppConstants {
                     parameter.put("requester", getUserName(request));
                     try {
                         identityService.setAuthenticatedUserId(getUserName(request));
-                        ProcessInstance processInstance = runtimeService.startProcessInstanceById(definition.getId(), (String) saveEntity.get("id"), parameter);
+                        ProcessInstance processInstance = runtimeService.startProcessInstanceById(definition.getId(), (String) saveEntity.get(DB_FIELD__ID), parameter);
                         saveEntity.put("processId", processInstance.getId());
                         BasicDBObject test = new BasicDBObject(DB_FIELD__ID, saveEntity.get(DB_FIELD__ID));
                         jdbcService.updateData(test, saveEntity);
@@ -932,7 +932,7 @@ public class FormViewController implements AppConstants {
     }
     protected String getUserId(HttpServletRequest request) {
         Map map = (Map) request.getSession().getAttribute("user");
-        return map == null ? null : String.valueOf(map.get("id"));
+        return map == null ? null : String.valueOf(map.get(DB_FIELD__ID));
     }
 
     private Map<String, Object> parseExpress(Map<String, Object> output, Map<String, Object> context) {
@@ -1115,7 +1115,7 @@ public class FormViewController implements AppConstants {
                         }
                     }
                     if (validated){
-                        jdbcService.update(viewContext.getData(),new BasicDBObject("id",id),new BasicDBObject(name,value));
+                        jdbcService.update(viewContext.getData(),new BasicDBObject(DB_FIELD__ID,id),new BasicDBObject(name,value));
                     }else {
                         response.setHeader("Content-Type","text/plain");
                         response.sendError(400,(String)viewContext.getMessagesContext().get("error").get(0).get("msg"));
@@ -1124,7 +1124,7 @@ public class FormViewController implements AppConstants {
                 }
             }
         }else {
-            jdbcService.update(viewContext.getData(),new BasicDBObject("id",id),new BasicDBObject(name,value));
+            jdbcService.update(viewContext.getData(),new BasicDBObject(DB_FIELD__ID,id),new BasicDBObject(name,value));
         }
     }
 }
