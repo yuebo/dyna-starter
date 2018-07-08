@@ -34,7 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by yuebo on 2017/12/13.
  */
-@Controller("/spring")
+@Controller
+@RequestMapping("/spring")
 public class ActionController {
     @Autowired
     FormViewUtils formViewUtils;
