@@ -41,7 +41,7 @@ public class RoleSearchSearchFormProcessor extends DefaultSearchFormProcessor {
 //        System.out.println(filter);
         Map temp = new HashMap();
         temp.putAll(filter);
-        List<Map<String, Object>> searchResult = jdbcService.queryForListWithFilter("select * from (select r._id,r.rolename,group_concat(c.name)as permission from "+DbConstant.TBL_ROLE+" r left join "+ DbConstant.TBL_ROLE_PERMISSION+" p on r._id=p.roleId left join "+ DbConstant.TBL_PERMISSION+" c on p.permission=c._id group by r._id) temp", temp, sort, limit, skip);
+        List<Map<String, Object>> searchResult = jdbcService.queryForListWithFilter("select * from (select r.id,r.rolename,group_concat(c.name)as permission from "+DbConstant.TBL_ROLE+" r left join "+ DbConstant.TBL_ROLE_PERMISSION+" p on r.id=p.roleId left join "+ DbConstant.TBL_PERMISSION+" c on p.permission=c.id group by r.id) temp", temp, sort, limit, skip);
 
         int total = jdbcService.count(viewContext.getData(), new BasicDBObject(filter));
         result.setResult(searchResult);

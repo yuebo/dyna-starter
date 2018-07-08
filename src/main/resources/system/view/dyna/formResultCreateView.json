@@ -34,7 +34,7 @@
         }
       },
       "default": false,
-      "tip": "表示此结果中的id字段，用于picker，如果有多个id字段，返回第一个，如果全部是false，则返回_id"
+      "tip": "表示此结果中的id字段，用于picker，如果有多个id字段，返回第一个，如果全部是false，则返回id"
     },
     {
       "name": "usePermission",
@@ -58,7 +58,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_permission"
@@ -97,7 +97,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_dyna_converter"

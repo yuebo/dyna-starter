@@ -35,12 +35,12 @@ import java.util.Map;
 public class CarApproveOperateProvider extends DefaultOperateProvider {
     @Override
     protected boolean doOperate(ViewContext viewContext, OperateContext operateContext) {
-        String id=request.getParameter("_id");
+        String id=request.getParameter("id");
 
-        Map<String,Object> test= jdbcService.find("tbl_car_topup",new BasicDBObject("_id",id).append("status","待审核"));
+        Map<String,Object> test= jdbcService.find("tbl_car_topup",new BasicDBObject("id",id).append("status","待审核"));
 
         if(test!=null){
-            jdbcService.update("tbl_car_topup",new BasicDBObject("_id",id),new BasicDBObject("status",getStatus()));
+            jdbcService.update("tbl_car_topup",new BasicDBObject("id",id),new BasicDBObject("status",getStatus()));
         }
 
         return super.doOperate(viewContext, operateContext);

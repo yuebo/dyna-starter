@@ -46,7 +46,7 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
     private JDBCService jdbcService;
     public T findById(String id){
         T t=instance();
-        Map<String,Object> result=jdbcService.find(table().value(),new BasicDBObject("_id",id));
+        Map<String,Object> result=jdbcService.find(table().value(),new BasicDBObject("id",id));
         return convert(result);
     }
 
@@ -92,7 +92,7 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
             update.put(convertToColumn(key.toString()),bean.get(key));
         }
         if(findById(id)!=null){
-            jdbcService.update(table().value(),new BasicDBObject("_id",id),update);
+            jdbcService.update(table().value(),new BasicDBObject("id",id),update);
         }else {
             if (id==null){
                 try {
@@ -116,10 +116,10 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
     }
 
     public void delete(T t){
-        jdbcService.delete(table().value(),new BasicDBObject("_id",id(t)));
+        jdbcService.delete(table().value(),new BasicDBObject("id",id(t)));
     }
     public void deleteById(String id){
-        jdbcService.delete(table().value(),new BasicDBObject("_id",id));
+        jdbcService.delete(table().value(),new BasicDBObject("id",id));
     }
 
     public <DTO> List<T> findAll(DTO dto){

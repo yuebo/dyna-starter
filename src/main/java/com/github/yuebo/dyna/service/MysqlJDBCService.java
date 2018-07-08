@@ -50,7 +50,7 @@ public class MysqlJDBCService extends JDBCService {
                 try {
                     StringBuffer buffer = new StringBuffer("CREATE TABLE ");
                     buffer.append(StringUtils.upperCase(collection));
-                    buffer.append(" ( `_ID` VARCHAR (50) primary key)");
+                    buffer.append(" ( `ID` VARCHAR (50) primary key)");
                     logger.info(buffer.toString());
                     jdbcTemplate.getJdbcOperations().execute(buffer.toString());
                 } finally {
@@ -237,8 +237,8 @@ public class MysqlJDBCService extends JDBCService {
     public void save(String collection, Map o) {
         ensureTable(collection);
         ensureColumns(collection, o);
-        if (o.get("_id") == null) {
-            o.put("_id", new ObjectId().toHexString());
+        if (o.get("id") == null) {
+            o.put("id", new ObjectId().toHexString());
         }
         StringBuffer buffer = new StringBuffer("insert into ");
         buffer.append(collection);

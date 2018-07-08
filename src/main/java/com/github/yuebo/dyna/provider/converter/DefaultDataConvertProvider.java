@@ -38,7 +38,7 @@ public class DefaultDataConvertProvider extends DefaultConvertProvider {
         Map<String, Object> filter = new HashMap();
         String table = (String) parameter.get("table");
         String column = (String) parameter.get("column");
-        filter.put("_id", (String) item);
+        filter.put("id", (String) item);
         Map result = jdbcService.find(table, filter);
         if (result == null) {
             return null;
@@ -56,7 +56,7 @@ public class DefaultDataConvertProvider extends DefaultConvertProvider {
         if (result == null) {
             return null;
         }
-        return result.get("_id");
+        return result.get("id");
 
     }
 }

@@ -34,12 +34,12 @@ public class DicussInactiveOperateProvider extends DefaultOperateProvider {
 
     @Override
     protected boolean doOperate(ViewContext viewContext, OperateContext operateContext) {
-        String id=request.getParameter("_id");
+        String id=request.getParameter("id");
 
-        Map<String,Object> test= jdbcService.find("biz_discuss",new BasicDBObject("_id",id).append("status","A"));
+        Map<String,Object> test= jdbcService.find("biz_discuss",new BasicDBObject("id",id).append("status","A"));
 
         if(test!=null){
-            jdbcService.update("biz_discuss",new BasicDBObject("_id",id),new BasicDBObject("status",getStatus()));
+            jdbcService.update("biz_discuss",new BasicDBObject("id",id),new BasicDBObject("status",getStatus()));
         }
 
         return super.doOperate(viewContext, operateContext);

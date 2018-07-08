@@ -46,7 +46,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
     @Autowired
     FormViewUtils formViewUtils;
     public String exportJson(String id){
-        Map form= jdbcService.find(TBL_DYNA_FORM, new BasicBSONObject("_id",id));
+        Map form= jdbcService.find(TBL_DYNA_FORM, new BasicBSONObject("id",id));
         if(form==null){
             throw new RuntimeException("form not found");
         }
@@ -185,7 +185,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                     //get option provider
                     if(StringUtils.isNotEmpty(optionId)){
                         BasicDBObject optionObject=new BasicDBObject();
-                        Map<String,Object> option=jdbcService.find(TBL_DYNA_OPTION,new BasicBSONObject("_id",optionId));
+                        Map<String,Object> option=jdbcService.find(TBL_DYNA_OPTION,new BasicBSONObject("id",optionId));
                         if(option!=null){
 //                            optionObject.append(VIEW_OPTION_NAME,MapUtils.getString(option,VIEW_OPTION_NAME));
                             if(StringUtils.isNotEmpty(MapUtils.getString(option,VIEW_OPTION_PROVIDER))){
@@ -458,7 +458,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
     private BasicDBObject getConverter(String converterId) {
         if(StringUtils.isNotEmpty(converterId)){
             BasicDBObject converterObject=new BasicDBObject();
-            Map<String,Object> converter= jdbcService.find(TBL_DYNA_CONVERTER,new BasicBSONObject("_id",converterId));
+            Map<String,Object> converter= jdbcService.find(TBL_DYNA_CONVERTER,new BasicBSONObject("id",converterId));
 
             if(converter!=null){
 //                converterObject.append(VIEW_CONVERTER_NAME,MapUtils.getString(converter,VIEW_CONVERTER_NAME));
@@ -478,7 +478,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
         if(result!=null){
             for (Map<String,Object> r:result){
                 String pid=MapUtils.getString(r,"permissionId");
-                Map permission=jdbcService.find(DbConstant.TBL_PERMISSION, new BasicBSONObject("_id",pid));
+                Map permission=jdbcService.find(DbConstant.TBL_PERMISSION, new BasicBSONObject("id",pid));
                 if(permission!=null){
                     list.add(MapUtils.getString(permission,"name"));
                 }

@@ -242,7 +242,7 @@ public class ViewContext implements AppConstants {
                return MapUtils.getString(result,VIEW_FIELD_RESULT_NAME);
            }
        }
-       return "_id";
+       return "id";
 
 
     }

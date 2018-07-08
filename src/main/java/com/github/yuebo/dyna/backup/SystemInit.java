@@ -180,7 +180,7 @@ public class SystemInit {
         Map param = new HashMap();
         param.put("_data", table);
         param.put(name, value);
-        return jdbcService.findData(param).get("_ID");
+        return jdbcService.findData(param).get("id");
     }
     public Date now(){
         return new Date();

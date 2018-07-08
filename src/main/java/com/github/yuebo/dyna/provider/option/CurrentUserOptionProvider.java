@@ -44,7 +44,7 @@ public class CurrentUserOptionProvider implements OptionProvider {
         if (request.getSession().getAttribute("user") != null) {
             Map<String, Object> user = (Map) request.getSession().getAttribute("user");
             Map<String, String> option = new HashMap();
-            option.put((String) user.get("_id"), (String) user.get("name"));
+            option.put((String) user.get("id"), (String) user.get("name"));
             options.add(option);
         }
         return options;

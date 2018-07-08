@@ -42,7 +42,7 @@ public class CarMileageChartDatasourceProvider extends DefaultChartDatasourcePro
     @Override
     protected List<Map<String, Object>> getDataList(String data) {
 
-        String id=request.getParameter("_id");
+        String id=request.getParameter("id");
 
         if(StringUtils.isEmpty(id)){
             id=request.getParameter("carId");
@@ -51,7 +51,7 @@ public class CarMileageChartDatasourceProvider extends DefaultChartDatasourcePro
             }
         }
 
-        String sql= "select carId ,year(logDate) year,DATE_FORMAT(logDate, '%Y-%m')  yearmonth,sum(t.MILEAGE) amount,max(c.carNO) carNO from tbl_car_mileage t join tbl_car c on c._id=t.carId group by carId, year(logDate),DATE_FORMAT(logDate, '%Y-%m')";
+        String sql= "select carId ,year(logDate) year,DATE_FORMAT(logDate, '%Y-%m')  yearmonth,sum(t.MILEAGE) amount,max(c.carNO) carNO from tbl_car_mileage t join tbl_car c on c.id=t.carId group by carId, year(logDate),DATE_FORMAT(logDate, '%Y-%m')";
         ListOrderedMap map=new ListOrderedMap();
         map.put("yearmonth","asc");
         int year=Calendar.getInstance().get(Calendar.YEAR);
@@ -63,7 +63,7 @@ public class CarMileageChartDatasourceProvider extends DefaultChartDatasourcePro
                cache.put(MapUtils.getString(o,"yearmonth"),o);
            }
         }
-        Map car=jdbcService.find("tbl_car",new BasicDBObject("_id",id));
+        Map car=jdbcService.find("tbl_car",new BasicDBObject("id",id));
         String carNo=MapUtils.getString(car,"carNo");
         List actualResult=new ArrayList();
 

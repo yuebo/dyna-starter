@@ -40,7 +40,7 @@ public class PreviewFormProcessor extends DefaultFormProcessor {
         String id = (String) condition.get(DB_FIELD__ID);
         HashMap map = new HashMap();
 
-        Map view=jdbcService.find("tbl_view_deployment",new BasicDBObject("_id",id));
+        Map view=jdbcService.find("tbl_view_deployment",new BasicDBObject("id",id));
 
         if(view==null){
             viewContext.getViewMap().put("view", VIEW_OUTPUT_ERROR);

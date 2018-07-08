@@ -42,7 +42,7 @@ public class CarTopupChartDatasourceProvider extends DefaultChartDatasourceProvi
     @Override
     protected List<Map<String, Object>> getDataList(String data) {
 
-        String id=request.getParameter("_id");
+        String id=request.getParameter("id");
 
         if(StringUtils.isEmpty(id)){
             id=request.getParameter("carId");
@@ -51,7 +51,7 @@ public class CarTopupChartDatasourceProvider extends DefaultChartDatasourceProvi
             }
         }
 
-        String sql= "select carId ,year(REQUESTDATE) year,DATE_FORMAT(REQUESTDATE, '%Y-%m')  yearmonth,sum(amount) amount,max(c.carNO) carNO from tbl_car_topup t join tbl_car c on c._id=t.carId where status='审核通过' group by carId, year(REQUESTDATE),DATE_FORMAT(REQUESTDATE, '%Y-%m')";
+        String sql= "select carId ,year(REQUESTDATE) year,DATE_FORMAT(REQUESTDATE, '%Y-%m')  yearmonth,sum(amount) amount,max(c.carNO) carNO from tbl_car_topup t join tbl_car c on c.id=t.carId where status='审核通过' group by carId, year(REQUESTDATE),DATE_FORMAT(REQUESTDATE, '%Y-%m')";
         ListOrderedMap map=new ListOrderedMap();
         map.put("yearmonth","asc");
         int year=Calendar.getInstance().get(Calendar.YEAR);
@@ -63,7 +63,7 @@ public class CarTopupChartDatasourceProvider extends DefaultChartDatasourceProvi
                cache.put(MapUtils.getString(o,"yearmonth"),o);
            }
         }
-        Map car=jdbcService.find("tbl_car",new BasicDBObject("_id",id));
+        Map car=jdbcService.find("tbl_car",new BasicDBObject("id",id));
         String carNo=MapUtils.getString(car,"carNo");
         List actualResult=new ArrayList();
 

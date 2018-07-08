@@ -48,12 +48,12 @@ public class CurrentDepartmentManagerOptionProvider implements OptionProvider,Ap
         if (request.getSession().getAttribute("user") != null) {
             Map<String, Object> user = (Map) request.getSession().getAttribute("user");
             Map<String, String> option = new HashMap();
-            String id = (String) user.get("_id");
+            String id = (String) user.get("id");
             Map result = jdbcService.find("tbl_user_department", new BasicDBObject("userId", id));
             if (result != null) {
-                Map department = jdbcService.find("tbl_department", new BasicDBObject("_id", result.get("departmentId")));
+                Map department = jdbcService.find("tbl_department", new BasicDBObject("id", result.get("departmentId")));
                 if (department != null) {
-                    Map manager = jdbcService.find(TBL_USER, new BasicDBObject("_id", department.get("managerId")));
+                    Map manager = jdbcService.find(TBL_USER, new BasicDBObject("id", department.get("managerId")));
                     option.put((String) manager.get("name"), (String) manager.get("name"));
                     options.add(option);
                 }

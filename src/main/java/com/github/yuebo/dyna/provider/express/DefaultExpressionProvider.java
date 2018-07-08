@@ -62,7 +62,7 @@ public class DefaultExpressionProvider implements ExpressionProvider {
         Map param = new HashMap();
         param.put("_data", table);
         param.put(name, value);
-        return jdbcService.findData(param).get("_id");
+        return jdbcService.findData(param).get("id");
     }
     public Object find(String table,String column,Object ... filter){
 
@@ -100,7 +100,7 @@ public class DefaultExpressionProvider implements ExpressionProvider {
     }
 
     public String getUserId(){
-        return MapUtils.getString(userUtils.currentUser(),"_id");
+        return MapUtils.getString(userUtils.currentUser(),"id");
     }
 
     public String getUserName(){

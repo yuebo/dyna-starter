@@ -266,7 +266,7 @@ function elfinder_delete(){
 function doOperate(e){
     var el=$(e.target).closest("a")
     var popup=el.data("popup")||false;
-    var id=el.data("id")?"_id="+el.data("id"):"";
+    var id=el.data("id")?"id="+el.data("id"):"";
     var refresh=el.data("refresh");
     var change=el.data("change");
     var conf=el.data("confirm");
@@ -315,7 +315,7 @@ function doOperate(e){
 function doAction(e){
     var el=$(e.target).closest("a")
     var popup=el.data("popup")||false;
-    var id=el.data("id")?"_id="+el.data("id"):"";
+    var id=el.data("id")?"id="+el.data("id"):"";
     var refresh=el.data("refresh")
     if(popup){
         linkPopup(e)
@@ -348,7 +348,7 @@ function doAction(e){
 function linkPopup(e) {
     var el=$(e.target).closest("a")
     var popup=el.data("popup")||false;
-    var id=el.data("id")?"&_id="+el.data("id"):"";
+    var id=el.data("id")?"&id="+el.data("id"):"";
     var title=el.data("title")||"";
     var temp=$('<div \>');
     temp.dialog({modal: true, width: "80%", title: title, zIndex: 99999,
@@ -374,7 +374,7 @@ function linkPopup(e) {
 }
 function linkGoto(e){
     var el=$(e.target).closest("a")
-    var id=el.data("id")?"&_id="+el.data("id"):"";
+    var id=el.data("id")?"&id="+el.data("id"):"";
     var parameter=el.data("parameter")?el.data("parameter"):"";
     var url=rootPath+"/spring/data/"+el.data("type")+"/"+el.data("view")+"?"+id+parameter;
     location.href=url
@@ -383,7 +383,7 @@ function linkGoto(e){
 
 function backToView(e){
     var el=$(e.target).closest("a");
-    var id=el.data("id")?"&_id="+$("#"+el.data("id")).val():"";
+    var id=el.data("id")?"&id="+$("#"+el.data("id")).val():"";
     var url=rootPath+"/spring/data/"+el.data("type")+"/"+el.data("view")+"?"+id;
     // var newUrl=location.protocol+"//"+location.host+url;
     console.log(url)

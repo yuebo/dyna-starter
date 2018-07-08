@@ -114,10 +114,6 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
     public EscapeTool escapeTool(){
         return new EscapeTool();
     }
-    @Bean
-    public CommonsMultipartResolver multipartResolver(){
-        return new CommonsMultipartResolver();
-    }
 
     @Bean
     SessionStoreToken sessionStoreToken(){

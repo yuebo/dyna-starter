@@ -71,10 +71,10 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
         job.put("fileName", event.getFileName());
         job.put("baseName", event.getBaseName());
         job.put("upload", event.getUpload());
-        job.put("_id", event.getId());
+        job.put("id", event.getId());
         initCreateInfo(job, event.getUser());
         jdbcService.save(TBL_JOB, job);
-        return (String) job.get("_id");
+        return (String) job.get("id");
 
     }
 
@@ -93,7 +93,7 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
 
     protected void updateJob(FileUploadEvent event, String status, String jobId, long errorCount) {
         HashMap condition = new HashMap();
-        condition.put("_id", jobId);
+        condition.put("id", jobId);
         Map job = new HashMap();
         job.put("status", status);
         job.put("completeDate", new Date());
@@ -104,16 +104,16 @@ public class DefaultFileProcessor implements FileProcessor, AppConstants {
     }
 
     protected void initCreateInfo(Map saveEntity, Map user) {
-        saveEntity.put("createdBy", getUserId(user));
-        saveEntity.put("createdDate", new Date());
+        saveEntity.put("created_by", getUserId(user));
+        saveEntity.put("created_date", new Date());
     }
 
     protected void initUpdateInfo(Map saveEntity, Map user) {
-        saveEntity.put("updatedBy", getUserId(user));
-        saveEntity.put("updatedDate", new Date());
+        saveEntity.put("updated_by", getUserId(user));
+        saveEntity.put("updated_date", new Date());
     }
 
     protected String getUserId(Map user) {
-        return String.valueOf(user.get("_id"));
+        return String.valueOf(user.get("id"));
     }
 }
