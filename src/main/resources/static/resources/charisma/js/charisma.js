@@ -1,5 +1,4 @@
 //disable the ajax cache for ie
-$.ajaxSetup({cache:false});
 $(document).ready(function () {
 
 	//debugger;

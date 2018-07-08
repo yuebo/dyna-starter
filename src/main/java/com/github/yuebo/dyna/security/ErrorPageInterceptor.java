@@ -29,12 +29,15 @@ public class ErrorPageInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws
             Exception {
+        if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))){
+            return super.preHandle(request, response, handler);
+        }
         if (errorCodeList.contains(response.getStatus())) {
-            response.sendRedirect("/dyna/SystemError.html");
+            response.sendRedirect(request.getContextPath()+"/SystemError.html");
             return false;
         }
         if(response.getStatus()==401){
-            response.sendRedirect("/dyna/spring/data/create/errorView");
+            response.sendRedirect(request.getContextPath()+"/spring/data/create/errorView");
             return false;
         }
         return super.preHandle(request, response, handler);
