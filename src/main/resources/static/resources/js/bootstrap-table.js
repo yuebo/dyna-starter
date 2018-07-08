@@ -314,7 +314,7 @@
 
                 row[field] = $(this).html();
                 // save td's id and class
-                row['_' + field + '_id'] = $(this).attr('id');
+                row['_' + field + 'id'] = $(this).attr('id');
                 row['_' + field + '_class'] = $(this).attr('class');
             });
             data.push(row);

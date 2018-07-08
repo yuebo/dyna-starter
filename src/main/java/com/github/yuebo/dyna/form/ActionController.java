@@ -34,16 +34,17 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by yuebo on 2017/12/13.
  */
-@Controller("/spring")
+@Controller
+@RequestMapping("/spring")
 public class ActionController {
     @Autowired
     FormViewUtils formViewUtils;
     @RequestMapping(method = RequestMethod.POST,value = "/redirect")
-    public String redirectToCreateView(@RequestParam("view") String view,@RequestParam("_id")String [] ids, HttpServletRequest request){
+    public String redirectToCreateView(@RequestParam("view") String view,@RequestParam("id")String [] ids, HttpServletRequest request){
         ViewContext viewContext=new ViewContext(formViewUtils.getFormView(view));
         StringBuffer buffer=new StringBuffer();
         for(String id:ids){
-            buffer.append("&_id=").append(id);
+            buffer.append("&id=").append(id);
         }
         return "redirect:/spring/data/"+viewContext.getType()+"/"+viewContext.getName()+"?"+buffer.substring(1).toString();
     }

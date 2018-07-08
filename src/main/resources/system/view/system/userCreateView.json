@@ -141,7 +141,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_department"
@@ -165,7 +165,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_permission"
@@ -190,7 +190,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "rolename",
           "query": {
             "_data": "tbl_role"

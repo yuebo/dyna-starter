@@ -133,7 +133,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_permission"

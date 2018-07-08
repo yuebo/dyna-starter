@@ -32,6 +32,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+
 /**
  * Created by yuebo on 5/18/2015.
  */
@@ -168,8 +170,8 @@ public class JDBCService implements DbConstant {
     public void save(String collection, Map o) {
         ensureTable(collection);
         ensureColumns(collection, o);
-        if (o.get("_id") == null) {
-            o.put("_id", new ObjectId().toHexString());
+        if (o.get(DB_FIELD__ID) == null) {
+            o.put(DB_FIELD__ID, new ObjectId().toHexString());
         }
         StringBuffer buffer = new StringBuffer("insert into ");
         buffer.append(collection);
@@ -250,7 +252,7 @@ public class JDBCService implements DbConstant {
             //create table with _id column only
             StringBuffer buffer = new StringBuffer("create table ");
             buffer.append(collection);
-            buffer.append(" ( \"_ID\" varchar2(50) primary key)");
+            buffer.append(" ( \"ID\" varchar2(50) primary key)");
             logger.info(buffer.toString());
             jdbcTemplate.getJdbcOperations().execute(buffer.toString());
             generator.removeMetaCache();
@@ -262,7 +264,7 @@ public class JDBCService implements DbConstant {
         String table = (String) o.get("_data");
         Map temp = new HashMap<>();
         temp.putAll(o);
-        o.remove("_data");
+        temp.remove("_data");
         save(table, temp);
         o.putAll(temp);
 

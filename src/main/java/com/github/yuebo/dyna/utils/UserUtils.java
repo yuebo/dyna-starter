@@ -52,8 +52,8 @@ public class UserUtils implements AppConstants{
         Map user = (Map) request.getSession().getAttribute("user");
         if (user != null) {
             Map map = new HashMap();
-            map.put("userid", user.get("_id"));
-            List<Map<String, Object>> result = jdbcService.queryForListWithFilter("select r.*,ur.userid from "+TBL_ROLE+" r join "+TBL_USER_ROLE+" ur on r._id=ur.roleid", map, null, 0, 0);
+            map.put("userid", user.get(DB_FIELD__ID));
+            List<Map<String, Object>> result = jdbcService.queryForListWithFilter("select r.*,ur.userid from "+TBL_ROLE+" r join "+TBL_USER_ROLE+" ur on r.id=ur.roleid", map, null, 0, 0);
             for (Map role : result) {
                 arrayList.add(String.valueOf(role.get("rolename")));
             }

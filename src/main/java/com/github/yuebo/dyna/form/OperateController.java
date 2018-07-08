@@ -57,7 +57,7 @@ public class OperateController implements AppConstants {
         OperateResponse response=new OperateResponse();
         Map<String,Object> view=formViewUtils.getFormView(viewname);
         ViewContext viewContext=new ViewContext(view);
-        viewContext.setId(request.getParameter("_id"));
+        viewContext.setId(request.getParameter(PARAMETER_FIELD__ID));
 
         Map<String,Object> op=viewContext.getOperate(operate);
         if(op==null){

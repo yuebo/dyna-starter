@@ -162,7 +162,7 @@ public class FormViewController implements AppConstants {
             if (map2 != null) {
                 //add for check createdBy
                 if(viewContext.isSelfOnly()&&(viewContext.getDataPermission()==null||!permissionProvider.hasPermission(viewContext.getDataPermission()))){
-                    if(!MapUtils.getString(map2,"createdBy").equals(getUserId(request))){
+                    if(!MapUtils.getString(map2,AUDIT_CREATED_BY).equals(getUserId(request))){
                         logger.debug("invalid data access");
                         return VIEW_OUTPUT_ERROR;
                     }
@@ -396,7 +396,7 @@ public class FormViewController implements AppConstants {
         }
         //add for check createdBy
         if(viewContext.isSelfOnly()&&(viewContext.getDataPermission()==null||!permissionProvider.hasPermission(viewContext.getDataPermission()))){
-            searchCondition.put("createdBy",getUserId(request));
+            searchCondition.put(AUDIT_CREATED_BY,getUserId(request));
         }
 
         boolean isValid = this.doValidation(viewContext, null, searchCondition, request);
@@ -827,7 +827,7 @@ public class FormViewController implements AppConstants {
                     parameter.put("requester", getUserName(request));
                     try {
                         identityService.setAuthenticatedUserId(getUserName(request));
-                        ProcessInstance processInstance = runtimeService.startProcessInstanceById(definition.getId(), (String) saveEntity.get("_id"), parameter);
+                        ProcessInstance processInstance = runtimeService.startProcessInstanceById(definition.getId(), (String) saveEntity.get(DB_FIELD__ID), parameter);
                         saveEntity.put("processId", processInstance.getId());
                         BasicDBObject test = new BasicDBObject(DB_FIELD__ID, saveEntity.get(DB_FIELD__ID));
                         jdbcService.updateData(test, saveEntity);
@@ -932,7 +932,7 @@ public class FormViewController implements AppConstants {
     }
     protected String getUserId(HttpServletRequest request) {
         Map map = (Map) request.getSession().getAttribute("user");
-        return map == null ? null : String.valueOf(map.get("_id"));
+        return map == null ? null : String.valueOf(map.get(DB_FIELD__ID));
     }
 
     private Map<String, Object> parseExpress(Map<String, Object> output, Map<String, Object> context) {
@@ -979,7 +979,7 @@ public class FormViewController implements AppConstants {
 
         //add for check createdBy
         if(viewContext.isSelfOnly()&&(viewContext.getDataPermission()==null||!permissionProvider.hasPermission(viewContext.getDataPermission()))){
-            searchCondition.put("createdBy",getUserId(request));
+            searchCondition.put(AUDIT_CREATED_BY,getUserId(request));
         }
 
         boolean isValid = doValidation(viewContext, null, searchCondition, request);
@@ -1115,7 +1115,7 @@ public class FormViewController implements AppConstants {
                         }
                     }
                     if (validated){
-                        jdbcService.update(viewContext.getData(),new BasicDBObject("_id",id),new BasicDBObject(name,value));
+                        jdbcService.update(viewContext.getData(),new BasicDBObject(DB_FIELD__ID,id),new BasicDBObject(name,value));
                     }else {
                         response.setHeader("Content-Type","text/plain");
                         response.sendError(400,(String)viewContext.getMessagesContext().get("error").get(0).get("msg"));
@@ -1124,7 +1124,7 @@ public class FormViewController implements AppConstants {
                 }
             }
         }else {
-            jdbcService.update(viewContext.getData(),new BasicDBObject("_id",id),new BasicDBObject(name,value));
+            jdbcService.update(viewContext.getData(),new BasicDBObject(DB_FIELD__ID,id),new BasicDBObject(name,value));
         }
     }
 }

@@ -2,7 +2,7 @@
   "name": "userSearchView",
   "result": [
     {
-      "name": "_id",
+      "name": "id",
       "label": "",
       "attributes": {
         "data-radio": true

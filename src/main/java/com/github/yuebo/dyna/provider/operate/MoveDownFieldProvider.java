@@ -41,14 +41,14 @@ public class MoveDownFieldProvider extends DefaultOperateProvider {
     protected boolean doOperate(ViewContext viewContext, OperateContext operateContext) {
 
         String data=(String)operateContext.getParameter().getOrDefault("data",viewContext.getData());
-        Map<String,Object> currentRow=jdbcService.findData(new BasicDBObject("_data",data).append("_id",viewContext.getId()));
+        Map<String,Object> currentRow=jdbcService.findData(new BasicDBObject("_data",data).append(DB_FIELD__ID,viewContext.getId()));
         ListOrderedMap sort=new ListOrderedMap();
         sort.put("seq",getSortOrder());
         List<Map<String,Object>> nextRowList=jdbcService.findList(data,new BasicDBObject("seq",new BasicDBObject(getCondition(), MapUtils.getIntValue(currentRow,"seq"))),sort,1,0);
         if(nextRowList!=null){
             Object seq=currentRow.get("seq");
-            jdbcService.update(data,new BasicDBObject("_id",viewContext.getId()),new BasicDBObject("seq",nextRowList.get(0).get("seq")));
-            jdbcService.update(data,new BasicDBObject("_id",nextRowList.get(0).get("_id")),new BasicDBObject("seq",seq));
+            jdbcService.update(data,new BasicDBObject(DB_FIELD__ID,viewContext.getId()),new BasicDBObject("seq",nextRowList.get(0).get("seq")));
+            jdbcService.update(data,new BasicDBObject(DB_FIELD__ID,nextRowList.get(0).get(DB_FIELD__ID)),new BasicDBObject("seq",seq));
         }else {
             throw new RuntimeException("无法移动字段");
         }

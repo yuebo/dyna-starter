@@ -58,9 +58,9 @@ public class DefaultPermissionProvider implements PermissionProvider,AppConstant
 
             if (request.getAttribute("permissions") == null) {
                 //using native sql to check the permission
-                list = jdbcService.queryForList("select b.name from "+TBL_USER_PERMISSION+" a join "+TBL_PERMISSION+" b on b._ID=a.PERMISSION  where  a.USERID=:userid" +
-                        " union select b.name from "+TBL_USER+" u join "+TBL_USER_ROLE+" r on u._id=r.USERID join "+TBL_ROLE_PERMISSION+" rp on r.ROLEID=rp.ROLEID join "+TBL_PERMISSION+" b on rp.PERMISSION=b._ID where  r.USERID=:userid",
-                        new BasicDBObject("userid", user.get("_ID")), new ListOrderedMap(), 0, 0);
+                list = jdbcService.queryForList("select b.name from "+TBL_USER_PERMISSION+" a join "+TBL_PERMISSION+" b on b.id=a.PERMISSION  where  a.USERID=:userid" +
+                        " union select b.name from "+TBL_USER+" u join "+TBL_USER_ROLE+" r on u.id=r.USERID join "+TBL_ROLE_PERMISSION+" rp on r.ROLEID=rp.ROLEID join "+TBL_PERMISSION+" b on rp.PERMISSION=b.id where  r.USERID=:userid",
+                        new BasicDBObject("userid", user.get(DB_FIELD__ID)), new ListOrderedMap(), 0, 0);
                 List<String> dbPermissions = new ArrayList();
                 for (Map<String, Object> p : list) {
                     dbPermissions.add((String) p.get("name"));

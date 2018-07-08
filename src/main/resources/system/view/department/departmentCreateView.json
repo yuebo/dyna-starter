@@ -29,7 +29,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_user"
@@ -54,7 +54,7 @@
     {
       "name": "departmentSubSearchView",
       "parameter": {
-        "parentId": "_id"
+        "parentId": "id"
       }
     }
   ],

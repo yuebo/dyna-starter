@@ -23,7 +23,7 @@
             $esc.html($attribute.key)="$esc.html($attribute.value)"
         #end
     #end
-    #if($view.get('_id')&&$item.update=='false')
+    #if($view.get('id')&&$item.update=='false')
         readonly="true"
     #end
 #end

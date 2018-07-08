@@ -177,7 +177,7 @@ public class DefaultFormProcessor implements FormProcessor, AppConstants {
         formUtils.copyValuesToViewMap(viewContext, saveEntity);
         if (viewContext.getRedirect() == null) {
             StringBuffer buffer = new StringBuffer();
-            buffer.append("redirect:").append(viewContext.getName()).append("?_id=").append(id);
+            buffer.append("redirect:").append(viewContext.getName()).append("?id=").append(id);
             if (StringUtils.isNotEmpty(taskId)) {
                 buffer.append("&_taskId=").append(taskId);
             }
@@ -190,19 +190,20 @@ public class DefaultFormProcessor implements FormProcessor, AppConstants {
 
 
     protected void initCreateInfo(Map saveEntity) {
-        saveEntity.put("createdBy", getUserId(request));
-        saveEntity.put("createdDate", new Date());
+        saveEntity.put(AUDIT_CREATED_BY, getUserId(request));
+        saveEntity.put(AUDIT_CREATED_TIME, new Date());
+        initUpdateInfo(saveEntity);
     }
 
     protected void initUpdateInfo(Map saveEntity) {
-        saveEntity.put("updatedBy", getUserId(request));
-        saveEntity.put("updatedDate", new Date());
+        saveEntity.put(AUDIT_UPDATED_BY, getUserId(request));
+        saveEntity.put(AUDIT_UPDATED_TIME, new Date());
     }
 
 
     protected String getUserId(HttpServletRequest request) {
         Map map = (Map) request.getSession().getAttribute("user");
-        return map == null ? null : String.valueOf(map.get("_id"));
+        return map == null ? null : String.valueOf(map.get(DB_FIELD__ID));
     }
 
 }

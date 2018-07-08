@@ -243,7 +243,7 @@ public class XlsxFileProcessor extends DefaultFileProcessor {
             if (data != null) {
                 data.putAll(row);
                 initUpdateInfo(row,viewContext.getFileUploadEvent().getUser());
-                jdbcService.update(table, new BasicDBObject("_id", data.get("_id")), row);
+                jdbcService.update(table, new BasicDBObject(DB_FIELD__ID, data.get(DB_FIELD__ID)), row);
             } else {
                 initCreateInfo(row,viewContext.getFileUploadEvent().getUser());
                 jdbcService.save(table, row);

@@ -5,8 +5,8 @@
     #if($request.getAttribute("_session.token"))
         <input type="hidden" name="_session.token" value="$esc.html($request.getAttribute('_session.token'))">
     #end
-    #if($view.get('_id'))
-        <input type="hidden" id="_id" name="_id" value="$esc.html($view.get('_id'))">
+    #if($view.get('id'))
+        <input type="hidden" id="id" name="id" value="$esc.html($view.get('id'))">
         #if($view.get('_taskId'))
             <input type="hidden" id="_taskId" name="_taskId" value="$esc.html($view.get('_taskId'))">
         #end
@@ -46,7 +46,7 @@
     #end
 </form>
 
-    #if($view.get("_id"))
+    #if($view.get("id"))
         #if($view.subview)
           #foreach($subviewConf in $view.subview)
           <form id="searchform" role="form" accept-charset="utf-8">

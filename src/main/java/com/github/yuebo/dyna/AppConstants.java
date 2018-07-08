@@ -27,9 +27,9 @@ import java.util.Arrays;
  */
 public interface AppConstants extends DbConstant {
 
-    String DB_FIELD__ID = "_id";
+    String DB_FIELD__ID = "id";
     String PARAMETER_FIELD__TASKID = "_taskId";
-    String PARAMETER_FIELD__ID = "_id";
+    String PARAMETER_FIELD__ID = "id";
     String PARAMETER_FIELD__BACK = "_back";
     String DB_FIELD__DATA = "_data";
     String DB_FIELD_DATA = "data";
@@ -156,7 +156,7 @@ public interface AppConstants extends DbConstant {
     String VIEW_FIELD_NAME = "name";
     String VIEW_FIELD_DATA = "data";
     String VIEW_FIELD__TASKID = "_taskId";
-    String VIEW_FIELD__ID = "_id";
+    String VIEW_FIELD__ID = "id";
     String VIEW_FIELD_MENU = "menu";
     String VIEW_FIELD_PROCESSOR = "processor";
     String VIEW_FIELD_MESSAGES = "messages";
@@ -273,6 +273,11 @@ public interface AppConstants extends DbConstant {
 //        return Arrays.asList(controls).contains(type);
 //    }
 
+
+    String AUDIT_UPDATED_BY="updated_by";
+    String AUDIT_UPDATED_TIME="updated_time";
+    String AUDIT_CREATED_BY="created_by";
+    String AUDIT_CREATED_TIME="created_time";
 
 
 }

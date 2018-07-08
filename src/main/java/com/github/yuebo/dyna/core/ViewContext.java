@@ -236,15 +236,12 @@ public class ViewContext implements AppConstants {
 
     public String getIdFieldName(){
        List<Map<String,Object>> list= getResult();
-
        for(Map<String,Object> result:list){
-           if(MapUtils.getBoolean(result,"id",false)){
+           if(MapUtils.getBoolean(result,DB_FIELD__ID,false)){
                return MapUtils.getString(result,VIEW_FIELD_RESULT_NAME);
            }
        }
-       return "_id";
-
-
+       return DB_FIELD__ID;
     }
 
 

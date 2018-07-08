@@ -25,6 +25,8 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
+
 /**
  * Created by yuebo on 23/11/2017.
  */
@@ -38,7 +40,7 @@ public class DefaultDataConvertProvider extends DefaultConvertProvider {
         Map<String, Object> filter = new HashMap();
         String table = (String) parameter.get("table");
         String column = (String) parameter.get("column");
-        filter.put("_id", (String) item);
+        filter.put(DB_FIELD__ID, (String) item);
         Map result = jdbcService.find(table, filter);
         if (result == null) {
             return null;
@@ -56,7 +58,7 @@ public class DefaultDataConvertProvider extends DefaultConvertProvider {
         if (result == null) {
             return null;
         }
-        return result.get("_id");
+        return result.get(DB_FIELD__ID);
 
     }
 }

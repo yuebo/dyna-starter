@@ -127,7 +127,7 @@ public class DefaultUserEntityManager extends UserEntityManager implements AppCo
         Map param = new HashMap();
         param.put("USERNAME", userId);
         List<Group> result = new ArrayList();
-        List<Map<String, Object>> groupList = jdbcService.queryForListWithFilter("select r.*,b.USERNAME from TBL_USER_ROLE a join TBL_USER b on a.USERID=b._ID join TBL_ROLE r on r._ID = a.ROLEID", param, null, 0, 0);
+        List<Map<String, Object>> groupList = jdbcService.queryForListWithFilter("select r.*,b.USERNAME from TBL_USER_ROLE a join TBL_USER b on a.USERID=b.id join TBL_ROLE r on r.id = a.ROLEID", param, null, 0, 0);
         for (Map<String, Object> role : groupList) {
             GroupEntity groupEntity = new GroupEntity();
             groupEntity.setId((String) role.get("name"));

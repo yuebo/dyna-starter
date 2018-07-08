@@ -16,7 +16,7 @@
 <script>
         #if($view.actions)
         function doSelectAction(url,checked){
-            if(checked=='true'&&jQuery("input[name=_id]:checked").length==0){
+            if(checked=='true'&&jQuery("input[name=id]:checked").length==0){
                 alert("$esc.javascript($msg.get('select_one'))");
                 return;
             }
@@ -50,7 +50,7 @@
                     #end
                     sidePagination: "server",
                     pagination: true,
-                    selectItemName:"_id",
+                    selectItemName:"id",
                     idField: "$esc.javascript($viewContext.idFieldName)",
                     onLoadSuccess: function(){
                         jQuery(".editable_row").editable({
@@ -79,8 +79,8 @@
                 method: "get",
                 sidePagination: "server",
                 pagination: true,
-                selectItemName:"_id",
-                idField:"_id",
+                selectItemName:"id",
+                idField:"id",
                 #if($params.sort[0])
                     sortName: "$esc.javascript($params.sort[0])",
                 #end

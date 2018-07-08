@@ -53,7 +53,7 @@ public class UploadDownloadController implements AppConstants {
     @RequestMapping(value = "/download/{viewname}", method = {RequestMethod.GET})
     public void download(HttpServletRequest request, @PathVariable("viewname") String viewname, Model model, HttpServletResponse response) throws IOException {
         logger.info("start to download {}",viewname);
-        String id = request.getParameter("_id");
+        String id = request.getParameter(PARAMETER_FIELD__ID);
 
         Map result = jdbcService.find(TBL_JOB, new BasicDBObject(DB_FIELD__ID, id));
         if (request == null) {

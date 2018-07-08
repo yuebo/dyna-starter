@@ -32,6 +32,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.github.yuebo.dyna.AppConstants.DB_FIELD__ID;
 import static com.github.yuebo.dyna.DbConstant.*;
 
 /**
@@ -46,7 +47,7 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
     private JDBCService jdbcService;
     public T findById(String id){
         T t=instance();
-        Map<String,Object> result=jdbcService.find(table().value(),new BasicDBObject("_id",id));
+        Map<String,Object> result=jdbcService.find(table().value(),new BasicDBObject(DB_FIELD__ID,id));
         return convert(result);
     }
 
@@ -92,11 +93,11 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
             update.put(convertToColumn(key.toString()),bean.get(key));
         }
         if(findById(id)!=null){
-            jdbcService.update(table().value(),new BasicDBObject("_id",id),update);
+            jdbcService.update(table().value(),new BasicDBObject(DB_FIELD__ID,id),update);
         }else {
             if (id==null){
                 try {
-                    PropertyUtils.setProperty(t,"id",new ObjectId().toHexString());
+                    PropertyUtils.setProperty(t,DB_FIELD__ID,new ObjectId().toHexString());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -108,7 +109,7 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
     private String id(T t) {
         String id;
         try {
-            id = (String)PropertyUtils.getProperty(t,"id");
+            id = (String)PropertyUtils.getProperty(t,DB_FIELD__ID);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -116,10 +117,10 @@ public class CrudService<T>  implements NameMapper,CrudSupport<T>{
     }
 
     public void delete(T t){
-        jdbcService.delete(table().value(),new BasicDBObject("_id",id(t)));
+        jdbcService.delete(table().value(),new BasicDBObject(DB_FIELD__ID,id(t)));
     }
     public void deleteById(String id){
-        jdbcService.delete(table().value(),new BasicDBObject("_id",id));
+        jdbcService.delete(table().value(),new BasicDBObject(DB_FIELD__ID,id));
     }
 
     public <DTO> List<T> findAll(DTO dto){

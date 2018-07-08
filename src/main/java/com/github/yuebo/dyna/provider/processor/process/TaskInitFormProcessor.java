@@ -89,7 +89,7 @@ public class TaskInitFormProcessor extends DefaultFormProcessor {
         }
 
         HashMap map = new HashMap();
-        viewContext.getViewMap().put("view", "redirect:" + formKey + "?_taskId=" + processInformation.getTaskId() + "&_id=" + processInformation.getBusinessId());
+        viewContext.getViewMap().put("view", "redirect:" + formKey + "?_taskId=" + processInformation.getTaskId() + "&id=" + processInformation.getBusinessId());
         return map;
     }
 }

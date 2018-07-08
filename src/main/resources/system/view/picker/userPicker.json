@@ -2,7 +2,7 @@
   "name": "userPicker",
   "result": [
     {
-      "name": "_id",
+      "name": "id",
       "label": "",
       "attributes": {
         "data-checkbox": true

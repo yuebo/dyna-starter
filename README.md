@@ -101,6 +101,17 @@ Maven 依赖
 3.优化初始化数据
 4.修复导出失败的问题
 5.增加配置属性，可以禁用自动更新数据库表的模式
+6.注意此版本和之前版本的数据库不兼容,修改了一下字段以便兼容项目的jpa
+* _id->id
+* createdBy->created_by
+* createdDate->created_time
+* updatedBy->updated_by
+* updatedDate->updated_time
+#### 1.0.6-SNAPSHOT
+1. 修复上次组件无法上传文件的错误
+2. 修复查询视图在丢失登录状态的时候不重定向到首页的错误
+3. 修改id字段变为使用常量
+
 
 
 ## 详细资料

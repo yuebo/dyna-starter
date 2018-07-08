@@ -115,7 +115,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_permission"
@@ -140,7 +140,7 @@
       "option": {
         "provider": "defaultOptionProvider",
         "parameter": {
-          "key": "_id",
+          "key": "id",
           "value": "name",
           "query": {
             "_data": "tbl_permission"
@@ -378,43 +378,43 @@
     {
       "name": "formFieldSubView",
       "parameter": {
-        "formId": "_id"
+        "formId": "id"
       }
     },
     {
       "name": "formResultSubView",
       "parameter": {
-        "formId": "_id"
+        "formId": "id"
       }
     },
     {
       "name": "formValidatorSubView",
       "parameter": {
-        "formId": "_id"
+        "formId": "id"
       }
     },
     {
       "name": "formActionSubView",
       "parameter": {
-        "formId": "_id"
+        "formId": "id"
       }
     },
     {
       "name": "formOperateSubView",
       "parameter": {
-        "formId": "_id"
+        "formId": "id"
       }
     },
     {
       "name": "formSubviewSubView",
       "parameter": {
-        "formId": "_id"
+        "formId": "id"
       }
     },
     {
       "name": "formChangeSubView",
       "parameter": {
-        "formId": "_id"
+        "formId": "id"
       }
     }
   ],
