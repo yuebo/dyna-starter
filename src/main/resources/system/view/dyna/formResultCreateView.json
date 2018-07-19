@@ -24,7 +24,7 @@
       }
     },
     {
-      "name": "id",
+      "name": "isId",
       "type": "select",
       "label": "是否是id字段",
       "option": {

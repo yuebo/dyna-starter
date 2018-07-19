@@ -65,7 +65,7 @@
       "TYPE": "folder",
       "SIZE": 0,
       "PARENT": "",
-      "CREATEDDATE":"#db.now()"
+      "CREATED_TIME":"#db.now()"
     }
   ]
 }

@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>动态表单系统</title>
+    <title>$esc.html($app.applicationName)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="description" content="动态表单，通过简单配置就能生成一个系统">
     <meta name="author" content="https://dyna.eappca.com">
@@ -91,7 +91,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#"> <img alt="Charisma Logo" src="$request.contextPath/resources/charisma/img/logo20.png" class="hidden-xs"/>
-            <span>动态表单系统</span></a>
+            <span>$esc.html($app.applicationName)</span></a>
 
         <!-- user dropdown starts -->
 
@@ -234,8 +234,8 @@
     <hr>
 
     <footer class="row">
-        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; 动态表单(JDBC整合activiti) 2014 - 2017</p>
-        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: www.eappcat.com
+        <p class="col-md-9 col-sm-9 col-xs-12 copyright">$esc.html($app.copyright)</p>
+        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">$esc.html($app.author)
     </footer>
 
 </div>

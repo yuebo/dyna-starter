@@ -270,7 +270,7 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                     if(StringUtils.isNotEmpty(MapUtils.getString(a,VIEW_ACTION_VIEW))&&StringUtils.isNotEmpty(MapUtils.getString(a,VIEW_ACTION_TYPE))){
                         actionObject.append(VIEW_ACTION_VIEW,MapUtils.getString(a,VIEW_ACTION_VIEW));
                         actionObject.append(VIEW_ACTION_TYPE,MapUtils.getString(a,VIEW_ACTION_TYPE));
-                        actionObject.append(VIEW_ACTION_ID,MapUtils.getString(a,VIEW_ACTION_ID));
+                        actionObject.append(VIEW_ACTION_ID,MapUtils.getString(a,"idField"));
                     }
 
                 }else if(VIEW_ACTION_EXPORT.equals(action)){
@@ -344,6 +344,10 @@ public class ExportJsonUtils implements AppConstants,FormConstants {
                     if(StringUtils.isNotEmpty(MapUtils.getString(r,VIEW_FIELD_RESULT_ATTIBUTES))){
                         result.append(VIEW_FIELD_RESULT_ATTIBUTES, JSON.parse(MapUtils.getString(r,VIEW_FIELD_RESULT_ATTIBUTES)));
                     }
+                    if(StringUtils.isNotEmpty(MapUtils.getString(r,"isId"))){
+                        result.append("id", "true".equals(MapUtils.getString(r,"isId")));
+                    }
+
                     if(StringUtils.isNotEmpty(MapUtils.getString(r,VIEW_FIELD_RESULT_DATA))){
                         result.append(VIEW_FIELD_RESULT_DATA, MapUtils.getString(r,VIEW_FIELD_RESULT_DATA));
                     }

@@ -1,8 +1,8 @@
 package com.github.yuebo.dyna;
 
+import com.github.yuebo.dyna.config.DynaConfigProperties;
 import com.github.yuebo.dyna.core.MenuProvider;
 import com.github.yuebo.dyna.core.PermissionProvider;
-import com.github.yuebo.dyna.utils.FormUtils;
 import com.github.yuebo.dyna.utils.FormViewUtils;
 import com.github.yuebo.dyna.provider.DefaultMessageProvider;
 import com.github.yuebo.dyna.provider.SpringBeanProvider;
@@ -18,16 +18,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
 import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 
 import java.util.HashMap;
-import java.util.List;
 
 
 @Configuration
@@ -50,6 +46,9 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
     TokenInterceptor tokenInterceptor;
     @Autowired
     ErrorPageInterceptor errorPageInterceptor;
+
+    @Autowired
+    DynaConfigProperties dynaConfigProperties;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -107,6 +106,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
         attributes.put("provider",springBeanProvider);
         attributes.put("msg",defaultMessageProvider);
         attributes.put("util",formViewUtils);
+        attributes.put("app",dynaConfigProperties);
         resolver.setAttributesMap(attributes);
         return resolver;
     }

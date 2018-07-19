@@ -82,7 +82,7 @@
       }
     },
     {
-      "name": "id",
+      "name": "idField",
       "type": "text",
       "label": "id字段",
       "attributes": {
@@ -213,7 +213,7 @@
     },
     {
       "name": "action",
-      "target": "id",
+      "target": "idField",
       "value": "back",
       "type": "toggle"
     },

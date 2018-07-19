@@ -46,7 +46,7 @@
     }
   ],
   "defaultSort": {
-    "name": "createdDate",
+    "name": "CREATED_TIME",
     "order": "asc"
   },
   "permission": ["表单配置"]
