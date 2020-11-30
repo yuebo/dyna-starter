@@ -29,11 +29,11 @@
   ],
   "TBL_USER_PERMISSION#USERID#PERMISSION": [
     {
-      "USERID": "#db.id('TBL_USER','NAME','ADMIN')",
+      "USERID": "#db.id('TBL_USER','NAME','admin')",
       "PERMISSION": "#db.id('TBL_PERMISSION','NAME','系统配置')"
     },
     {
-      "USERID": "#db.id('TBL_USER','NAME','ADMIN')",
+      "USERID": "#db.id('TBL_USER','NAME','admin')",
       "PERMISSION": "#db.id('TBL_PERMISSION','NAME','表单配置')"
     }
   ],
@@ -44,7 +44,7 @@
   ],
   "TBL_USER_ROLE#USERID#ROLEID": [
     {
-      "USERID": "#db.id('TBL_USER','NAME','ADMIN')",
+      "USERID": "#db.id('TBL_USER','NAME','admin')",
       "ROLEID": "#db.id('TBL_ROLE','ROLENAME','系统管理员')"
     }
   ],
