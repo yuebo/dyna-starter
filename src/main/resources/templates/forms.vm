@@ -35,7 +35,7 @@
         #if($component.checkedComponent)
             <div class="form-group #if($colSpan)col-sm-$colSpanTemp#end #if($msg.hasError($messages,$item.name))has-error#end">
                 #if($item.label)<label class="col-sm-$colLabel">$esc.html($item.label)#checkrequired($item,$viewContext.fieldValidators)</label>#end
-                <div class="col-md-$colWedget">
+                <div class="col-sm-$colWedget">
                     #parse($component.templateName)
                 </div>
                 #if($item.tip)

@@ -35,7 +35,7 @@
     },
     {
       "name": "departmentNO",
-      "label": "部门名称",
+      "label": "部门编号",
       "attributes": {
         "data-sortable": true
       }

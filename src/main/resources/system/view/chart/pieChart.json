@@ -42,10 +42,14 @@
         "provider": "defaultChartDatasourceProvider",
         "parameter": {
           "sql": "select d.name,sex, count(1) as cnt from tbl_user u left join tbl_user_department ud on u.id=ud.userid left join tbl_department d on ud.departmentid =d.id group by d.name,sex",
-          "legendGroup": "sex",
-          "seriesGroup": "name",
+          "legendGroup": "name",
+          "seriesGroup": "sex",
           "valueField": "cnt"
         }
+      },
+      "popup": {
+        "searchview": "userSearchView",
+        "field": "sex"
       },
       "option": {
         "title": {

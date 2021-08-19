@@ -19,10 +19,7 @@
 package com.github.yuebo.dyna.provider.operate;
 
 import com.github.yuebo.dyna.AppConstants;
-import com.github.yuebo.dyna.core.OperateContext;
-import com.github.yuebo.dyna.core.OperateProvider;
-import com.github.yuebo.dyna.core.OperateResponse;
-import com.github.yuebo.dyna.core.ViewContext;
+import com.github.yuebo.dyna.core.*;
 import com.github.yuebo.dyna.utils.MessageUtils;
 import com.github.yuebo.dyna.service.JDBCService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +50,10 @@ public class DefaultOperateProvider implements OperateProvider, AppConstants {
             boolean isRedirect=doOperate(viewContext,operateContext);
             response.setRedirect(isRedirect);
             response.setMsg(message);
-        }catch (Exception e){
+        }catch (OperateException e){
+            response.setStatus(500);
+            response.setMsg(e.getMessage());
+        } catch (Exception e){
             String message=messageUtils.getMessage(viewContext,"error","operate_fail");
             response.setStatus(500);
             response.setMsg(message);

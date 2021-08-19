@@ -64,8 +64,7 @@
       "PATH": "/",
       "TYPE": "folder",
       "SIZE": 0,
-      "PARENT": "",
-      "CREATED_TIME":"#db.now()"
+      "PARENT": ""
     }
   ]
 }

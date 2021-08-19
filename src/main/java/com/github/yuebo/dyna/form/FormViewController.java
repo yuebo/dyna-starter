@@ -1077,6 +1077,22 @@ public class FormViewController implements AppConstants {
         return VIEW_OUTPUT_SHOW;
 
     }
+
+    @RequestMapping(value = "/chart/detail/{viewname}", method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String chartDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable("viewname") String viewname, Model model) throws IOException {
+        logger.debug("start show chart detail view:{}", viewname);
+        Map search = (Map) request.getSession().getAttribute(SESSION_KEY_SEARCH_PARAM);
+        if (search == null) {
+            search = new HashMap();
+            request.getSession().setAttribute(SESSION_KEY_SEARCH_PARAM, search);
+        }
+        HashMap values = new HashMap();
+        values.putAll(request.getParameterMap());
+        search.put(viewname, values);
+        return "ok";
+
+    }
     @PostMapping(value = "/search/update/{viewname}")
     @ResponseBody
     public void editTbaleUpdate(@PathVariable("viewname")String viewname,HttpServletRequest rerequest,HttpServletResponse response) throws IOException {

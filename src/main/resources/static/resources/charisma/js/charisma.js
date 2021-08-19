@@ -445,6 +445,23 @@ function popupPicker(e){
     }
 
 }
+
+function popupView(view,title){
+    if(view){
+        var temp=$('<div \>');
+        temp.dialog({modal: true, width: "80%", title: title, zIndex: 99999,
+            create: function(event,ui){
+                var html="<iframe frameborder='0' width='100%' height='600'   src='"+rootPath+"/spring/data/search/"+view+"?_popup=true&_back=true'></iframe>";
+                $(this).html(html);
+            },
+            beforeClose: function(){
+
+            }
+        })
+
+    }
+
+}
 function popupClear(e){
     var el=$(e.target);
     var inputEl=$("button[data-picker]").closest(".input-group").find("input")

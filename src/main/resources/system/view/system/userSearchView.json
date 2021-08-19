@@ -86,6 +86,21 @@
         "class": "form-control"
       },
       "operator": "$like"
+    },
+    {
+      "name": "sex",
+      "type": "radio",
+      "label": "性别",
+      "attributes": {
+        "class": "radio",
+        "value": "F"
+      },
+      "option": {
+        "values": {
+          "M": "男",
+          "F": "女"
+        }
+      }
     }
   ],
   "defaultValue": {

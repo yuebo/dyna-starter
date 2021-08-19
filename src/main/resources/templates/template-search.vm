@@ -87,8 +87,10 @@
                 #if($params.order[0])
                     sortOrder: "$esc.javascript($params.order[0])",
                 #end
-                pageSize: $esc.javascript($params.limit[0]),
-                pageNumber: (($esc.javascript($params.offset[0])+$esc.javascript($params.limit[0])))/$esc.javascript($params.limit[0]),
+                #if($params.limit[0])
+                    pageSize: $esc.javascript($params.limit[0]),
+                    pageNumber: (($esc.javascript($params.offset[0])+$esc.javascript($params.limit[0])))/$esc.javascript($params.limit[0]),
+                #end
                 onLoadSuccess: function(){
                     jQuery(".editable_row").editable({
                             "error":function(response, newValue) {

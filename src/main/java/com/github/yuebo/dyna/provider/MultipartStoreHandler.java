@@ -35,7 +35,7 @@ import java.util.Date;
  */
 @Component
 public class MultipartStoreHandler {
-    @Value("${upload.defaultPath}")
+    @Value("${upload.defaultPath:/tmp}")
     private String defaultPath;
 
     public void setDefaultPath(String defaultPath) {

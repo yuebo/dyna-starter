@@ -24,6 +24,7 @@ import com.github.yuebo.dyna.utils.ClasspathViewLoader;
 import com.github.yuebo.dyna.utils.SpringUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
+import org.apache.commons.collections.map.CaseInsensitiveMap;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -115,17 +116,20 @@ public class SystemInit {
                             }
                         }
                         d.putAll(temp);
+                        CaseInsensitiveMap dataToSave = new CaseInsensitiveMap();
+                        dataToSave.putAll(d);
+
                         BasicDBObject condition = new BasicDBObject();
                         for (int j = 1; j < val.length; j++) {
                             condition.put(val[j], d.get(val[j]));
                         }
                         Map result = jdbcService.find(val[0], condition);
                         if (result == null) {
-                            d.put(AUDIT_CREATED_BY, "system");
-                            d.put(AUDIT_CREATED_TIME, new Date());
-                            d.put(AUDIT_UPDATED_BY, "system");
-                            d.put(AUDIT_UPDATED_TIME, new Date());
-                            jdbcService.save(val[0], d);
+                            dataToSave.put(AUDIT_CREATED_BY, "system");
+                            dataToSave.put(AUDIT_CREATED_TIME, new Date());
+                            dataToSave.put(AUDIT_UPDATED_BY, "system");
+                            dataToSave.put(AUDIT_UPDATED_TIME, new Date());
+                            jdbcService.save(val[0], dataToSave);
                         } else {
                             //no update if found
                         }
