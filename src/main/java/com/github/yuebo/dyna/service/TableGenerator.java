@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +33,6 @@ import java.util.Map;
 /**
  * Created by yuebo on 27/11/2017.
  */
-@Component
 public class TableGenerator {
     @Autowired
     protected NamedParameterJdbcTemplate jdbcTemplate;

@@ -42,7 +42,7 @@ public class MysqlTableGenerator extends TableGenerator {
             Map schema=jdbcTemplate.queryForMap("SELECT DATABASE() AS DB", Collections.EMPTY_MAP);
             this.schema=(String)schema.getOrDefault("DB","dyna");
         }
-        return StringUtils.upperCase(this.schema);
+        return this.schema;
     }
 
     @Cacheable(value = "meta", key = "#table")
@@ -53,8 +53,8 @@ public class MysqlTableGenerator extends TableGenerator {
         String sql = "select * from information_schema.tables where TABLE_NAME=:table and TABLE_SCHEMA=:schema";
         List list = jdbcTemplate.queryForList(sql, new HashMap<String, Object>() {
             {
-                put("table", StringUtils.upperCase(table));
-                put("schema", StringUtils.upperCase(getSchema()));
+                put("table", table);
+                put("schema",getSchema());
             }
         });
 
@@ -65,8 +65,8 @@ public class MysqlTableGenerator extends TableGenerator {
     public List<String> checkColumns(String table) {
         String sql = "select * from information_schema.columns where TABLE_NAME=:table and TABLE_SCHEMA =:schema order by COLUMN_NAME";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, new HashMap<String, Object>() {{
-            put("table", StringUtils.upperCase(table));
-            put("schema", StringUtils.upperCase(getSchema()));
+            put("table", table);
+            put("schema", getSchema());
         }});
 
         List<String> dbColumns = new ArrayList<>();
@@ -80,8 +80,8 @@ public class MysqlTableGenerator extends TableGenerator {
     public Map<String,Integer> checkColumnsLength(String table) {
         String sql = "select * from information_schema.columns where TABLE_NAME=:table and TABLE_SCHEMA =:schema order by COLUMN_NAME";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, new HashMap<String, Object>() {{
-            put("table", StringUtils.upperCase(table));
-            put("schema", StringUtils.upperCase(getSchema()));
+            put("table", table);
+            put("schema", getSchema());
         }});
 
         Map<String,Integer> columns=new LinkedCaseInsensitiveMap();

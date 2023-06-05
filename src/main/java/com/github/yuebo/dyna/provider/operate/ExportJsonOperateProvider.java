@@ -25,8 +25,8 @@ import com.github.yuebo.dyna.core.ViewContext;
 import com.github.yuebo.dyna.utils.ExportJsonUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,10 +37,10 @@ import java.util.Map;
  * Created by yuebo on 2017/12/6.
  */
 @Component
+@Slf4j
 public class ExportJsonOperateProvider extends DefaultOperateProvider implements AppConstants,FormConstants {
     @Autowired
     ExportJsonUtils exportJsonUtils;
-    private static Logger logger=Logger.getLogger(ExportJsonOperateProvider.class);
     @Override
     protected boolean doOperate(ViewContext viewContext, OperateContext operateContext) {
         //get the id from parameter,

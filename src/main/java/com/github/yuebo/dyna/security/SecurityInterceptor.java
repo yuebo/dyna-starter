@@ -4,6 +4,8 @@ import com.github.yuebo.dyna.core.PermissionProvider;
 import com.github.yuebo.dyna.utils.FormViewUtils;
 import com.github.yuebo.dyna.service.JDBCService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -18,9 +20,15 @@ import java.util.Map;
  * Date: 12/30/14
  * Time: 10:05 AM
  */
+
+@Component
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
+
+    @Autowired
     protected PermissionProvider permissionProvider;
+    @Autowired
     protected JDBCService jdbcService;
+    @Autowired
     protected FormViewUtils formViewUtils;
 
     public PermissionProvider getPermissionProvider() {

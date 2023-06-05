@@ -19,13 +19,15 @@
 package com.github.yuebo.dyna.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Vector;
 
+@Component
 public class SessionStoreToken {
 
-    private int tokenSize;
+    private int tokenSize=10;
 
 
     @Autowired

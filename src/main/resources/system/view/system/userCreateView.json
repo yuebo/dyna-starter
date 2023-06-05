@@ -58,11 +58,10 @@
     },
     {
       "name": "sex",
-      "type": "radio",
+      "type": "select",
       "label": "性别",
       "attributes": {
-        "class": "radio",
-        "value": "F"
+        "value": ""
       },
       "option": {
         "values": {

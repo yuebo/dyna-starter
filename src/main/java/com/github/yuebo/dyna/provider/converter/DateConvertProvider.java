@@ -19,8 +19,8 @@
 package com.github.yuebo.dyna.provider.converter;
 
 import com.github.yuebo.dyna.core.NullDate;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -34,8 +34,8 @@ import java.util.Map;
  * Time: 9:52 AM
  */
 @Component("dateConverter")
+@Slf4j
 public class DateConvertProvider extends DefaultConvertProvider {
-    private Logger logger = Logger.getLogger(getClass());
     private final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Override
@@ -54,7 +54,7 @@ public class DateConvertProvider extends DefaultConvertProvider {
             dateFormat.setLenient(false);
             val = dateFormat.parse((String) item);
         } catch (ParseException e) {
-            logger.error("date convert error", e);
+            log.error("date convert error", e);
         }
 
         return val;

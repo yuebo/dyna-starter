@@ -51,7 +51,7 @@ public class MysqlJDBCService extends JDBCService {
             if (!generator.checkTable(collection)) {
                 try {
                     StringBuffer buffer = new StringBuffer("CREATE TABLE ");
-                    buffer.append(StringUtils.upperCase(collection));
+                    buffer.append(collection);
                     buffer.append(" ( `ID` VARCHAR (50) primary key)");
                     logger.info(buffer.toString());
                     jdbcTemplate.getJdbcOperations().execute(buffer.toString());
@@ -69,10 +69,10 @@ public class MysqlJDBCService extends JDBCService {
             try {
                 if(fields.containsKey(field)){
                     if(fields.get(field)<length){
-                        jdbcTemplate.getJdbcOperations().execute("alter table "+StringUtils.upperCase(collection)+" modify column "+getColumnName(field)+" varchar("+length+")");
+                        jdbcTemplate.getJdbcOperations().execute("alter table "+ collection +" modify column "+getColumnName(field)+" varchar("+length+")");
                     }
                 }else {
-                    jdbcTemplate.getJdbcOperations().execute("alter table "+StringUtils.upperCase(collection)+" add column "+getColumnName(field)+" varchar("+length+")");
+                    jdbcTemplate.getJdbcOperations().execute("alter table "+ collection +" add column "+getColumnName(field)+" varchar("+length+")");
                 }
             }finally {
                 generator.removeMetaCache();
@@ -86,7 +86,7 @@ public class MysqlJDBCService extends JDBCService {
                 if (!generator.checkColumns(collection).contains(StringUtils.upperCase(key))) {
                     try {
                         StringBuffer buffer = new StringBuffer("ALTER TABLE ");
-                        buffer.append(StringUtils.upperCase(collection));
+                        buffer.append(collection);
                         buffer.append(" ADD ");
                         buffer.append(getColumnName(StringUtils.upperCase(key)));
                         buffer.append(" ");

@@ -24,8 +24,8 @@ import com.github.yuebo.dyna.core.SearchResult;
 import com.github.yuebo.dyna.core.ViewContext;
 import com.github.yuebo.dyna.service.JDBCService;
 import com.mongodb.BasicDBObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.OrderedMap;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,8 +39,8 @@ import java.util.Map;
  * Time: 5:03 PM
  */
 @Component
+@Slf4j
 public class DefaultSearchFormProcessor implements SearchFormProcessor, AppConstants {
-    private static Logger logger = Logger.getLogger(DefaultSearchFormProcessor.class);
     @Autowired
     protected JDBCService jdbcService;
 

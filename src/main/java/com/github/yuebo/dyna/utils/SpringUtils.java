@@ -20,9 +20,9 @@ package com.github.yuebo.dyna.utils;
 
 import com.github.yuebo.dyna.AppConstants;
 import com.github.yuebo.dyna.core.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -39,8 +39,8 @@ import java.util.*;
  * Created by yuebo on 5/18/2015.
  */
 @Component
+@Slf4j
 public class SpringUtils implements ApplicationContextAware, AppConstants {
-    private static Logger logger = Logger.getLogger(SpringUtils.class);
     private ApplicationContext applicationContext;
 
     @Override
@@ -153,7 +153,7 @@ public class SpringUtils implements ApplicationContextAware, AppConstants {
             Expression expression = parser.parseExpression(exp);
             return expression.getValue(context);
         } catch (Exception e) {
-            logger.error("error parse exp" + exp);
+            log.error("error parse exp" + exp);
             return null;
         }
 

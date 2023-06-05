@@ -1,5 +1,5 @@
 {
-  "TBL_USER#NAME": [
+  "tbl_user#NAME": [
     {
       "ADDRESS": "317728991@qq.com",
       "AUTHENTICATE": "I",
@@ -19,7 +19,7 @@
       "SEX": "F"
     }
   ],
-  "TBL_PERMISSION#NAME": [
+  "tbl_permission#NAME": [
     {
       "NAME": "系统配置"
     },
@@ -27,38 +27,38 @@
       "NAME": "表单配置"
     }
   ],
-  "TBL_USER_PERMISSION#USERID#PERMISSION": [
+  "tbl_user_permission#USERID#PERMISSION": [
     {
-      "USERID": "#db.id('TBL_USER','NAME','ADMIN')",
-      "PERMISSION": "#db.id('TBL_PERMISSION','NAME','系统配置')"
+      "USERID": "#db.id('tbl_user','NAME','admin')",
+      "PERMISSION": "#db.id('tbl_permission','NAME','系统配置')"
     },
     {
-      "USERID": "#db.id('TBL_USER','NAME','ADMIN')",
-      "PERMISSION": "#db.id('TBL_PERMISSION','NAME','表单配置')"
+      "USERID": "#db.id('tbl_user','NAME','admin')",
+      "PERMISSION": "#db.id('tbl_permission','NAME','表单配置')"
     }
   ],
-  "TBL_ROLE#ROLENAME": [
+  "tbl_role#ROLENAME": [
     {
       "ROLENAME": "系统管理员"
     }
   ],
-  "TBL_USER_ROLE#USERID#ROLEID": [
+  "tbl_user_role#USERID#ROLEID": [
     {
-      "USERID": "#db.id('TBL_USER','NAME','ADMIN')",
-      "ROLEID": "#db.id('TBL_ROLE','ROLENAME','系统管理员')"
+      "USERID": "#db.id('tbl_user','NAME','admin')",
+      "ROLEID": "#db.id('tbl_role','ROLENAME','系统管理员')"
     }
   ],
-  "TBL_ROLE_PERMISSION#ROLEID#PERMISSION": [
+  "tbl_role_permission#ROLEID#PERMISSION": [
     {
-      "ROLEID": "#db.id('TBL_ROLE','ROLENAME','系统管理员')",
-      "PERMISSION": "#db.id('TBL_PERMISSION','NAME','系统配置')"
+      "ROLEID": "#db.id('tbl_role','ROLENAME','系统管理员')",
+      "PERMISSION": "#db.id('tbl_permission','NAME','系统配置')"
     },
     {
-      "ROLEID": "#db.id('TBL_ROLE','ROLENAME','系统管理员')",
-      "PERMISSION": "#db.id('TBL_PERMISSION','NAME','表单配置')"
+      "ROLEID": "#db.id('tbl_role','ROLENAME','系统管理员')",
+      "PERMISSION": "#db.id('tbl_permission','NAME','表单配置')"
     }
   ],
-  "TBL_DBFS#PATH": [
+  "tbl_dbfs#PATH": [
     {
       "NAME": "",
       "PATH": "/",

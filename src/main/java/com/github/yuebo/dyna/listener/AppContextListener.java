@@ -18,7 +18,8 @@
 
 package com.github.yuebo.dyna.listener;
 
-import org.apache.log4j.Logger;
+
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -26,8 +27,8 @@ import javax.servlet.ServletContextListener;
 /**
  * Created by yuebo on 27/11/2017.
  */
+@Slf4j
 public class AppContextListener implements ServletContextListener {
-    private Logger logger = Logger.getLogger(AppContextListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {

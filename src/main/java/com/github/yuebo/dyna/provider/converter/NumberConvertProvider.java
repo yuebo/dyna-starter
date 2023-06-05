@@ -19,9 +19,9 @@
 package com.github.yuebo.dyna.provider.converter;
 
 import com.github.yuebo.dyna.core.NullNumber;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
@@ -33,8 +33,8 @@ import java.util.Map;
  * Time: 9:52 AM
  */
 @Component("numberConverter")
+@Slf4j
 public class NumberConvertProvider extends DefaultConvertProvider {
-    private Logger logger = Logger.getLogger(getClass());
     private String NUMBER_FORMAT="0.00";
 
     @Override
@@ -54,7 +54,7 @@ public class NumberConvertProvider extends DefaultConvertProvider {
             DecimalFormat decimalFormat=new DecimalFormat(format);
             val = decimalFormat.parse((String) item);
         } catch (Exception e) {
-            logger.error("date convert error", e);
+            log.error("date convert error", e);
         }
 
         return val;

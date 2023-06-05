@@ -21,6 +21,8 @@ package com.github.yuebo.dyna.security;
 import com.github.yuebo.dyna.AppConstants;
 import com.github.yuebo.dyna.utils.FormViewUtils;
 import org.apache.commons.collections.MapUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -30,9 +32,11 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Map;
 
+@Component
 public class TokenInterceptor extends HandlerInterceptorAdapter implements AppConstants {
-
+    @Autowired
     protected FormViewUtils formViewUtils;
+    @Autowired
     private SessionStoreToken sessionStoreToken;
 
     public FormViewUtils getFormViewUtils() {

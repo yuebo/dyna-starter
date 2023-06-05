@@ -1,5 +1,5 @@
 {
-  "TBL_MESSAGE#KEY": [
+  "tbl_message#KEY": [
     {
       "KEY": "unique",
       "VALUE": "{0}不是唯一的"

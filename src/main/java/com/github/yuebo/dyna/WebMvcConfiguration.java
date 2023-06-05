@@ -2,15 +2,12 @@ package com.github.yuebo.dyna;
 
 import com.github.yuebo.dyna.config.DynaConfigProperties;
 import com.github.yuebo.dyna.core.MenuProvider;
-import com.github.yuebo.dyna.core.PermissionProvider;
 import com.github.yuebo.dyna.utils.FormViewUtils;
 import com.github.yuebo.dyna.provider.DefaultMessageProvider;
 import com.github.yuebo.dyna.provider.SpringBeanProvider;
 import com.github.yuebo.dyna.security.ErrorPageInterceptor;
 import com.github.yuebo.dyna.security.SecurityInterceptor;
-import com.github.yuebo.dyna.security.SessionStoreToken;
 import com.github.yuebo.dyna.security.TokenInterceptor;
-import com.github.yuebo.dyna.service.JDBCService;
 import org.apache.velocity.tools.generic.EscapeTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -29,15 +26,11 @@ import java.util.HashMap;
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
     @Autowired
-    EscapeTool escapeTool;
-
-    @Autowired
     MenuProvider menuProvider;
     @Autowired
     DefaultMessageProvider defaultMessageProvider;
     @Autowired
     SpringBeanProvider springBeanProvider;
-
     @Autowired
     FormViewUtils formViewUtils;
     @Autowired
@@ -52,31 +45,10 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
         registry.addInterceptor(securityInterceptor);
         registry.addInterceptor(tokenInterceptor);
         registry.addInterceptor(errorPageInterceptor);
         super.addInterceptors(registry);
-    }
-    @Bean
-    SecurityInterceptor securityInterceptor(@Autowired FormViewUtils formViewUtils, @Autowired JDBCService jdbcService, @Autowired PermissionProvider permissionProvider){
-        SecurityInterceptor securityInterceptor= new SecurityInterceptor();
-        securityInterceptor.setJdbcService(jdbcService);
-        securityInterceptor.setPermissionProvider(permissionProvider);
-        securityInterceptor.setFormViewUtils(formViewUtils);
-        return securityInterceptor;
-    }
-
-    @Bean
-    TokenInterceptor tokenInterceptor(@Autowired FormViewUtils formViewUtils){
-        TokenInterceptor tokenInterceptor= new TokenInterceptor();
-        tokenInterceptor.setFormViewUtils(formViewUtils);
-        tokenInterceptor.setSessionStoreToken(sessionStoreToken());
-        return tokenInterceptor;
-    }
-    @Bean
-    ErrorPageInterceptor errorPageInterceptor(){
-        return new ErrorPageInterceptor();
     }
 
     @SuppressWarnings("deprecation")
@@ -90,7 +62,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @SuppressWarnings("deprecation")
     @Bean
-    public VelocityViewResolver velocityResolver() {
+    public VelocityViewResolver velocityResolver(@Autowired EscapeTool escapeTool) {
         VelocityViewResolver resolver = new VelocityViewResolver();
         resolver.setCache(false);
         resolver.setPrefix("/templates/");
@@ -115,10 +87,4 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
         return new EscapeTool();
     }
 
-    @Bean
-    SessionStoreToken sessionStoreToken(){
-        SessionStoreToken sessionStoreToken=new SessionStoreToken();
-        sessionStoreToken.setTokenSize(10);
-        return sessionStoreToken;
-    }
 }

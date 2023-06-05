@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Configuration
 @ComponentScan({"com.github.yuebo.dyna","com.github.yuebo.elfinder"})
 @EnableCaching
 @EnableAsync
@@ -44,7 +43,7 @@ public class DynaAutoConfiguration {
     String dataFiles;
     @Value("${dyna.jdbc.autoUpdate:true}")
     boolean autoUpdate;
-    @ConfigurationProperties
+
     @Bean
     JDBCService jdbcService(@Autowired NamedParameterJdbcTemplate jdbcTemplate,@Autowired TableGenerator tableGenerator){
         MysqlJDBCService mysqlJDBCService=new MysqlJDBCService();

@@ -1,15 +1,19 @@
-
+server:
+  servlet:
+    context-path: /dyna
+    session:
+      timeout: 7d
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://10.108.5.41:3306/dyna?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false&nullCatalogMeansCurrent=true
     username: root
-    password: password
-    driver-class-name: com.mysql.jdbc.Driver
+    password: abc123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  velocity:
+    enabled: false
 
 upload:
   defaultPath: /tmp
-server:
-  context-path: /dyna
 
 dyna:
   init:

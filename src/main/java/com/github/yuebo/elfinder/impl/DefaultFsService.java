@@ -20,14 +20,15 @@ package com.github.yuebo.elfinder.impl;
 
 import com.github.yuebo.elfinder.controller.executor.FsItemEx;
 import com.github.yuebo.elfinder.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.Map.Entry;
 
+@Slf4j
 public class DefaultFsService implements FsService
 {
 	FsSecurityChecker _securityChecker;
@@ -180,8 +181,7 @@ public class DefaultFsService implements FsService
 		this._volumeMap = volumeMap;
 		for (Entry<String, FsVolume> en : _volumeMap.entrySet())
 		{
-			Logger.getLogger(this.getClass())
-					.info(String.format("mounted %s: %s", en.getKey(),
+			log.info(String.format("mounted %s: %s", en.getKey(),
 							en.getValue()));
 		}
 	}
@@ -193,13 +193,12 @@ public class DefaultFsService implements FsService
 	 */
 	public void setVolumes(FsVolume[] volumes) throws IOException
 	{
-		Logger.getLogger(getClass())
-				.warn("calling setVolumes() is deprecated, please use setVolumeMap() to specify volume id explicitly");
+		log.warn("calling setVolumes() is deprecated, please use setVolumeMap() to specify volume id explicitly");
 		char vid = 'A';
 		for (FsVolume volume : volumes)
 		{
 			_volumeMap.put("" + vid, volume);
-			Logger.getLogger(this.getClass()).info(
+			log.info(
 					String.format("mounted %s: %s", "" + vid, volume));
 			vid++;
 		}
