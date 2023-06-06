@@ -7,6 +7,7 @@
     <groupId>com.github.yuebo</groupId>
     <artifactId>boot-dyna-starter</artifactId>
     <version>1.0.8-SNAPSHOT</version>
+
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -35,6 +36,8 @@
         <version>2.7.11</version>
     </parent>
     <properties>
+        <releases.url>https://nexus3.tineco.com/repository/maven-releases/</releases.url>
+        <snapshots.url>https://nexus3.tineco.com/repository/maven-snapshots/</snapshots.url>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 <!--        <spring.version>4.3.13.RELEASE</spring.version>-->
@@ -166,6 +169,17 @@
 <!--            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
 <!--        </repository>-->
 <!--    </distributionManagement>-->
+
+    <distributionManagement>
+        <repository>
+            <id>Releases</id>
+            <url>${releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>Snapshots</id>
+            <url>${snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
 <!--        <plugins>-->
